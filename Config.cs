@@ -22,7 +22,7 @@ namespace api
             }
             if (!(File.Exists("SaveData\\profileimage.png")))
             {
-                File.WriteAllBytes("SaveData\\profileimage.png", new WebClient().DownloadData("https://github.com/OpenRecRoom/OpenRec/raw/main/profileimage.png"));
+                File.WriteAllBytes("SaveData\\profileimage.png", new WebClient().DownloadData("https://github.com/rec_rewild_classicRoom/rec_rewild_classic/raw/main/profileimage.png"));
             }
             Console.WriteLine("Done!");
             Console.Clear();

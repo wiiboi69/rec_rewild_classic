@@ -145,7 +145,7 @@ namespace vaultgamesesh
 				c00009b.RoomDetails.Scenes[0].RoomId = roomId;
 				c00009b.RoomDetails.Scenes[0].DataBlobName = string.Empty;
 				c00009b.RoomDetails.Scenes[0].DataModifiedAt = DateTime.Now;
-				c00009b.RoomDetails.Room.CreatorPlayerId = server.APIServer.CachedPlayerID;
+				c00009b.RoomDetails.Room.CreatorPlayerId = server.APIServer_Base.CachedPlayerID;
 			}
 			c00005d.m00003a().Add(c00009a.Name, c);
 			string text = c000004.m000007() + c00009b.RoomDetails.Room.Name;

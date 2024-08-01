@@ -14,7 +14,7 @@ namespace gamesesh
 		{
 			long? creatorid = 1243409L;
 			long gamesessionid = long.Parse(start.Program.version + "1");
-			Console.WriteLine("OpenRec GameSession Room");
+			Console.WriteLine("rec_rewild_classic GameSession Room");
 			GameSessions.JoinRandomRequest joinRandomRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
 			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
 			{
@@ -22,11 +22,7 @@ namespace gamesesh
 			}
 			if (start.Program.version == "2017")
             {
-				creatorid = (long?)APIServer.CachedPlayerID;
-			}
-			if (start.Program.bannedflag == true)
-			{
-				gamesessionid = 100L;
+				creatorid = (long?)APIServer_Base.CachedPlayerID;
 			}
 			Config.localGameSession = new GameSessions.SessionInstance
 			{
@@ -36,7 +32,7 @@ namespace gamesesh
 				RecRoomId = null,
 				EventId = null,
 				CreatorPlayerId = creatorid,
-				Name = "OpenRec Room",
+				Name = "rec_rewild_classic Room",
 				ActivityLevelId = joinRandomRequest.ActivityLevelIds[0],
 				Private = false,
 				Sandbox = false,
@@ -70,25 +66,22 @@ namespace gamesesh
 		public static string Create(string jsonData)
 		{
 			long gamesessionid = 20161L;
-			Console.WriteLine("OpenRec GameSession Custom Room");
+			Console.WriteLine("rec_rewild_classic GameSession Custom Room");
 			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
 			{
 				gamesessionid = new Random().Next(0, 99);
 			}
-			if (start.Program.bannedflag == true)
-			{
-				gamesessionid = 100L;
-			}
-			GameSessions.CreateRequest createRequest = JsonConvert.DeserializeObject<GameSessions.CreateRequest>(jsonData);
-			Config.localGameSession = new GameSessions.SessionInstance
+
+			CreateRequest createRequest = JsonConvert.DeserializeObject<CreateRequest>(jsonData);
+			Config.localGameSession = new SessionInstance
 			{
 				GameSessionId = gamesessionid,
 				RegionId = "us",
 				RoomId = createRequest.ActivityLevelId,
 				RecRoomId = null,
 				EventId = null,
-				CreatorPlayerId = (long?)APIServer.CachedPlayerID,
-				Name = "OpenRec Custom Room",
+				CreatorPlayerId = (long?)APIServer_Base.CachedPlayerID,
+				Name = "rec_rewild_classic Custom Room",
 				ActivityLevelId = createRequest.ActivityLevelId,
 				Private = false,
 				Sandbox = true,
@@ -98,7 +91,7 @@ namespace gamesesh
 				MaxCapacity = 20,
 				IsFull = false
 			};
-			return JsonConvert.SerializeObject(new GameSessions.JoinResult
+			return JsonConvert.SerializeObject(new JoinResult
 			{
 				Result = 0,
 				GameSession = Config.localGameSession
@@ -106,9 +99,9 @@ namespace gamesesh
 		}
 
 		// Token: 0x060000C1 RID: 193 RVA: 0x0000257B File Offset: 0x0000077B
-		public static GameSessions.PlayerStatus StatusSessionInstance()
+		public static PlayerStatus StatusSessionInstance()
 		{
-			return new GameSessions.PlayerStatus
+			return new PlayerStatus
 			{
 				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
 				IsOnline = true,
@@ -181,7 +174,7 @@ namespace gamesesh
 			// Token: 0x17000042 RID: 66
 			// (get) Token: 0x060000C9 RID: 201 RVA: 0x000025D9 File Offset: 0x000007D9
 			// (set) Token: 0x060000CA RID: 202 RVA: 0x000025E1 File Offset: 0x000007E1
-			public GameSessions.SessionInstance GameSession { get; set; }
+			public SessionInstance GameSession { get; set; }
 		}
 
 		// Token: 0x02000023 RID: 35
@@ -279,7 +272,7 @@ namespace gamesesh
 			// Token: 0x17000054 RID: 84
 			// (get) Token: 0x060000EF RID: 239 RVA: 0x0000270B File Offset: 0x0000090B
 			// (set) Token: 0x060000F0 RID: 240 RVA: 0x00002713 File Offset: 0x00000913
-			public GameSessions.RegionPing[] RegionPings { get; set; }
+			public RegionPing[] RegionPings { get; set; }
 		}
 
 		public class JoinRoomRequest2
@@ -292,7 +285,7 @@ namespace gamesesh
 			// Token: 0x17000023 RID: 35
 			// (get) Token: 0x06000062 RID: 98 RVA: 0x00002356 File Offset: 0x00000556
 			// (set) Token: 0x06000063 RID: 99 RVA: 0x0000235E File Offset: 0x0000055E
-			public GameSessions.RegionPing[] RegionPings { get; set; }
+			public RegionPing[] RegionPings { get; set; }
 
 			// Token: 0x17000024 RID: 36
 			// (get) Token: 0x06000064 RID: 100 RVA: 0x00002367 File Offset: 0x00000567
@@ -370,7 +363,7 @@ namespace gamesesh
 			// Token: 0x1700005C RID: 92
 			// (get) Token: 0x06000102 RID: 258 RVA: 0x00002793 File Offset: 0x00000993
 			// (set) Token: 0x06000103 RID: 259 RVA: 0x0000279B File Offset: 0x0000099B
-			public GameSessions.SessionInstance GameSession { get; set; }
+			public SessionInstance GameSession { get; set; }
 		}
 	}
 }

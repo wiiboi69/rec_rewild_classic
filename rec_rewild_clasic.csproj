@@ -4,14 +4,14 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ApplicationIcon>icon2.ico</ApplicationIcon>
-    <AssemblyName>OpenRec</AssemblyName>
-    <RootNamespace>OpenRec</RootNamespace>
+    <AssemblyName>rec_rewild_classic</AssemblyName>
+    <RootNamespace>rec_rewild_classic</RootNamespace>
     <Authors>recroom2016</Authors>
     <PackageIcon>icon2.png</PackageIcon>
     <PackageIconUrl />
-    <RepositoryUrl>https://github.com/recroom2016/OpenRec</RepositoryUrl>
+    <RepositoryUrl>https://github.com/recroom2016/rec_rewild_classic</RepositoryUrl>
     <PackageProjectUrl>https://discord.gg/daC8QUhnFP</PackageProjectUrl>
-    <Company>OpenRec</Company>
+    <Company>rec_rewild_classic</Company>
     <Version>0.4.0</Version>
   </PropertyGroup>
 
@@ -34,6 +34,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="api\" />
   </ItemGroup>
 
 </Project>

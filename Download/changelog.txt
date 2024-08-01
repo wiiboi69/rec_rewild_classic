@@ -1,16 +1,10 @@
-Feature Patch v0.6.9: sex build
--Added tutorial and info hints
--Added custom rooms back into 2018 (no saving yet)
--Added Profile Downloader
--Added build links tab
--Improved profile image changing
--Updated the UI more
+----------rec_rewild_clasic----------
 
-Note: This release DOES NOT feature friending yet! This is just a feature patch before that is released in version 0.7.0.
+    welcone to rec_rewild_clasic.
+    
 
-Credits:
-@Nexus0821 - Programmed and helped add in a lot of new features
+    this is a 2016 to 2018 server
 
-@LucasOnDiscord#0210 - Adding potions
-@GabeTheFirst#7335 - Tester when my game was broken
-@andry6702#9812 - Discovered custom room downloading for 2018
+
+ -v0.0.1                       ~coach
+=====================================

@@ -51,7 +51,7 @@ namespace api
 			
 			return JsonConvert.SerializeObject(new Config2
 			{
-				MessageOfTheDay = new WebClient().DownloadString("https://raw.githubusercontent.com/recroom2016/OpenRec/master/Update/motd.txt"),
+				MessageOfTheDay = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/motd.txt"),
 				CdnBaseUri = "http://localhost:20182/",
 				LevelProgressionMaps = new List<LevelProgressionEntry>
 				{

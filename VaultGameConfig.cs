@@ -24,7 +24,7 @@ namespace vaultgamesesh
         public static string f000002 = "us";
 
         // Token: 0x04000003 RID: 3
-        public static string f000003 = "OpenRec_v0.6.0";
+        public static string f000003 = "rec_rewild_classic_v0.6.0";
 
     }
 }

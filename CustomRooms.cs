@@ -27,7 +27,7 @@ namespace api
             {
                 RoomId = 29,
                 Name = root2.Name,
-                Description = "OpenRec Downloaded Room",
+                Description = "rec_rewild_classic Downloaded Room",
                 ImageName = root2.ImageName,
                 CreatorPlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
                 State = 0,
@@ -95,7 +95,7 @@ namespace api
             {
                 RoomId = 29,
                 Name = root2.Name,
-                Description = "OpenRec Downloaded Room",
+                Description = "rec_rewild_classic Downloaded Room",
                 ImageName = root2.ImageName,
                 CreatorPlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
                 State = 0,

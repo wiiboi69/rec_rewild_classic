@@ -75,14 +75,9 @@ namespace vaultgamesesh
 			bool @private = c00006c.Private;
             if (@private)
             {
-                text += string.Format("Pri{0}", server.APIServer.CachedPlayerID);
+                text += string.Format("Pri{0}", server.APIServer_Base.CachedPlayerID);
             }
 			long gameseshid = 20181L;
-			if (start.Program.bannedflag == true)
-			{
-				gameseshid = 100L;
-				text += "BANNED";
-			}
 			
 			c000041.f000013 = new c000041.c000044
 			{
