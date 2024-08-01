@@ -19,7 +19,7 @@ namespace server
 			{
 				Console.WriteLine("[NameServer.cs] has started.");
 				new Thread(new ThreadStart(this.StartListen)).Start();
-                new Thread(new ThreadStart(this.StartListen2)).Start();
+                //new Thread(new ThreadStart(this.StartListen2)).Start();
             }
 			catch (Exception ex)
 			{

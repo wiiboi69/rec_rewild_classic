@@ -1479,6 +1479,7 @@ namespace vaultgamesesh
 					}
 				}
 			},
+			/*
 			{
 				File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomname.txt"),
 				new c00005d.c000060
@@ -1533,7 +1534,7 @@ namespace vaultgamesesh
 						}
 					}
 				}
-			}
+			}*/
 		};
 
 		// Token: 0x0200003D RID: 61
