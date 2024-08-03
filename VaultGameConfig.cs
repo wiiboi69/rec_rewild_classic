@@ -21,10 +21,10 @@ namespace vaultgamesesh
         public static ulong f000001 = 0UL;
 
         // Token: 0x04000002 RID: 2
-        public static string f000002 = "us";
+        public static string Region = "us";
 
         // Token: 0x04000003 RID: 3
-        public static string f000003 = "rec_rewild_classic_v0.6.0";
+        public static string room_name_Region = "rec_rewild_classic_v0.0.1";
 
     }
 }

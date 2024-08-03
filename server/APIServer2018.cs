@@ -258,7 +258,7 @@ namespace server
 					}
 					if (Url == "gamesessions/v3/joinroom")
 					{
-						s = JsonConvert.SerializeObject(c000041.m000030(text));
+						s = c000041.Create_GameSession(text);
 					}
 					if (rawUrl == "//api/sanitize/v1/isPure")
 					{

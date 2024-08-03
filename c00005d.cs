@@ -11,23 +11,23 @@ namespace vaultgamesesh
 	internal sealed class c00005d
 	{
 		// Token: 0x0600001C RID: 28 RVA: 0x00002B94 File Offset: 0x00000D94
-		public static Dictionary<string, c00005d.c000060> m00003a()
+		public static Dictionary<string, room> m00003a()
 		{
-			Dictionary<string, c00005d.c000060> dictionary = new Dictionary<string, c00005d.c000060>();
+			Dictionary<string, room> dictionary = new Dictionary<string, room>();
 			string[] directories = Directory.GetDirectories(c000004.m000007());
 			for (int i = 0; i < directories.Length; i++)
 			{
-				c00005d.c000060 c = JsonConvert.DeserializeObject<c00005d.c000060>(File.ReadAllText(directories[i] + "\\RoomDetails.json"));
+				room c = JsonConvert.DeserializeObject<room>(File.ReadAllText(directories[i] + "\\RoomDetails.json"));
 				dictionary.Add(c.Room.Name, c);
 			}
 			return dictionary;
 		}
 
 		// Token: 0x0600001D RID: 29 RVA: 0x00002BFC File Offset: 0x00000DFC
-		public static List<c00005d.c000061> m000035()
+		public static List<c000061> m000035()
 		{
-			List<c00005d.c000061> list = new List<c00005d.c000061>();
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.f000024)
+			List<c000061> list = new List<c000061>();
+			foreach (KeyValuePair<string, room> keyValuePair in f000024)
 			{
 				list.Add(keyValuePair.Value.Room);
 			}
@@ -35,14 +35,14 @@ namespace vaultgamesesh
 		}
 
 		// Token: 0x0600001E RID: 30 RVA: 0x00002C6C File Offset: 0x00000E6C
-		public static Dictionary<string, c00005d.c000060> m00003b()
+		public static Dictionary<string, room> m00003b()
 		{
-			Dictionary<string, c00005d.c000060> result;
+			Dictionary<string, room> result;
 			try
 			{
 				try
 				{
-					result = JsonConvert.DeserializeObject<Dictionary<string, c00005d.c000060>>(File.ReadAllText("GamesessionsV3Data.json"));
+					result = JsonConvert.DeserializeObject<Dictionary<string, room>>(File.ReadAllText("GamesessionsV3Data.json"));
 				}
 				finally
 				{
@@ -56,9 +56,9 @@ namespace vaultgamesesh
 		}
 
 		// Token: 0x0600001F RID: 31 RVA: 0x00002CC4 File Offset: 0x00000EC4
-		public static c00005d.c000060 m000023(int p0)
+		public static room m000023(int p0)
 		{
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.f000050)
+			foreach (KeyValuePair<string, room> keyValuePair in f000050)
 			{
 				bool flag = keyValuePair.Value.Room.RoomId == (ulong)((long)p0);
 				bool flag2 = flag;
@@ -67,15 +67,15 @@ namespace vaultgamesesh
 					return keyValuePair.Value;
 				}
 			}
-			return c00005d.f000050["DormRoom"];
+			return f000050["DormRoom"];
 		}
 
 		// Token: 0x04000008 RID: 8
-		public static Dictionary<string, c00005d.c000060> f000024 = new Dictionary<string, c00005d.c000060>
+		public static Dictionary<string, room> f000024 = new Dictionary<string, room>
 		{
 			{
 				"MakerRoom",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -93,9 +93,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 24UL,
@@ -113,9 +113,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -125,7 +125,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Park",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -143,9 +143,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 25UL,
@@ -163,9 +163,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -175,7 +175,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Lounge",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -193,9 +193,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 22UL,
@@ -213,9 +213,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "recroomoriginal",
 							Type = 2
@@ -225,7 +225,7 @@ namespace vaultgamesesh
 			},
 			{
 				"PerformanceHall",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -243,9 +243,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 23UL,
@@ -263,9 +263,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -275,7 +275,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Hangar",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -293,9 +293,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 18UL,
@@ -313,14 +313,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "pvp",
 							Type = 0
@@ -331,11 +331,11 @@ namespace vaultgamesesh
 		};
 
 		// Token: 0x04000009 RID: 9
-		public static Dictionary<string, c00005d.c000060> f000050 = new Dictionary<string, c00005d.c000060>
+		public static Dictionary<string, room> f000050 = new Dictionary<string, room>
 		{
 			{
 				"DormRoom",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -355,9 +355,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 0UL,
@@ -383,9 +383,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -395,7 +395,7 @@ namespace vaultgamesesh
 			},
 			{
 				"RecCenter",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -413,9 +413,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 2UL,
@@ -439,9 +439,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -451,7 +451,7 @@ namespace vaultgamesesh
 			},
 			{
 				"3DCharades",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -469,9 +469,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 3L,
 							RoomId = 4UL,
@@ -489,9 +489,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -501,7 +501,7 @@ namespace vaultgamesesh
 			},
 			{
 				"DiscGolfLake",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -519,9 +519,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 4UL,
@@ -539,14 +539,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "sport",
 							Type = 0
@@ -556,7 +556,7 @@ namespace vaultgamesesh
 			},
 			{
 				"DiscGolfPropulsion",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -574,9 +574,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 5UL,
@@ -594,14 +594,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "sport",
 							Type = 0
@@ -611,7 +611,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Dodgeball",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -629,9 +629,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 6UL,
@@ -649,14 +649,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "sport",
 							Type = 0
@@ -666,7 +666,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Paddleball",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -684,9 +684,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 7UL,
@@ -704,14 +704,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "sport",
 							Type = 0
@@ -721,7 +721,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Paintball",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -739,9 +739,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 8UL,
@@ -753,7 +753,7 @@ namespace vaultgamesesh
 							CanMatchmakeInto = true,
 							DataModifiedAt = DateTime.Now
 						},
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 2L,
 							RoomId = 9UL,
@@ -765,7 +765,7 @@ namespace vaultgamesesh
 							CanMatchmakeInto = true,
 							DataModifiedAt = DateTime.Now
 						},
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 3L,
 							RoomId = 10UL,
@@ -777,7 +777,7 @@ namespace vaultgamesesh
 							CanMatchmakeInto = true,
 							DataModifiedAt = DateTime.Now
 						},
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 4L,
 							RoomId = 11UL,
@@ -789,7 +789,7 @@ namespace vaultgamesesh
 							CanMatchmakeInto = true,
 							DataModifiedAt = DateTime.Now
 						},
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 5L,
 							RoomId = 12UL,
@@ -807,14 +807,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "pvp",
 							Type = 0
@@ -824,7 +824,7 @@ namespace vaultgamesesh
 			},
 			{
 				"GoldenTrophy",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -842,9 +842,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 13UL,
@@ -862,14 +862,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "quest",
 							Type = 0
@@ -879,7 +879,7 @@ namespace vaultgamesesh
 			},
 			{
 				"TheRiseofJumbotron",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -897,9 +897,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 14UL,
@@ -917,14 +917,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "quest",
 							Type = 0
@@ -934,7 +934,7 @@ namespace vaultgamesesh
 			},
 			{
 				"CrimsonCauldron",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -952,9 +952,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 15UL,
@@ -972,14 +972,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "quest",
 							Type = 0
@@ -989,7 +989,7 @@ namespace vaultgamesesh
 			},
 			{
 				"IsleOfLostSkulls",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1007,9 +1007,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 16UL,
@@ -1027,14 +1027,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "quest",
 							Type = 0
@@ -1044,7 +1044,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Soccer",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1062,9 +1062,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 17UL,
@@ -1082,14 +1082,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "sport",
 							Type = 0
@@ -1099,7 +1099,7 @@ namespace vaultgamesesh
 			},
 			{
 				"LaserTag",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1117,9 +1117,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 18UL,
@@ -1131,7 +1131,7 @@ namespace vaultgamesesh
 							CanMatchmakeInto = true,
 							DataModifiedAt = DateTime.Now
 						},
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 2L,
 							RoomId = 19UL,
@@ -1149,14 +1149,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "pvp",
 							Type = 0
@@ -1166,7 +1166,7 @@ namespace vaultgamesesh
 			},
 			{
 				"RecRoyaleSquads",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1184,9 +1184,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 0L,
 							RoomId = 20UL,
@@ -1204,14 +1204,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "pvp",
 							Type = 0
@@ -1221,7 +1221,7 @@ namespace vaultgamesesh
 			},
 			{
 				"RecRoyaleSolos",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1239,9 +1239,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 0L,
 							RoomId = 21UL,
@@ -1259,14 +1259,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "pvp",
 							Type = 0
@@ -1276,7 +1276,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Lounge",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1294,9 +1294,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 0L,
 							RoomId = 22UL,
@@ -1314,9 +1314,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -1326,7 +1326,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Park",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1344,9 +1344,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 0L,
 							RoomId = 25UL,
@@ -1364,9 +1364,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -1376,7 +1376,7 @@ namespace vaultgamesesh
 			},
 			{
 				"QuestForDraucula",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1394,9 +1394,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 0L,
 							RoomId = 27UL,
@@ -1414,9 +1414,9 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
@@ -1426,7 +1426,7 @@ namespace vaultgamesesh
 			},
 			{
 				"Bowling",
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1444,9 +1444,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = 28UL,
@@ -1464,14 +1464,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "rro",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "sport",
 							Type = 0
@@ -1482,7 +1482,7 @@ namespace vaultgamesesh
 			/*
 			{
 				File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomname.txt"),
-				new c00005d.c000060
+				new room
 				{
 					Room = new c00005d.c000061
 					{
@@ -1500,9 +1500,9 @@ namespace vaultgamesesh
 						SupportsTeleportVR = true,
 						SupportsWalkVR = true
 					},
-					Scenes = new List<c00005d.c00005f>
+					Scenes = new List<subrooms>
 					{
-						new c00005d.c00005f
+						new subrooms
 						{
 							RoomSceneId = 1L,
 							RoomId = Convert.ToUInt64(File.ReadAllText("SaveData\\Rooms\\Downloaded\\roomid.txt")),
@@ -1520,14 +1520,14 @@ namespace vaultgamesesh
 					CheerCount = 1,
 					FavoriteCount = 1,
 					VisitCount = 1,
-					Tags = new List<c00005d.c000063>
+					Tags = new List<Tags>
 					{
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "custom",
 							Type = 2
 						},
-						new c00005d.c000063
+						new Tags
 						{
 							Tag = "",
 							Type = 0
@@ -1537,172 +1537,58 @@ namespace vaultgamesesh
 			}*/
 		};
 
-		// Token: 0x0200003D RID: 61
-		public enum enum05e
-		{
-
-		}
-
 		// Token: 0x0200003E RID: 62
-		public sealed class c00005f
-		{
+		public sealed class subrooms
+        {
 			// Token: 0x1700008C RID: 140
 			// (get) Token: 0x06000187 RID: 391 RVA: 0x0000A800 File Offset: 0x00008A00
 			// (set) Token: 0x06000188 RID: 392 RVA: 0x0000A818 File Offset: 0x00008A18
-			public long RoomSceneId
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f00002c;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f00002c = value;
-				}
-			}
+			public long RoomSceneId { get; set; }
 
 			// Token: 0x1700008D RID: 141
 			// (get) Token: 0x06000189 RID: 393 RVA: 0x0000A824 File Offset: 0x00008A24
 			// (set) Token: 0x0600018A RID: 394 RVA: 0x0000A83C File Offset: 0x00008A3C
-			public ulong RoomId
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000023;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000023 = value;
-				}
-			}
+			public ulong RoomId { get; set; }
 
-			// Token: 0x1700008E RID: 142
-			// (get) Token: 0x0600018B RID: 395 RVA: 0x0000A848 File Offset: 0x00008A48
-			// (set) Token: 0x0600018C RID: 396 RVA: 0x0000A860 File Offset: 0x00008A60
-			public string RoomSceneLocationId
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000003;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000003 = value;
-				}
-			}
+            // Token: 0x1700008E RID: 142
+            // (get) Token: 0x0600018B RID: 395 RVA: 0x0000A848 File Offset: 0x00008A48
+            // (set) Token: 0x0600018C RID: 396 RVA: 0x0000A860 File Offset: 0x00008A60
+            public string RoomSceneLocationId { get; set; }
 
-			// Token: 0x1700008F RID: 143
-			// (get) Token: 0x0600018D RID: 397 RVA: 0x0000A86C File Offset: 0x00008A6C
-			// (set) Token: 0x0600018E RID: 398 RVA: 0x0000A884 File Offset: 0x00008A84
-			public string Name
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000035;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000035 = value;
-				}
-			}
+            // Token: 0x1700008F RID: 143
+            // (get) Token: 0x0600018D RID: 397 RVA: 0x0000A86C File Offset: 0x00008A6C
+            // (set) Token: 0x0600018E RID: 398 RVA: 0x0000A884 File Offset: 0x00008A84
+            public string Name { get; set; }
 
-			// Token: 0x17000090 RID: 144
-			// (get) Token: 0x0600018F RID: 399 RVA: 0x0000A890 File Offset: 0x00008A90
-			// (set) Token: 0x06000190 RID: 400 RVA: 0x0000A8A8 File Offset: 0x00008AA8
-			public bool IsSandbox
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000073;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000073 = value;
-				}
-			}
+            // Token: 0x17000090 RID: 144
+            // (get) Token: 0x0600018F RID: 399 RVA: 0x0000A890 File Offset: 0x00008A90
+            // (set) Token: 0x06000190 RID: 400 RVA: 0x0000A8A8 File Offset: 0x00008AA8
+            public bool IsSandbox { get; set; }
 
-			// Token: 0x17000091 RID: 145
-			// (get) Token: 0x06000191 RID: 401 RVA: 0x0000A8B4 File Offset: 0x00008AB4
-			// (set) Token: 0x06000192 RID: 402 RVA: 0x0000A8CC File Offset: 0x00008ACC
-			public string DataBlobName
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f00000e;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f00000e = value;
-				}
-			}
+            // Token: 0x17000091 RID: 145
+            // (get) Token: 0x06000191 RID: 401 RVA: 0x0000A8B4 File Offset: 0x00008AB4
+            // (set) Token: 0x06000192 RID: 402 RVA: 0x0000A8CC File Offset: 0x00008ACC
+            public string DataBlobName { get; set; }
 
-			// Token: 0x17000092 RID: 146
-			// (get) Token: 0x06000193 RID: 403 RVA: 0x0000A8D8 File Offset: 0x00008AD8
-			// (set) Token: 0x06000194 RID: 404 RVA: 0x0000A8F0 File Offset: 0x00008AF0
-			public int MaxPlayers
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000007;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000007 = value;
-				}
-			}
+            // Token: 0x17000092 RID: 146
+            // (get) Token: 0x06000193 RID: 403 RVA: 0x0000A8D8 File Offset: 0x00008AD8
+            // (set) Token: 0x06000194 RID: 404 RVA: 0x0000A8F0 File Offset: 0x00008AF0
+            public int MaxPlayers { get; set; }
 
-			// Token: 0x17000093 RID: 147
-			// (get) Token: 0x06000195 RID: 405 RVA: 0x0000A8FC File Offset: 0x00008AFC
-			// (set) Token: 0x06000196 RID: 406 RVA: 0x0000A914 File Offset: 0x00008B14
-			public bool CanMatchmakeInto
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000017;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000017 = value;
-				}
-			}
+            // Token: 0x17000093 RID: 147
+            // (get) Token: 0x06000195 RID: 405 RVA: 0x0000A8FC File Offset: 0x00008AFC
+            // (set) Token: 0x06000196 RID: 406 RVA: 0x0000A914 File Offset: 0x00008B14
+            public bool CanMatchmakeInto { get; set; }
 
-			// Token: 0x17000094 RID: 148
-			// (get) Token: 0x06000197 RID: 407 RVA: 0x0000A920 File Offset: 0x00008B20
-			// (set) Token: 0x06000198 RID: 408 RVA: 0x0000A938 File Offset: 0x00008B38
-			public DateTime DataModifiedAt
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000074;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000074 = value;
-				}
-			}
+            // Token: 0x17000094 RID: 148
+            // (get) Token: 0x06000197 RID: 407 RVA: 0x0000A920 File Offset: 0x00008B20
+            // (set) Token: 0x06000198 RID: 408 RVA: 0x0000A938 File Offset: 0x00008B38
+            public DateTime DataModifiedAt { get; set; }
 
-			// Token: 0x17000095 RID: 149
-			// (get) Token: 0x06000199 RID: 409 RVA: 0x0000A942 File Offset: 0x00008B42
-			// (set) Token: 0x0600019A RID: 410 RVA: 0x0000A94A File Offset: 0x00008B4A
-			public string ReplicationId { get; set; }
+            // Token: 0x17000095 RID: 149
+            // (get) Token: 0x06000199 RID: 409 RVA: 0x0000A942 File Offset: 0x00008B42
+            // (set) Token: 0x0600019A RID: 410 RVA: 0x0000A94A File Offset: 0x00008B4A
+            public string ReplicationId { get; set; }
 
 			// Token: 0x17000096 RID: 150
 			// (get) Token: 0x0600019B RID: 411 RVA: 0x0000A953 File Offset: 0x00008B53
@@ -1729,230 +1615,60 @@ namespace vaultgamesesh
 			// (set) Token: 0x060001A4 RID: 420 RVA: 0x0000A99F File Offset: 0x00008B9F
 			public bool SupportsJoinInProgress { get; set; }
 
-			// Token: 0x040000CF RID: 207
-			private long f00002c;
-
-			// Token: 0x040000D0 RID: 208
-			private ulong f000023;
-
-			// Token: 0x040000D1 RID: 209
-			private string f000003;
-
-			// Token: 0x040000D2 RID: 210
-			private string f000035;
-
-			// Token: 0x040000D3 RID: 211
-			private bool f000073;
-
-			// Token: 0x040000D4 RID: 212
-			private string f00000e;
-
-			// Token: 0x040000D5 RID: 213
-			private int f000007;
-
-			// Token: 0x040000D6 RID: 214
-			private bool f000017;
-
-			// Token: 0x040000D7 RID: 215
-			private DateTime f000074;
 		}
 
 		// Token: 0x0200003F RID: 63
-		public sealed class c000060
-		{
+		public sealed class room
+        {
 			// Token: 0x1700009B RID: 155
 			// (get) Token: 0x060001A6 RID: 422 RVA: 0x0000A9B4 File Offset: 0x00008BB4
 			// (set) Token: 0x060001A7 RID: 423 RVA: 0x0000A9CC File Offset: 0x00008BCC
-			public c00005d.c000061 Room
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f00002d;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f00002d = value;
-				}
-			}
+			public c00005d.c000061 Room { get; set; }
 
-			// Token: 0x1700009C RID: 156
-			// (get) Token: 0x060001A8 RID: 424 RVA: 0x0000A9D8 File Offset: 0x00008BD8
-			// (set) Token: 0x060001A9 RID: 425 RVA: 0x0000A9F0 File Offset: 0x00008BF0
-			public List<c00005d.c00005f> Scenes
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000031;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000031 = value;
-				}
-			}
+            // Token: 0x1700009C RID: 156
+            // (get) Token: 0x060001A8 RID: 424 RVA: 0x0000A9D8 File Offset: 0x00008BD8
+            // (set) Token: 0x060001A9 RID: 425 RVA: 0x0000A9F0 File Offset: 0x00008BF0
+            public List<subrooms> Scenes { get; set; }
 
-			// Token: 0x1700009D RID: 157
-			// (get) Token: 0x060001AA RID: 426 RVA: 0x0000A9FC File Offset: 0x00008BFC
-			// (set) Token: 0x060001AB RID: 427 RVA: 0x0000AA14 File Offset: 0x00008C14
-			public List<int> CoOwners
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000034;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000034 = value;
-				}
-			}
+            // Token: 0x1700009D RID: 157
+            // (get) Token: 0x060001AA RID: 426 RVA: 0x0000A9FC File Offset: 0x00008BFC
+            // (set) Token: 0x060001AB RID: 427 RVA: 0x0000AA14 File Offset: 0x00008C14
+            public List<int> CoOwners { get; set; }
 
-			// Token: 0x1700009E RID: 158
-			// (get) Token: 0x060001AC RID: 428 RVA: 0x0000AA20 File Offset: 0x00008C20
-			// (set) Token: 0x060001AD RID: 429 RVA: 0x0000AA38 File Offset: 0x00008C38
-			public List<int> InvitedCoOwners
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000034;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000034 = value;
-				}
-			}
+            // Token: 0x1700009E RID: 158
+            // (get) Token: 0x060001AC RID: 428 RVA: 0x0000AA20 File Offset: 0x00008C20
+            // (set) Token: 0x060001AD RID: 429 RVA: 0x0000AA38 File Offset: 0x00008C38
+            public List<int> InvitedCoOwners { get; set; }
 
-			// Token: 0x1700009F RID: 159
-			// (get) Token: 0x060001AE RID: 430 RVA: 0x0000AA44 File Offset: 0x00008C44
-			// (set) Token: 0x060001AF RID: 431 RVA: 0x0000AA5C File Offset: 0x00008C5C
-			public List<int> Hosts
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f00002a;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f00002a = value;
-				}
-			}
+            // Token: 0x1700009F RID: 159
+            // (get) Token: 0x060001AE RID: 430 RVA: 0x0000AA44 File Offset: 0x00008C44
+            // (set) Token: 0x060001AF RID: 431 RVA: 0x0000AA5C File Offset: 0x00008C5C
+            public List<int> Hosts { get; set; }
 
-			// Token: 0x170000A0 RID: 160
-			// (get) Token: 0x060001B0 RID: 432 RVA: 0x0000AA68 File Offset: 0x00008C68
-			// (set) Token: 0x060001B1 RID: 433 RVA: 0x0000AA80 File Offset: 0x00008C80
-			public List<int> InvitedHosts
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000034;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000034 = value;
-				}
-			}
+            // Token: 0x170000A0 RID: 160
+            // (get) Token: 0x060001B0 RID: 432 RVA: 0x0000AA68 File Offset: 0x00008C68
+            // (set) Token: 0x060001B1 RID: 433 RVA: 0x0000AA80 File Offset: 0x00008C80
+            public List<int> InvitedHosts { get; set; }
 
-			// Token: 0x170000A1 RID: 161
-			// (get) Token: 0x060001B2 RID: 434 RVA: 0x0000AA8C File Offset: 0x00008C8C
-			// (set) Token: 0x060001B3 RID: 435 RVA: 0x0000AAA4 File Offset: 0x00008CA4
-			public int CheerCount
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000005;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000005 = value;
-				}
-			}
+            // Token: 0x170000A1 RID: 161
+            // (get) Token: 0x060001B2 RID: 434 RVA: 0x0000AA8C File Offset: 0x00008C8C
+            // (set) Token: 0x060001B3 RID: 435 RVA: 0x0000AAA4 File Offset: 0x00008CA4
+            public int CheerCount { get; set; }
 
-			// Token: 0x170000A2 RID: 162
-			// (get) Token: 0x060001B4 RID: 436 RVA: 0x0000AAB0 File Offset: 0x00008CB0
-			// (set) Token: 0x060001B5 RID: 437 RVA: 0x0000AAC8 File Offset: 0x00008CC8
-			public int FavoriteCount
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000006;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000006 = value;
-				}
-			}
+            // Token: 0x170000A2 RID: 162
+            // (get) Token: 0x060001B4 RID: 436 RVA: 0x0000AAB0 File Offset: 0x00008CB0
+            // (set) Token: 0x060001B5 RID: 437 RVA: 0x0000AAC8 File Offset: 0x00008CC8
+            public int FavoriteCount { get; set; }
 
-			// Token: 0x170000A3 RID: 163
-			// (get) Token: 0x060001B6 RID: 438 RVA: 0x0000AAD4 File Offset: 0x00008CD4
-			// (set) Token: 0x060001B7 RID: 439 RVA: 0x0000AAEC File Offset: 0x00008CEC
-			public int VisitCount
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000007;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000007 = value;
-				}
-			}
+            // Token: 0x170000A3 RID: 163
+            // (get) Token: 0x060001B6 RID: 438 RVA: 0x0000AAD4 File Offset: 0x00008CD4
+            // (set) Token: 0x060001B7 RID: 439 RVA: 0x0000AAEC File Offset: 0x00008CEC
+            public int VisitCount { get; set; }
 
-			// Token: 0x170000A4 RID: 164
-			// (get) Token: 0x060001B8 RID: 440 RVA: 0x0000AAF8 File Offset: 0x00008CF8
-			// (set) Token: 0x060001B9 RID: 441 RVA: 0x0000AB10 File Offset: 0x00008D10
-			public List<c00005d.c000063> Tags
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000075;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000075 = value;
-				}
-			}
-
-			// Token: 0x040000D8 RID: 216
-			private c00005d.c000061 f00002d;
-
-			// Token: 0x040000D9 RID: 217
-			private List<c00005d.c00005f> f000031;
-
-			// Token: 0x040000DA RID: 218
-			private List<int> f000034;
-
-			// Token: 0x040000DB RID: 219
-			private List<int> f00002a;
-
-			// Token: 0x040000DC RID: 220
-			private int f000005;
-
-			// Token: 0x040000DD RID: 221
-			private int f000006;
-
-			// Token: 0x040000DE RID: 222
-			private int f000007;
-
-			// Token: 0x040000DF RID: 223
-			private List<c00005d.c000063> f000075;
+            // Token: 0x170000A4 RID: 164
+            // (get) Token: 0x060001B8 RID: 440 RVA: 0x0000AAF8 File Offset: 0x00008CF8
+            // (set) Token: 0x060001B9 RID: 441 RVA: 0x0000AB10 File Offset: 0x00008D10
+            public List<Tags> Tags { get; set; }
 		}
 
 		// Token: 0x02000040 RID: 64
@@ -2294,71 +2010,17 @@ namespace vaultgamesesh
 		}
 
 		// Token: 0x02000042 RID: 66
-		public sealed class c000063
+		public sealed class Tags
 		{
 			// Token: 0x170000B7 RID: 183
 			// (get) Token: 0x060001E1 RID: 481 RVA: 0x0000AD98 File Offset: 0x00008F98
 			// (set) Token: 0x060001E2 RID: 482 RVA: 0x0000ADB0 File Offset: 0x00008FB0
-			public string Tag
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f00000a;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f00000a = value;
-				}
-			}
+			public string Tag { get; set; }
 
-			// Token: 0x170000B8 RID: 184
-			// (get) Token: 0x060001E3 RID: 483 RVA: 0x0000ADBC File Offset: 0x00008FBC
-			// (set) Token: 0x060001E4 RID: 484 RVA: 0x0000ADD4 File Offset: 0x00008FD4
-			public int Type
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f00000b;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f00000b = value;
-				}
-			}
-
-			// Token: 0x040000F2 RID: 242
-			private string f00000a;
-
-			// Token: 0x040000F3 RID: 243
-			private int f00000b;
-		}
-
-		// Token: 0x02000043 RID: 67
-		public enum enum064
-		{
-
-		}
-
-		// Token: 0x02000044 RID: 68
-		public enum enum065
-		{
-
-		}
-
-		// Token: 0x02000045 RID: 69
-		public enum enum066
-		{
-
-		}
-
-		// Token: 0x02000046 RID: 70
-		public enum enum067
-		{
-
-		}
+            // Token: 0x170000B8 RID: 184
+            // (get) Token: 0x060001E3 RID: 483 RVA: 0x0000ADBC File Offset: 0x00008FBC
+            // (set) Token: 0x060001E4 RID: 484 RVA: 0x0000ADD4 File Offset: 0x00008FD4
+            public int Type { get; set; }
+        }
 	}
 }
