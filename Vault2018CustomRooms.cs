@@ -14,7 +14,7 @@ namespace vaultgamesesh
 		public static c000099.c00009c m00002f()
 		{
 			List<c00005d.c000062> list = new List<c00005d.c000062>();
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.f000050)
+			foreach (KeyValuePair<string, c00005d.room> keyValuePair in c00005d.f000050)
 			{
 				c00005d.c000062 item = new c00005d.c000062
 				{
@@ -24,7 +24,7 @@ namespace vaultgamesesh
 				};
 				list.Add(item);
 			}
-			return new c000099.c00009c
+			return new c00009c
 			{
 				Name = "Check Out All The Rooms Today!",
 				FeaturedRooms = list
@@ -35,7 +35,7 @@ namespace vaultgamesesh
 		public static List<c00005d.c000061> m000009()
 		{
 			List<c00005d.c000061> list = new List<c00005d.c000061>();
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.m00003b())
+			foreach (KeyValuePair<string, c00005d.room> keyValuePair in c00005d.m00003b())
 			{
 				list.Add(keyValuePair.Value.Room);
 			}
@@ -46,7 +46,7 @@ namespace vaultgamesesh
 		public static List<c00005d.c000061> m000035()
 		{
 			List<c00005d.c000061> list = new List<c00005d.c000061>();
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.f000024)
+			foreach (KeyValuePair<string, c00005d.room> keyValuePair in c00005d.f000024)
 			{
 				list.Add(keyValuePair.Value.Room);
 			}
@@ -57,7 +57,7 @@ namespace vaultgamesesh
 		public static List<c00005d.c000061> m000055()
 		{
 			List<c00005d.c000061> list = new List<c00005d.c000061>();
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.m00003a())
+			foreach (KeyValuePair<string, c00005d.room> keyValuePair in c00005d.m00003a())
 			{
 				list.Add(keyValuePair.Value.Room);
 			}
@@ -72,9 +72,9 @@ namespace vaultgamesesh
 				' '
 			});
 			List<c00005d.c000061> list = new List<c00005d.c000061>();
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.m00003b())
+			foreach (KeyValuePair<string, c00005d.room> keyValuePair in c00005d.m00003b())
 			{
-				c00005d.c000060 value = keyValuePair.Value;
+				c00005d.room value = keyValuePair.Value;
 				bool flag = true;
 				foreach (string text in array)
 				{
@@ -83,7 +83,7 @@ namespace vaultgamesesh
 						if (text.StartsWith("#"))
 						{
 							bool flag2 = false;
-							foreach (c00005d.c000063 c in value.Tags)
+							foreach (c00005d.Tags c in value.Tags)
 							{
 								if ("#" + c.Tag.ToLower() == text.ToLower())
 								{
@@ -110,9 +110,9 @@ namespace vaultgamesesh
 		}
 
 		// Token: 0x0600035D RID: 861 RVA: 0x0000B488 File Offset: 0x00009688
-		public static c00005d.c000060 m000057(ulong p0)
+		public static c00005d.room m000057(ulong p0)
 		{
-			foreach (KeyValuePair<string, c00005d.c000060> keyValuePair in c00005d.f000024)
+			foreach (KeyValuePair<string, c00005d.room> keyValuePair in c00005d.f000024)
 			{
 				if (keyValuePair.Value.Room.RoomId == p0)
 				{
@@ -123,22 +123,22 @@ namespace vaultgamesesh
 		}
 
 		// Token: 0x0600035E RID: 862 RVA: 0x0000B4F8 File Offset: 0x000096F8
-		public static c000099.c00009b m00000a(string p0)
+		public static c00009b m00000a(string p0)
 		{
-			c000099.c00009b c00009b = new c000099.c00009b();
-			c000099.c00009a c00009a = JsonConvert.DeserializeObject<c000099.c00009a>(p0);
-			c00005d.c000060 c = c000099.m000057(c00009a.RoomId);
+			c00009b c00009b = new c00009b();
+			c00009a c00009a = JsonConvert.DeserializeObject<c00009a>(p0);
+			c00005d.room c = m000057(c00009a.RoomId);
 			if (c == null)
 			{
-				c00009b.Result = (c000099.enum09d)2;
-				c00009b.RoomDetails = new c00005d.c000060();
+				c00009b.Result = 2;
+				c00009b.RoomDetails = new c00005d.room();
 			}
 			else
 			{
-				c00009b.Result = (c000099.enum09d)0;
+				c00009b.Result = 0;
 				c00009b.RoomDetails = c;
 				c00009b.RoomDetails.Room.Name = c00009a.Name;
-				ulong roomId = (ulong)((long)new Random().Next(100, 9999999));
+				ulong roomId = (ulong)new Random().Next(100, 9999999);
 				c00009b.RoomDetails.Room.RoomId = roomId;
 				c00009b.RoomDetails.Room.IsAGRoom = false;
 				c00009b.RoomDetails.Scenes[0].IsSandbox = true;
@@ -207,42 +207,13 @@ namespace vaultgamesesh
 			// Token: 0x17000107 RID: 263
 			// (get) Token: 0x06000365 RID: 869 RVA: 0x0000375C File Offset: 0x0000195C
 			// (set) Token: 0x06000366 RID: 870 RVA: 0x00003764 File Offset: 0x00001964
-			public c000099.enum09d Result
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f000042;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f000042 = value;
-				}
-			}
+			public int Result { get; set; }
 
-			// Token: 0x17000108 RID: 264
-			// (get) Token: 0x06000367 RID: 871 RVA: 0x0000376D File Offset: 0x0000196D
-			// (set) Token: 0x06000368 RID: 872 RVA: 0x00003775 File Offset: 0x00001975
-			public c00005d.c000060 RoomDetails
-			{
-				[CompilerGenerated]
-				get
-				{
-					return this.f00004f;
-				}
-				[CompilerGenerated]
-				set
-				{
-					this.f00004f = value;
-				}
-			}
+            // Token: 0x17000108 RID: 264
+            // (get) Token: 0x06000367 RID: 871 RVA: 0x0000376D File Offset: 0x0000196D
+            // (set) Token: 0x06000368 RID: 872 RVA: 0x00003775 File Offset: 0x00001975
+            public c00005d.room RoomDetails { get;set; }
 
-			// Token: 0x040001DF RID: 479
-			private c000099.enum09d f000042;
-
-			// Token: 0x040001E0 RID: 480
-			private c00005d.c000060 f00004f;
 		}
 
 		// Token: 0x0200009C RID: 156
@@ -289,10 +260,6 @@ namespace vaultgamesesh
 			private List<c00005d.c000062> f000031;
 		}
 
-		// Token: 0x0200009D RID: 157
-		public enum enum09d
-		{
 
-		}
 	}
 }

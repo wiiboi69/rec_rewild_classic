@@ -67,8 +67,8 @@ namespace start
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("rec_rewild_classic - a fork of openrec for rec room 2016 to 2018. (Version: " + appversion + ")");
             Console.WriteLine("Download source code here: https://github.com/wiiboi69/Rec_rewild_classic");
-            Console.WriteLine("discord server here: https://discord.gg/qZhThdFMjy");
-            Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
+
+           // Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
             if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt").Contains(appversion)))
             {
                 Console.WriteLine("This version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
