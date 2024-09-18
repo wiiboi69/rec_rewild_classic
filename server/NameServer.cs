@@ -44,6 +44,7 @@ namespace server
                 NSData data = new NSData()
                 {
                     API = "http://localhost:2018",
+                    Cdn = "http://localhost:20182",
                     Notifications = "http://localhost:20161",
                     Images = "http://localhost:20182"
                 };
@@ -96,11 +97,13 @@ namespace server
 			public string API { get; set; }
 			public string Notifications { get; set; }
 			public string Images { get; set; }
-		}
+            public string Cdn { get; set; }
 
-	
-		// Token: 0x04000192 RID: 402
-		private HttpListener listener = new HttpListener();
+        }
+
+
+        // Token: 0x04000192 RID: 402
+        private HttpListener listener = new HttpListener();
 
 		private HttpListener listener2 = new HttpListener();
 	}
