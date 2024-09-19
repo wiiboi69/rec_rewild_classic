@@ -39,14 +39,42 @@ namespace vaultgamesesh
 
 		public static Late2018WebSock instance;
 
-		public WebSocketServer WebSock = new WebSocketServer("ws://localhost:20161/");
+		public WebSocketServer WebSock = new WebSocketServer("ws://localhost:20161");
 
 		public class HubWS : WebSocketBehavior
 		{
 			protected override void OnMessage(MessageEventArgs e)
 			{
-				Console.WriteLine("LateWebSocket.cs Hub Requested.");
-				base.Send(JsonConvert.SerializeObject(new Late2018WebSock.Hub()));
+				Console.WriteLine("LateWebSocket.cs Hub Requested. ");
+				string temp = Encoding.ASCII.GetString(e.RawData);
+                Console.WriteLine("LateWebSocket.cs Hub: " + temp);
+                if (temp.Contains("SubscribeToPlayers"))
+                {
+                    base.Send(JsonConvert.SerializeObject(new WebSocketHTTP.SockSignalR
+                    {
+                        type = (WebSocketHTTP.MessageTypes)1,
+                        result = "200 OK",
+                        nonblocking = true,
+                        target = "Notification",
+                        arguments = new object[] { JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, c000020.m000027())) },
+                        error = "",
+                        invocationId = "naaaa",
+                        item = ""
+                    }) + "\u001e");
+                    return;
+                }
+                base.Send(JsonConvert.SerializeObject(new WebSocketHTTP.SockSignalR
+                {
+                    type = (WebSocketHTTP.MessageTypes)1,
+                    result = "200 OK",
+                    nonblocking = true,
+                    target = "HubConnection",
+                    arguments = new object[] { JsonConvert.SerializeObject(new Late2018WebSock.Hub()) },
+                    error = "",
+                    invocationId = "spin",
+                    item = ""
+                }) + "\u001e");
+
 			}
 
 			public HubWS()
@@ -61,7 +89,7 @@ namespace vaultgamesesh
 				this.accessToken = "AccessDeezNuts";
 				this.SupportedTransports = new List<string>();
 				this.negotiateVersion = 0;
-				this.url = new Uri(string.Format("http://localhost:{0}/", "2018"));
+				this.url = new Uri("ws://localhost:20199/");
 			}
 
 			public Uri url { get; set; }

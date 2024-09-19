@@ -12,6 +12,7 @@ namespace vaultgamesesh
 		public static string ProcessRequest(string jsonData)
 		{
 			Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
+			Console.WriteLine("{ws} " + jsonData);
 			bool flag = dictionary.ContainsKey("api");
 			string result;
 			if (flag)

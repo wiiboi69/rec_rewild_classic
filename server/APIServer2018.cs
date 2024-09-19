@@ -183,21 +183,22 @@ namespace server
 					}
 					if (Url == "equipment/v1/getUnlocked")
 					{
-						s = File.ReadAllText("SaveData\\equipment.txt");
-					}
-					if (Url == "avatar/v1/saved")
+                        //s = File.ReadAllText("SaveData\\equipment.txt");
+                        s = BracketResponse;
+                    }
+                    if (Url == "avatar/v1/saved")
 					{
 						s = BracketResponse;
 					}
 					if (Url == "consumables/v1/getUnlocked")
 					{
-						if (APIServer_Base.CachedVersionMonth == 09)
+						//if (APIServer_Base.CachedVersionMonth == 09)
 						{
 							s = BracketResponse;
 						}
-						else
+						//else
 						{
-							s = File.ReadAllText("SaveData\\consumables.txt");
+						//	s = File.ReadAllText("SaveData\\consumables.txt");
 						}
 					}
 					if (Url == "avatar/v2/gifts")
@@ -214,9 +215,10 @@ namespace server
 					}
 					if (Url == "objectives/v1/myprogress")
 					{
-						s = JsonConvert.SerializeObject(new Objective2018());
-					}
-					if (Url == "rooms/v1/myrooms")
+                       s = JsonConvert.SerializeObject(new Objective2018());
+                        
+                    }
+                    if (Url == "rooms/v1/myrooms")
 					{
 						s = File.ReadAllText("SaveData\\myrooms.txt");
 					}
@@ -270,9 +272,10 @@ namespace server
 					}
 					if (Url == "checklist/v1/current")
 					{
-						s = APIServer_Base.ChecklistV1Current;
-					}
-					if (Url == "presence/v1/setplayertype")
+                        s = BracketResponse;
+                        //s = APIServer_Base.ChecklistV1Current;
+                    }
+                    if (Url == "presence/v1/setplayertype")
 					{
 						s = BracketResponse;
 					}
@@ -343,7 +346,7 @@ namespace server
 					response.ContentLength64 = (long)bytes.Length;
 					Stream outputStream = response.OutputStream;
 					outputStream.Write(bytes, 0, bytes.Length);
-					Thread.Sleep(400);
+					Thread.Sleep(200);
 					outputStream.Close();
 					this.listener.Stop();
 

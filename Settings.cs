@@ -13,6 +13,7 @@ namespace api
 			{ 
 				return;
 			}
+			bool flag = false;
 			Setting setting = JsonConvert.DeserializeObject<Setting>(jsonData);
 			Settings.playerSettings = Settings.LoadSettings();
 			foreach (Setting setting2 in Settings.playerSettings)
@@ -21,14 +22,18 @@ namespace api
 				{
 					setting2.Value = setting.Value;
 					Settings.SaveSettings(Settings.playerSettings);
+					flag = true;
 				}
 			}
-			Settings.playerSettings.Add(new Setting
+			if (!flag)
 			{
-				Key = setting.Key,
-				Value = setting.Value
-			});
-			Settings.SaveSettings(Settings.playerSettings);
+				Settings.playerSettings.Add(new Setting
+				{
+					Key = setting.Key,
+					Value = setting.Value
+				});
+				Settings.SaveSettings(Settings.playerSettings);
+			}
 		}
 		public static List<Setting> LoadSettings()
 		{

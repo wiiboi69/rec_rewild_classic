@@ -8,6 +8,7 @@ using System.Diagnostics;
 using vaultgamesesh;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Spectre.Console;
 
 namespace start
 {
@@ -335,8 +336,19 @@ namespace start
             if (readline == "5")
             {
                 Console.Title = "rec_rewild_classic Version Select";
-                Console.WriteLine("Please select the version of RecRoom the server should host: (2016, 2017, 2018)");
-                string readline2 = Console.ReadLine();
+                string readline2 = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .EnableSearch()
+                        .Title("Please select the version of RecRoom the server should host")
+                        .PageSize(10)
+                        .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                        .AddChoices(new[] {
+                            "2016", "2017",
+                        })
+                        .AddChoiceGroup("2018", new[]
+                        {
+                            "May", "July", "September"
+                        }));
                 if (readline2 == "2016")
                 {
                     Console.Title = "rec_rewild_classic December 25th, 2016";
@@ -355,45 +367,42 @@ namespace start
                     new APIServer2017();
                     new WebSocket();
                 }
-                else if (readline2 == "2018")
+                else if (readline2 == "May")
                 {
-                    Console.WriteLine("May, July or September (SEPTEMBER MIGHT NOT WORK) 2018: (M, J, S)");
-                    string readline3 = Console.ReadLine();
-                    if ((readline3 == "M") || (readline3 == "m"))
-                    {
-                        Console.Title = "rec_rewild_classic May 30th 2018";
-                        version = "2018";
-                        Console.Clear();
-                        Console.WriteLine("Version Selected: May 30th, 2018.");
-                        new NameServer();
-                        new ImageServer();
-                        new APIServer2018();
-                        new WebSocket();
-                    }
-                    else if ((readline3 == "S") || (readline3 == "s"))
-                    {
-                        Console.Title = "rec_rewild_classic September 27th 2018";
-                        version = "2018";
-                        Console.Clear();
-                        Console.WriteLine("Version Selected: September 27th, 2018.");
-                        new NameServer();
-                        new ImageServer();
-                        new APIServer2018();
-                        new Late2018WebSock();
-                    }
-                    else if ((readline3 == "J") || (readline3 == "j"))
-                    {
-                        Console.Title = "rec_rewild_classic July 20th 2018";
-                        version = "2018";
-                        Console.Clear();
-                        Console.WriteLine("Version Selected: July 20th, 2018");
-                        new NameServer();
-                        new ImageServer();
-                        new APIServer2018();
-                        new WebSocket();
-                    }
-                    
+                    Console.Title = "rec_rewild_classic May 30th 2018";
+                    version = "2018";
+                    Console.Clear();
+                    Console.WriteLine("Version Selected: May 30th, 2018.");
+                    new NameServer();
+                    new ImageServer();
+                    new APIServer2018();
+                    new WebSocket();
                 }
+                else if (readline2 == "September")
+                {
+                    Console.Title = "rec_rewild_classic September 27th 2018";
+                    version = "2018";
+                    Console.Clear();
+                    Console.WriteLine("Version Selected: September 27th, 2018.");
+                    new NameServer();
+                    new ImageServer();
+                    new APIServer2018();
+                    new WebSocketHTTP();
+                    new Late2018WebSock();
+                }
+                else if (readline2 == "July")
+                {
+                    Console.Title = "rec_rewild_classic July 20th 2018";
+                    version = "2018";
+                    Console.Clear();
+                    Console.WriteLine("Version Selected: July 20th, 2018");
+                    new NameServer();
+                    new ImageServer();
+                    new APIServer2018();
+                    new WebSocket();
+                }
+                    
+                
                 Console.WriteLine(msg);
             }
         }
