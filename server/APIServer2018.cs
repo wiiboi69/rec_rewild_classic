@@ -8,6 +8,8 @@ using api2018;
 using Newtonsoft.Json;
 using vaultgamesesh;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
+using Newtonsoft.Json.Linq;
 
 namespace server
 {
@@ -62,8 +64,22 @@ namespace server
 					{
 						text = streamReader.ReadToEnd();
 					}
-					Console.WriteLine("API Data: " + text);
-					if (Url.StartsWith("versioncheck"))
+                    byte[] array;
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        context.Request.InputStream.CopyTo(memoryStream);
+                        array = memoryStream.ToArray();
+
+                    }
+                    if (text.Length > 0xfff)
+                    {
+                        Console.WriteLine("API Data: unviewable");
+                    }
+                    else
+                    {
+                        Console.WriteLine("API Data: " + text);
+                    }
+                    if (Url.StartsWith("versioncheck"))
 					{
 						if (Url.Contains("201809"))
 						{
