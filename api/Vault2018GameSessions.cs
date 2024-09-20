@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Newtonsoft.Json;
 using System.IO;
+using System.Collections.Generic;
 
 namespace vaultgamesesh
 {
@@ -51,9 +52,10 @@ namespace vaultgamesesh
 				}
 				else
 				{
-                    room_data = c00005d.f000050["DormRoom"];
-				}
-			}
+                    //room_data = c00005d.f000050["DormRoom"];
+                    room_data = c00005d.f000050[GameSession_join.RoomName];
+                }
+            }
 			int num = 0;
 			for (int i = 0; i < room_data.Scenes.Count(); i++)
 			{
@@ -63,7 +65,9 @@ namespace vaultgamesesh
 					num = i;
 				}
 			}
-			string text = string.Format("{0}", room_data.Scenes[num].RoomId);
+            room_data.InvitedCoOwners = new List<int> { };
+            room_data.InvitedHosts = new List<int> { };
+            string text = string.Format("{0}", room_data.Scenes[num].RoomId);
 			bool flag4 = GameSession != null && text + c000004.room_name_Region == GameSession.PhotonRoomId;
 			if (flag4)
 			{

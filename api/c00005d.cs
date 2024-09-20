@@ -58,13 +58,17 @@ namespace vaultgamesesh
 		// Token: 0x0600001F RID: 31 RVA: 0x00002CC4 File Offset: 0x00000EC4
 		public static room m000023(int p0)
 		{
+			room temp = new room();
 			foreach (KeyValuePair<string, room> keyValuePair in f000050)
 			{
 				bool flag = keyValuePair.Value.Room.RoomId == (ulong)((long)p0);
 				bool flag2 = flag;
 				if (flag2)
 				{
-					return keyValuePair.Value;
+					temp = keyValuePair.Value;
+					temp.InvitedCoOwners = new List<int> {};
+					temp.InvitedHosts = new List<int> {};
+                    return temp;
 				}
 			}
 			return f000050["DormRoom"];
@@ -1540,81 +1544,21 @@ namespace vaultgamesesh
 		// Token: 0x0200003E RID: 62
 		public sealed class subrooms
         {
-			// Token: 0x1700008C RID: 140
-			// (get) Token: 0x06000187 RID: 391 RVA: 0x0000A800 File Offset: 0x00008A00
-			// (set) Token: 0x06000188 RID: 392 RVA: 0x0000A818 File Offset: 0x00008A18
 			public long RoomSceneId { get; set; }
-
-			// Token: 0x1700008D RID: 141
-			// (get) Token: 0x06000189 RID: 393 RVA: 0x0000A824 File Offset: 0x00008A24
-			// (set) Token: 0x0600018A RID: 394 RVA: 0x0000A83C File Offset: 0x00008A3C
 			public ulong RoomId { get; set; }
-
-            // Token: 0x1700008E RID: 142
-            // (get) Token: 0x0600018B RID: 395 RVA: 0x0000A848 File Offset: 0x00008A48
-            // (set) Token: 0x0600018C RID: 396 RVA: 0x0000A860 File Offset: 0x00008A60
             public string RoomSceneLocationId { get; set; }
-
-            // Token: 0x1700008F RID: 143
-            // (get) Token: 0x0600018D RID: 397 RVA: 0x0000A86C File Offset: 0x00008A6C
-            // (set) Token: 0x0600018E RID: 398 RVA: 0x0000A884 File Offset: 0x00008A84
             public string Name { get; set; }
-
-            // Token: 0x17000090 RID: 144
-            // (get) Token: 0x0600018F RID: 399 RVA: 0x0000A890 File Offset: 0x00008A90
-            // (set) Token: 0x06000190 RID: 400 RVA: 0x0000A8A8 File Offset: 0x00008AA8
             public bool IsSandbox { get; set; }
-
-            // Token: 0x17000091 RID: 145
-            // (get) Token: 0x06000191 RID: 401 RVA: 0x0000A8B4 File Offset: 0x00008AB4
-            // (set) Token: 0x06000192 RID: 402 RVA: 0x0000A8CC File Offset: 0x00008ACC
             public string DataBlobName { get; set; }
-
-            // Token: 0x17000092 RID: 146
-            // (get) Token: 0x06000193 RID: 403 RVA: 0x0000A8D8 File Offset: 0x00008AD8
-            // (set) Token: 0x06000194 RID: 404 RVA: 0x0000A8F0 File Offset: 0x00008AF0
             public int MaxPlayers { get; set; }
-
-            // Token: 0x17000093 RID: 147
-            // (get) Token: 0x06000195 RID: 405 RVA: 0x0000A8FC File Offset: 0x00008AFC
-            // (set) Token: 0x06000196 RID: 406 RVA: 0x0000A914 File Offset: 0x00008B14
             public bool CanMatchmakeInto { get; set; }
-
-            // Token: 0x17000094 RID: 148
-            // (get) Token: 0x06000197 RID: 407 RVA: 0x0000A920 File Offset: 0x00008B20
-            // (set) Token: 0x06000198 RID: 408 RVA: 0x0000A938 File Offset: 0x00008B38
             public DateTime DataModifiedAt { get; set; }
-
-            // Token: 0x17000095 RID: 149
-            // (get) Token: 0x06000199 RID: 409 RVA: 0x0000A942 File Offset: 0x00008B42
-            // (set) Token: 0x0600019A RID: 410 RVA: 0x0000A94A File Offset: 0x00008B4A
             public string ReplicationId { get; set; }
-
-			// Token: 0x17000096 RID: 150
-			// (get) Token: 0x0600019B RID: 411 RVA: 0x0000A953 File Offset: 0x00008B53
-			// (set) Token: 0x0600019C RID: 412 RVA: 0x0000A95B File Offset: 0x00008B5B
 			public bool UseLevelBasedMatchmaking { get; set; }
-
-			// Token: 0x17000097 RID: 151
-			// (get) Token: 0x0600019D RID: 413 RVA: 0x0000A964 File Offset: 0x00008B64
-			// (set) Token: 0x0600019E RID: 414 RVA: 0x0000A96C File Offset: 0x00008B6C
 			public bool UseAgeBasedMatchmaking { get; set; }
-
-			// Token: 0x17000098 RID: 152
-			// (get) Token: 0x0600019F RID: 415 RVA: 0x0000A975 File Offset: 0x00008B75
-			// (set) Token: 0x060001A0 RID: 416 RVA: 0x0000A97D File Offset: 0x00008B7D
 			public bool UseRecRoyaleMatchmaking { get; set; }
-
-			// Token: 0x17000099 RID: 153
-			// (get) Token: 0x060001A1 RID: 417 RVA: 0x0000A986 File Offset: 0x00008B86
-			// (set) Token: 0x060001A2 RID: 418 RVA: 0x0000A98E File Offset: 0x00008B8E
 			public int ReleaseStatus { get; set; }
-
-			// Token: 0x1700009A RID: 154
-			// (get) Token: 0x060001A3 RID: 419 RVA: 0x0000A997 File Offset: 0x00008B97
-			// (set) Token: 0x060001A4 RID: 420 RVA: 0x0000A99F File Offset: 0x00008B9F
 			public bool SupportsJoinInProgress { get; set; }
-
 		}
 
 		// Token: 0x0200003F RID: 63
