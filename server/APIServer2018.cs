@@ -101,7 +101,6 @@ namespace server
 						APIServer_Base.CachedPlayerID = ulong.Parse(text.Remove(0, 32));
                         APIServer_Base.CachedPlatformID = ulong.Parse(text.Remove(0, 22));
 						File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
-
 					}
 					if (Url == "platformlogin/v1/loginaccount")
 					{
@@ -232,7 +231,6 @@ namespace server
 					if (Url == "objectives/v1/myprogress")
 					{
                        s = JsonConvert.SerializeObject(new Objective2018());
-                        
                     }
                     if (Url == "rooms/v1/myrooms")
 					{

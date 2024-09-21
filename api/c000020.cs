@@ -4,10 +4,8 @@ using System.Runtime.CompilerServices;
 
 namespace vaultgamesesh
 {
-	// Token: 0x02000007 RID: 7
 	internal sealed class c000020
 	{
-		// Token: 0x0600001A RID: 26 RVA: 0x00002B20 File Offset: 0x00000D20
 		public static c000022 m000027()
 		{
 			c000041.gamesession gameSession;

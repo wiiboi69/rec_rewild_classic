@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace api
 {
-	// Token: 0x02000081 RID: 129
 	public class Sanitize
 	{
 		public static Sanitize.m001 GetSanitize()

@@ -9,6 +9,8 @@ using vaultgamesesh;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Spectre.Console;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace start
 {
@@ -65,7 +67,6 @@ namespace start
 
         Start:
             Console.Title = "rec_rewild_classic Startup Menu";
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("rec_rewild_classic - a fork of openrec for rec room 2016 to 2018. (Version: " + appversion + ")");
             Console.WriteLine("Download source code here: https://github.com/wiiboi69/Rec_rewild_classic");
 
@@ -75,9 +76,23 @@ namespace start
                 Console.WriteLine("This version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
             }            
             Console.WriteLine("//Custom Room Downloader has been moved to the settings tab!" + Environment.NewLine);
-            Console.WriteLine("(1) What's New" + Environment.NewLine +"(2) Change Settings" + Environment.NewLine + "(3) Modify Profile" + Environment.NewLine + "(4) Build Download Links" + Environment.NewLine + "(5) Start Server");
-            string readline = Console.ReadLine();
-            if (readline == "1")
+            //Console.WriteLine("(1) What's New" + Environment.NewLine +"(2) Change Settings" + Environment.NewLine + "(3) Modify Profile" + Environment.NewLine + "(4) Build Download Links" + Environment.NewLine + "(5) Start Server");
+
+            string readline = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .EnableSearch()
+                    .Title("")
+                    .PageSize(10)
+                    .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                    .AddChoices(new[] {
+                        "What's New",
+                        "Change Settings",
+                        "Modify Profile",
+                        "Build Download Links",
+                        "Start Server",
+                    }));
+
+            if (readline == "What's New")
             {
                 Console.Title = "rec_rewild_classic Changelog";
                 Console.Clear();
@@ -87,16 +102,28 @@ namespace start
                 Console.Clear();
                 goto Start;
             }
-            if (readline == "2")
+            if (readline == "Change Settings")
             {
                 Console.Clear();
                 goto Settings;
 
                 Settings:
                 Console.Title = "rec_rewild_classic Settings Menu";
-                Console.WriteLine("(1) Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt") + Environment.NewLine + "(2) Custom Room Downloader " + Environment.NewLine + "(3) Reset SaveData" + Environment.NewLine + "(4) Go Back");
-                string readline4 = Console.ReadLine();
-                if (readline4 == "1")
+                //Console.WriteLine("(1) Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt") + Environment.NewLine + "(2) Custom Room Downloader " + Environment.NewLine + "(3) Reset SaveData" + Environment.NewLine + "(4) Go Back");
+
+                string readline4 = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .EnableSearch()
+                        .Title("")
+                        .PageSize(10)
+                        .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                        .AddChoices(new[] {
+                            "Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt"),
+                            "Custom Room Downloader",
+                            "Reset SaveData",
+                            "Go Back",
+                        }));
+                if (readline4.StartsWith("Private Rooms"))
                 {
                     if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Disabled")
                     {
@@ -110,7 +137,7 @@ namespace start
                     Console.WriteLine("Success!");
                     goto Settings;
                 }
-                else if (readline4 == "2")
+                else if (readline4 == "Custom Room Downloader")
                 {
                     Console.Title = "rec_rewild_classic Custom Room Downloader";
                     Console.Clear();
@@ -133,7 +160,7 @@ namespace start
                     Console.WriteLine("Success!");
                     goto Settings;
                 }
-                else if (readline4 == "3")
+                else if (readline4 == "Reset SaveData")
                 {
                     File.Delete("SaveData\\avatar.txt");
                     File.Delete("SaveData\\avataritems.txt");
@@ -165,22 +192,38 @@ namespace start
                     Setup.setup();
                     goto Settings;
                 }
-                else if (readline4 == "4")
+                else if (readline4 == "Go Back")
                 {
                     Console.Clear();
                     goto Start;
                 }
             }
-            if (readline == "3")
+            if (readline == "Modify Profile")
             {
                 Console.Clear();
                 goto Profile;
 
             Profile:
                 Console.Title = "rec_rewild_classic Profile Menu";
-                Console.WriteLine("(1) Change Username" + Environment.NewLine + "(2) Change Profile Image" + Environment.NewLine + "(3) Change Level" + Environment.NewLine + "(4) Profile Downloader" + Environment.NewLine + "(5) Go Back");
-                string readline3 = Console.ReadLine();
-                if (readline3 == "1")
+                //Console.WriteLine("(1) Change Username" + Environment.NewLine + "(2) Change Profile Image" + Environment.NewLine + "(3) Change Level" + Environment.NewLine + "(4) Profile Downloader" + Environment.NewLine + "(5) Go Back");
+                string readline3 = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .EnableSearch()
+                        .Title("")
+                        .PageSize(10)
+                        .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                        .AddChoices(new[] {
+                            "Change Username:    " + File.ReadAllText("SaveData\\Profile\\username.txt"),
+                            "Change displayName: " + File.ReadAllText("SaveData\\Profile\\displayName.txt"),
+                            "Change userid:      " + File.ReadAllText("SaveData\\Profile\\userid.txt"),
+                            "Change Profile Image",
+                            "Change Level:       " + File.ReadAllText("SaveData\\Profile\\level.txt"),
+                            "Change bio:         " + File.ReadAllText("SaveData\\Profile\\bio.txt"),
+                            "Profile Downloader",
+                            "Go Back",
+                        }));
+
+                if (readline3.StartsWith("Change Username"))
                 {
                     Console.WriteLine("Current Username: " + File.ReadAllText("SaveData\\Profile\\username.txt"));
                     Console.WriteLine("New Username: ");
@@ -190,7 +233,67 @@ namespace start
                     Console.WriteLine("Success!");
                     goto Profile;
                 }
-                else if (readline3 == "2")
+                else if (readline3.StartsWith("Change displayName"))
+                {
+                    Console.WriteLine("Current displayName: " + File.ReadAllText("SaveData\\Profile\\displayName.txt"));
+                    Console.WriteLine("New displayName: ");
+                    string newlevel = Console.ReadLine();
+                    File.WriteAllText("SaveData\\Profile\\displayName.txt", newlevel);
+                    Console.Clear();
+                    Console.WriteLine("Success!");
+                    goto Profile;
+                }
+                else if (readline3.StartsWith("Change userid"))
+                {
+
+                    Console.WriteLine("Current userid: " + File.ReadAllText("SaveData\\Profile\\userid.txt"));
+                    Console.WriteLine("New userid: ");
+                    string newlevel = Console.ReadLine();
+                    int temp = 0;
+                    if (int.TryParse(newlevel, out temp))
+                    {
+                        File.WriteAllText("SaveData\\Profile\\userid.txt", temp.ToString());
+                        Console.Clear();
+                        Console.WriteLine("Success!");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("failed to set playerid!");
+                    }
+                    goto Profile;
+                }
+                else if (readline3.StartsWith("Change Level"))
+                {
+
+                    Console.WriteLine("Current Level: " + File.ReadAllText("SaveData\\Profile\\Level.txt"));
+                    Console.WriteLine("New Level: ");
+                    string newlevel = Console.ReadLine();
+                    int temp = 0;
+                    if (int.TryParse(newlevel, out temp))
+                    {
+                        File.WriteAllText("SaveData\\Profile\\Level.txt", temp.ToString());
+                        Console.Clear();
+                        Console.WriteLine("Success!");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("failed to set Level!");
+                    }
+                    goto Profile;
+                }
+                else if (readline3.StartsWith("Change bio"))
+                {
+                    Console.WriteLine("Current bio: " + File.ReadAllText("SaveData\\Profile\\bio.txt"));
+                    Console.WriteLine("New bio: ");
+                    string newlevel = Console.ReadLine();
+                    File.WriteAllText("SaveData\\Profile\\bio.txt", newlevel);
+                    Console.Clear();
+                    Console.WriteLine("Success!");
+                    goto Profile;
+                }
+                else if (readline3 == "Change Profile Image")
                 {
                     Console.Clear();
                     Console.WriteLine("1) Upload Media Link" + Environment.NewLine + "2) Drag Image onto this window" + Environment.NewLine + "3) Download Rec.Net Profile Image" + Environment.NewLine + "4) Go Back");
@@ -216,22 +319,26 @@ namespace start
                     else if (readline4 == "2")
                     {
                         Console.WriteLine("Drag any image onto this window and press enter: ");
-                        string imagedir = Console.ReadLine();
+                        string imagedir = ShowDialog();
                         try
                         {
                             byte[] imagefile = File.ReadAllBytes(imagedir);
-                            File.Replace(imagedir, "SaveData\\profileimage.png", "backupfilename.png");
-                            File.WriteAllBytes(imagedir, imagefile);
-                            File.Delete("backupfilename.png");
+
+                            File.WriteAllBytes(maindir + "\\SaveData\\profileimage.png", imagefile);
+
                         }
                         catch (Exception ex4)
                         {
                             Console.Clear();
-                            Console.WriteLine("Invalid Image (Make sure its on the same drive as rec_rewild_classic)");
+                            Console.WriteLine("Invalid Image");
+                            Console.WriteLine(ex4);
+                            Console.WriteLine("image file path: " + imagedir);
+                            Directory.SetCurrentDirectory(maindir);
                             goto Profile;
                         }
                         Console.Clear();
                         Console.WriteLine("Success!");
+                        Directory.SetCurrentDirectory(maindir);
                         goto Profile;
                     }
                     else if (readline4 == "3")
@@ -277,17 +384,7 @@ namespace start
                         goto Start;
                     }
                 }
-                else if (readline3 == "3")
-                {
-                    Console.WriteLine("Current Level: " + File.ReadAllText("SaveData\\Profile\\level.txt"));
-                    Console.WriteLine("New Level: ");
-                    string newlevel = Console.ReadLine();
-                    File.WriteAllText("SaveData\\Profile\\level.txt", newlevel);
-                    Console.Clear();
-                    Console.WriteLine("Success!");
-                    goto Profile;
-                }
-                else if (readline3 == "4")
+                else if (readline3 == "Profile Downloader")
                 {
                     Console.Title = "rec_rewild_classic Profile Downloader";
                     Console.Clear();
@@ -316,13 +413,13 @@ namespace start
                     Console.WriteLine("Success!");
                     goto Start;
                 }
-                else if (readline3 == "5")
+                else if (readline3 == "Go Back")
                 {
                     Console.Clear();
                     goto Start;
                 }
             }
-            if (readline == "4")
+            if (readline == "Build Download Links")
             {
                 Console.Title = "rec_rewild_classic Build Downloads";
                 Console.Clear();
@@ -333,7 +430,7 @@ namespace start
                 Console.Clear();
                 goto Start;
             }
-            if (readline == "5")
+            if (readline == "Start Server")
             {
                 Console.Title = "rec_rewild_classic Version Select";
                 string readline2 = AnsiConsole.Prompt(
@@ -409,7 +506,62 @@ namespace start
         public static string msg = "//This is the server sending and recieving data from recroom." + Environment.NewLine + "//Ignore this if you don't know what this means." + Environment.NewLine + "//Please start up the build now.";
         public static string version = "";
         public static string appversion = "0.0.1";
-        
+        public static string maindir = Directory.GetCurrentDirectory();
+
+
+
+        private static string ShowDialog()
+        {
+            var ofn = new OpenFileName();
+            ofn.lStructSize = Marshal.SizeOf(ofn);
+            // Define Filter for your extensions (Excel, ...)
+            ofn.lpstrFilter = "image Files (*.png)\0*.png\0All Files (*.*)\0*.*\0";
+            ofn.lpstrFile = new string(new char[256]);
+            ofn.nMaxFile = ofn.lpstrFile.Length;
+            ofn.lpstrFileTitle = new string(new char[64]);
+            ofn.nMaxFileTitle = ofn.lpstrFileTitle.Length;
+            ofn.lpstrTitle = "Open File Dialog...";
+            if (GetOpenFileName(ref ofn))
+
+                return ofn.lpstrFile;
+            return string.Empty;
+        }
+
+        [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool GetOpenFileName(ref OpenFileName ofn);
+
+
+
+        // From https://www.pinvoke.net/default.aspx/Structures/OPENFILENAME.html
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public struct OpenFileName
+        {
+            public int lStructSize;
+            public IntPtr hwndOwner;
+            public IntPtr hInstance;
+            public string lpstrFilter;
+            public string lpstrCustomFilter;
+            public int nMaxCustFilter;
+            public int nFilterIndex;
+            public string lpstrFile;
+            public int nMaxFile;
+            public string lpstrFileTitle;
+            public int nMaxFileTitle;
+            public string lpstrInitialDir;
+            public string lpstrTitle;
+            public int Flags;
+            public short nFileOffset;
+            public short nFileExtension;
+            public string lpstrDefExt;
+            public IntPtr lCustData;
+            public IntPtr lpfnHook;
+            public string lpTemplateName;
+            public IntPtr pvReserved;
+            public int dwReserved;
+            public int flagsEx;
+        }
+
+
     }
 
 }
