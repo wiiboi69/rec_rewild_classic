@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using ws;
 
-namespace vaultgamesesh
+namespace rewild_room_sesh
 {
 	// Token: 0x02000005 RID: 5
 	public class Notification2018
@@ -26,13 +26,13 @@ namespace vaultgamesesh
 					if (flag3)
 					{
 						Console.WriteLine("[18CWS] Game client sent presence update.");
-						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, c000020.m000027()));
+						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, heartbeat.get_heartbeat()));
 					}
 					bool flag4 = text2 == "heartbeat2";
 					if (flag4)
 					{
 						Console.WriteLine("[18CWS] Heartbeat 2 sent by game client.");
-						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(4, c000020.m000027()));
+						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(4, heartbeat.get_heartbeat()));
 					}
 				}
 				Console.WriteLine("[18CWS] Unknown CWS call: " + text);

@@ -6,7 +6,7 @@ using System.Threading;
 using api;
 using api2018;
 using Newtonsoft.Json;
-using vaultgamesesh;
+using rewild_room_sesh;
 using System.Collections.Generic;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
@@ -32,7 +32,7 @@ namespace server
 			try
 			{
 				//2 different servers for 3 different stages of the game, the apis change so much idk anymore
-				this.listener.Prefixes.Add("http://localhost:" + start.Program.version + "/");
+				this.listener.Prefixes.Add("http://localhost:" + start.Program.api_port + "/");
 
 				for (; ; )
 				{
@@ -93,7 +93,7 @@ namespace server
 					}
 					if (Url == ("config/v2"))
 					{
-						s = Config2.GetDebugConfig();
+						s = Config.GetDebugConfig();
 					}
 					if (Url == "platformlogin/v1/getcachedlogins")
 					{
@@ -262,7 +262,7 @@ namespace server
 					}
 					if (Url == "activities/charades/v1/words")
 					{
-						s = Activities.Charades.words();
+						s = Charades.words();
 					}
 					if (Url == "gamesessions/v2/joinrandom")
 					{
@@ -274,7 +274,7 @@ namespace server
 					}
 					if (Url == "gamesessions/v3/joinroom")
 					{
-						s = c000041.Create_GameSession(text);
+						s = room_sesh.Create_GameSession(text);
 					}
 					if (rawUrl == "//api/sanitize/v1/isPure")
 					{
@@ -303,7 +303,7 @@ namespace server
 					}
 					if (Url == "rooms/v1/clone")
 					{
-						s = JsonConvert.SerializeObject(c000099.m00000a(text));
+						s = JsonConvert.SerializeObject(rewild_custom_room_2018.clone_room(text));
 					}
 					if (Url.StartsWith("rooms/v2/saveData"))
 					{
@@ -324,7 +324,7 @@ namespace server
 					}
 					if (Url == "presence/v3/heartbeat")
 					{
-						s = JsonConvert.SerializeObject(Notification2018.Reponse.createResponse(4, c000020.m000027()));
+						s = JsonConvert.SerializeObject(Notification2018.Reponse.createResponse(4, heartbeat.get_heartbeat()));
 					}
 					if (Url == "rooms/v1/featuredRoomGroup")
 					{
@@ -349,7 +349,7 @@ namespace server
 					}
 					else if (Url.StartsWith("rooms/v4/details"))
 					{
-						s = JsonConvert.SerializeObject(c00005d.m000023(Convert.ToInt32(Url.Remove(0, 17))));
+						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("/api/rooms/v4/details/".Length))));
 					}
 					if (Url == "images/v1/slideshow")
 					{
@@ -370,8 +370,16 @@ namespace server
 			catch (Exception ex4)
 			{
 				Console.WriteLine(ex4);
+				if (Convert.ToString(ex4).Contains("System.Net.HttpListenerException"))
+				{
+					start.Program.api_port +=1;
+
+                    Console.WriteLine($"moving port to {start.Program.api_port}");
+
+				}
 				File.WriteAllText("crashdump.txt", Convert.ToString(ex4));
 				this.listener.Close();
+
 				new APIServer2018();
 			}
 		}

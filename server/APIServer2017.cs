@@ -45,11 +45,15 @@ namespace server
 					}
 					string text;
 					string s = "";
-					using (StreamReader streamReader = new StreamReader(request.InputStream, request.ContentEncoding))
-					{
-						text = streamReader.ReadToEnd();
-					}
-					if (!(Url == ""))
+                    byte[] array;
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        context.Request.InputStream.CopyTo(memoryStream);
+                        array = memoryStream.ToArray();
+                        text = Encoding.ASCII.GetString(array);
+                    }
+
+                    if (!(Url == ""))
 					{
 						Console.WriteLine("API Requested: " + Url);
 					}
@@ -57,27 +61,39 @@ namespace server
 					{
 						Console.WriteLine("API Requested (rawUrl): " + rawUrl);
 					}
-					Console.WriteLine("API Data: " + text);
-					if (Url.StartsWith("versioncheck"))
+                    if (text.Length > 0xfff)
+                    {
+                        Console.WriteLine("API Data: unviewable");
+                    }
+                    else
+                    {
+                        Console.WriteLine("API Data: " + text);
+                    }
+                    if (Url.StartsWith("versioncheck"))
 					{
 						s = APIServer_Base.VersionCheckResponse;
 					}
 					if (Url == ("config/v2"))
 					{
-						s = Config2.GetDebugConfig();
+						s = Config.GetDebugConfig();
 					}
 					if (Url == "platformlogin/v1/profiles")
 					{
-						s = getorcreate.GetOrCreateArray((ulong.Parse(text.Remove(0, 32))));
+						s = getorcreate.GetOrCreateArray(ulong.Parse(text.Remove(0, 32)));
 					 	APIServer_Base.CachedPlayerID = ulong.Parse(text.Remove(0, 32));
                         APIServer_Base.CachedPlatformID = ulong.Parse(text.Remove(0, 22));
 						File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
 					}
+
 					if (Url == "platformlogin/v2")
 					{
 						s = PlatformLogin.v4(APIServer_Base.CachedPlayerID);
 					}
-					if (Url == "PlayerReporting/v1/moderationBlockDetails")
+                    if (Url == "platformlogin/v6")
+                    {
+                        s = PlatformLogin.v4(APIServer_Base.CachedPlayerID);
+                    }
+                    if (Url == "PlayerReporting/v1/moderationBlockDetails")
 					{
 						s = APIServer_Base.ModerationBlockDetails;
 
@@ -150,7 +166,7 @@ namespace server
 					}
 					if (Url == "activities/charades/v1/words")
 					{
-						s = Activities.Charades.words();
+						s = Charades.words();
 					}
 					if (Url == "gamesessions/v2/joinrandom")
 					{

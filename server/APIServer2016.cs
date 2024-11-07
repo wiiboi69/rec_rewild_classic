@@ -7,7 +7,7 @@ using api;
 using api2018;
 using api2017;
 using Newtonsoft.Json;
-using vaultgamesesh;
+using rewild_room_sesh;
 using System.Collections.Generic;
 
 namespace server
@@ -48,13 +48,16 @@ namespace server
 					{
 						Url = rawUrl.Remove(0, 5);
 					}
-					string text;
-					string s = "";
-					using (StreamReader streamReader = new StreamReader(request.InputStream, request.ContentEncoding))
-					{
-						text = streamReader.ReadToEnd();
-					}
-					if (!(Url == ""))
+                    string text;
+                    string s = "";
+                    byte[] array;
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        context.Request.InputStream.CopyTo(memoryStream);
+                        array = memoryStream.ToArray();
+                        text = Encoding.ASCII.GetString(array);
+                    }
+                    if (!(Url == ""))
 					{
 						Console.WriteLine("API Requested: " + Url);
 					}
@@ -72,7 +75,7 @@ namespace server
 					}
 					if (Url == ("config/v2"))
 					{
-						s = Config2.GetDebugConfig();
+						s = Config.GetDebugConfig();
 					}
 					if (Url == "notification/v2")
 					{
@@ -143,7 +146,7 @@ namespace server
 					}
 					if (Url == "activities/charades/v1/words")
 					{
-						s = Activities.Charades.words();
+						s = Charades.words();
 					}
 					if (Url == "images/v2/profile/") //disabled with a / at the end
 					{

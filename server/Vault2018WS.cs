@@ -9,7 +9,7 @@ using WebSocketSharp;
 using WebSocketSharp.Server;
 using ws;
 
-namespace vaultgamesesh
+namespace rewild_room_sesh
 {
 	public class Late2018WebSock
 	{
@@ -56,7 +56,7 @@ namespace vaultgamesesh
                         result = "200 OK",
                         nonblocking = true,
                         target = "Notification",
-                        arguments = new object[] { JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, c000020.m000027())) },
+                        arguments = new object[] { JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, heartbeat.get_heartbeat())) },
                         error = "",
                         invocationId = "naaaa",
                         item = ""

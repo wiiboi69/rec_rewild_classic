@@ -8,11 +8,8 @@ using start;
 
 namespace server
 {
-	// Token: 0x02000050 RID: 80
 	internal class NameServer
 	{
-		
-		// Token: 0x06000227 RID: 551 RVA: 0x00006D1C File Offset: 0x00004F1C
 		public NameServer()
 		{
 			try
@@ -27,7 +24,6 @@ namespace server
 			}
 		}
 
-		// Token: 0x06000228 RID: 552 RVA: 0x00006D84 File Offset: 0x00004F84
 		private void StartListen()
 		{
 			//nameserver is ONLY for 2018
@@ -43,7 +39,7 @@ namespace server
                 string s = "";
                 NSData data = new NSData()
                 {
-                    API = "http://localhost:2018",
+                    API = $"http://localhost:{start.Program.api_port}",
                     Cdn = "http://localhost:20182",
                     Notifications = "http://localhost:20161",
                     Images = "http://localhost:20182"
@@ -68,7 +64,7 @@ namespace server
             {
                 this.listener2.Start();
                 Console.WriteLine("[NameServer2.cs] is listening.");
-                HttpListenerContext context = this.listener2.GetContext();
+                HttpListenerContext context = this.listener2.GetContext();  
                 HttpListenerRequest request = context.Request;
                 HttpListenerResponse response = context.Response;
                 string rawUrl = request.RawUrl;
@@ -76,6 +72,7 @@ namespace server
                 NSData data = new NSData()
                 {
                     API = "http://localhost:2018",
+                    Cdn = "http://localhost:20182",
                     Notifications = "http://localhost:20161",
                     Images = "http://localhost:20182"
                 };
@@ -101,8 +98,6 @@ namespace server
 
         }
 
-
-        // Token: 0x04000192 RID: 402
         private HttpListener listener = new HttpListener();
 
 		private HttpListener listener2 = new HttpListener();

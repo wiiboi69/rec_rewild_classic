@@ -13,6 +13,7 @@
     <PackageProjectUrl>https://discord.gg/daC8QUhnFP</PackageProjectUrl>
     <Company>rec_rewild_classic</Company>
     <Version>0.4.0</Version>
+    <UseWindowsForms>False</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,10 +36,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="api\custom_room\" />
   </ItemGroup>
 
 </Project>

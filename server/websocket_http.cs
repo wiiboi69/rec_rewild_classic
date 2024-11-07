@@ -11,7 +11,7 @@ using api;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using server;
-using vaultgamesesh;
+using rewild_room_sesh;
 
 namespace ws
 {
@@ -127,7 +127,7 @@ namespace ws
                         arguments = new object[] { JsonConvert.SerializeObject(new Respond
                         {
                             Id = "PresenceUpdate",
-                            Msg = JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, c000020.m000027()))
+                            Msg = JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, heartbeat.get_heartbeat()))
                         }) },
                         error = "",
                         invocationId = "1",
@@ -150,7 +150,7 @@ namespace ws
                             arguments = new object[] { JsonConvert.SerializeObject(new Respond
                             {
                                 Id = "PresenceUpdate",
-                                Msg = JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, c000020.m000027()))
+                                Msg = JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, heartbeat.get_heartbeat()))
                             }) },
                             error = null,
                             invocationId = null,

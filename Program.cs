@@ -5,7 +5,7 @@ using ws;
 using api;
 using System.Net;
 using System.Diagnostics;
-using vaultgamesesh;
+using rewild_room_sesh;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Spectre.Console;
@@ -75,7 +75,7 @@ namespace start
             {
                 Console.WriteLine("This version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
             }            
-            Console.WriteLine("//Custom Room Downloader has been moved to the settings tab!" + Environment.NewLine);
+            //Console.WriteLine("//Custom Room Downloader has been moved to the settings tab!" + Environment.NewLine);
             //Console.WriteLine("(1) What's New" + Environment.NewLine +"(2) Change Settings" + Environment.NewLine + "(3) Modify Profile" + Environment.NewLine + "(4) Build Download Links" + Environment.NewLine + "(5) Start Server");
 
             string readline = AnsiConsole.Prompt(
@@ -96,7 +96,10 @@ namespace start
             {
                 Console.Title = "rec_rewild_classic Changelog";
                 Console.Clear();
-                Console.WriteLine(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/changelog.txt"));
+                var panel = new Panel(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/changelog.txt"));
+                panel.Header = new PanelHeader("Changelog");
+                panel.Border = BoxBorder.Rounded;
+                AnsiConsole.Write(panel);
                 Console.WriteLine("Press any key to continue:");
                 Console.ReadKey();
                 Console.Clear();
@@ -109,7 +112,6 @@ namespace start
 
                 Settings:
                 Console.Title = "rec_rewild_classic Settings Menu";
-                //Console.WriteLine("(1) Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt") + Environment.NewLine + "(2) Custom Room Downloader " + Environment.NewLine + "(3) Reset SaveData" + Environment.NewLine + "(4) Go Back");
 
                 string readline4 = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
@@ -205,7 +207,6 @@ namespace start
 
             Profile:
                 Console.Title = "rec_rewild_classic Profile Menu";
-                //Console.WriteLine("(1) Change Username" + Environment.NewLine + "(2) Change Profile Image" + Environment.NewLine + "(3) Change Level" + Environment.NewLine + "(4) Profile Downloader" + Environment.NewLine + "(5) Go Back");
                 string readline3 = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .EnableSearch()
@@ -360,7 +361,7 @@ namespace start
                             {
                                 Console.Clear();
                                 Console.WriteLine("Failed to download profile...");
-                                goto Start;
+                                goto Profile;
                             }
                         
                             List<ProfieStealer.Root> profile = JsonConvert.DeserializeObject<List<ProfieStealer.Root>>(data);
@@ -381,37 +382,36 @@ namespace start
                     else if (readline4 == "4")
                     {
                         Console.Clear();
-                        goto Start;
+                        goto Profile;
                     }
                 }
                 else if (readline3 == "Profile Downloader")
                 {
+                    download_profile:
                     Console.Title = "rec_rewild_classic Profile Downloader";
                     Console.Clear();
-                    Console.WriteLine("Profile Downloader: This tool takes the username and profile image of any username you type in and imports it to rec_rewild_classic.");
-                    Console.WriteLine("Please type the @ username of the profile you would like:");
+                    Console.WriteLine("Profile Downloader: This tool takes the username and profile image of any username you type in and imports it to Rec_rewild.");
+                    Console.WriteLine("Please type the username of the profile you would like: ");
                     string readusername = Console.ReadLine();
-                    if (readusername.StartsWith("@"))
-                    {
-                        readusername = readusername.Remove(0, 1);
-                    }
                     string data2 = "";
                     try
                     {
-                        data2 = new WebClient().DownloadString("https://accounts.rec.net/account/search?name=" + readusername);
+                        data2 = new WebClient().DownloadString("https://apim.rec.net/accounts/account/search?name=" + readusername + "&take=5");
                     }
                     catch
                     {
                         Console.Clear();
                         Console.WriteLine("Failed to download profile...");
-                        goto Start;
+                        goto Profile;
                     }
-                    
-                    ProfieStealer.ProfileSteal(data2);
-                    
+
+                    if (!ProfieStealer.Profilefind(data2, take_int: 12))
+                    {
+                        goto download_profile;
+                    }
+
                     Console.Clear();
-                    Console.WriteLine("Success!");
-                    goto Start;
+                    goto Profile;
                 }
                 else if (readline3 == "Go Back")
                 {
@@ -468,6 +468,7 @@ namespace start
                 {
                     Console.Title = "rec_rewild_classic May 30th 2018";
                     version = "2018";
+                    start.Program.api_port = int.Parse(start.Program.version + "0");
                     Console.Clear();
                     Console.WriteLine("Version Selected: May 30th, 2018.");
                     new NameServer();
@@ -479,6 +480,7 @@ namespace start
                 {
                     Console.Title = "rec_rewild_classic September 27th 2018";
                     version = "2018";
+                    start.Program.api_port = int.Parse(start.Program.version + "0");
                     Console.Clear();
                     Console.WriteLine("Version Selected: September 27th, 2018.");
                     new NameServer();
@@ -491,6 +493,7 @@ namespace start
                 {
                     Console.Title = "rec_rewild_classic July 20th 2018";
                     version = "2018";
+                    start.Program.api_port = int.Parse(start.Program.version + "0");
                     Console.Clear();
                     Console.WriteLine("Version Selected: July 20th, 2018");
                     new NameServer();
@@ -505,6 +508,7 @@ namespace start
         }
         public static string msg = "//This is the server sending and recieving data from recroom." + Environment.NewLine + "//Ignore this if you don't know what this means." + Environment.NewLine + "//Please start up the build now.";
         public static string version = "";
+        public static int api_port = 0;
         public static string appversion = "0.0.1";
         public static string maindir = Directory.GetCurrentDirectory();
 
