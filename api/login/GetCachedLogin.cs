@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using api2018;
 using System.IO;
+using System.Net.NetworkInformation;
 
 namespace api2018
 {
@@ -12,13 +13,15 @@ namespace api2018
 		{
 			int level = int.Parse(File.ReadAllText("SaveData\\Profile\\level.txt"));
 			string name = File.ReadAllText("SaveData\\Profile\\username.txt");
-			return JsonConvert.SerializeObject(new List<getcachedlogins>
+            string bio = File.ReadAllText("SaveData\\Profile\\username.txt");
+            return JsonConvert.SerializeObject(new List<getcachedlogins>
 			{
 				new getcachedlogins
 				{
 					Id = userid,
 					Username = name,
 					DisplayName = name,
+					Bio = bio,
 					XP = 9999,
 					Level = level,
 					RegistrationStatus = 2,
@@ -58,7 +61,8 @@ namespace api2018
 		public ulong Id { get; set; }
 		public string Username { get; set; }
 		public string DisplayName { get; set; }
-		public int XP { get; set; }
+        public string Bio { get; set; }
+        public int XP { get; set; }
 		public int Level { get; set; }
 		public int RegistrationStatus { get; set; }
 		public bool Developer { get; set; }

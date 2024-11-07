@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
+using System.Net.NetworkInformation;
 
 namespace api2018
 {
@@ -17,7 +18,9 @@ namespace api2018
 		{
 			int level = int.Parse(File.ReadAllText("SaveData\\Profile\\level.txt"));
 			string name = File.ReadAllText("SaveData\\Profile\\username.txt");
-			return JsonConvert.SerializeObject(new logincached
+            string bio = File.ReadAllText("SaveData\\Profile\\bio.txt");
+
+            return JsonConvert.SerializeObject(new logincached
 			{
 				Error = "",
 				Player = new getcachedlogins
@@ -25,6 +28,7 @@ namespace api2018
 					Id = userid,
 					Username = name,
 					DisplayName = name,
+					Bio = bio,
 					XP = 9999,
 					Level = level,
 					RegistrationStatus = 2,

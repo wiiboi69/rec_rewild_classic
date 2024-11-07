@@ -76,6 +76,10 @@ namespace start
             {
                 File.WriteAllText("SaveData\\Profile\\displayName.txt", File.ReadAllText("SaveData\\Profile\\username.txt"));
             }
+            if (!(File.Exists("SaveData\\Profile\\bio.txt")))
+            {
+				File.WriteAllText("SaveData\\Profile\\bio.txt", "Default bio");
+            }
             if (!(File.Exists("SaveData\\Profile\\level.txt")))
 			{
 				File.WriteAllText("SaveData\\Profile\\level.txt", "10");
