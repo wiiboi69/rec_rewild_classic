@@ -10,6 +10,7 @@ using rewild_room_sesh;
 using System.Collections.Generic;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
+using ws;
 
 namespace server
 {
@@ -324,7 +325,7 @@ namespace server
 					}
 					if (Url == "presence/v3/heartbeat")
 					{
-						s = JsonConvert.SerializeObject(Notification2018.Reponse.createResponse(4, heartbeat.get_heartbeat()));
+						s = JsonConvert.SerializeObject(Notification.Reponse.createResponse(Notification.ResponseResults.PresenceHeartbeatResponse, heartbeat.get_heartbeat()));
 					}
 					if (Url == "rooms/v1/featuredRoomGroup")
 					{
