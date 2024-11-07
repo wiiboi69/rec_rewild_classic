@@ -390,7 +390,7 @@ namespace start
                     download_profile:
                     Console.Title = "rec_rewild_classic Profile Downloader";
                     Console.Clear();
-                    Console.WriteLine("Profile Downloader: This tool takes the username and profile image of any username you type in and imports it to Rec_rewild.");
+                    Console.WriteLine("Profile Downloader: This tool takes the username and profile image of any username you type in and imports it to rec_rewild_classic.");
                     Console.WriteLine("Please type the username of the profile you would like: ");
                     string readusername = Console.ReadLine();
                     string data2 = "";
