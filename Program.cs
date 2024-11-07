@@ -445,6 +445,9 @@ namespace start
                         .AddChoiceGroup("2018", new[]
                         {
                             "May", "July", "September"
+                        })
+                        .AddChoices(new[] {
+                            "back",
                         }));
                 if (readline2 == "2016")
                 {
@@ -501,8 +504,12 @@ namespace start
                     new APIServer2018();
                     new WebSocket();
                 }
-                    
-                
+                else if (readline2 == "back")
+                {
+                    Console.Clear();
+                    goto Start;
+                }
+
                 Console.WriteLine(msg);
             }
         }

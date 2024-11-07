@@ -13,7 +13,7 @@ namespace ws
 		// Token: 0x06000031 RID: 49 RVA: 0x000066D4 File Offset: 0x000048D4
 		public WebSocket()
 		{
-			WebSocketServer webSocketServer = new WebSocketServer(string.Format("	", Array.Empty<object>()));
+			WebSocketServer webSocketServer = new WebSocketServer(string.Format("ws://localhost:20161", Array.Empty<object>()));
 			webSocketServer.AddWebSocketService<WebSocket.NotificationV2>("/api/notification/v2");
 			webSocketServer.AddWebSocketService<WebSocket.NotificationV2>("/hub/v1");
 			webSocketServer.Start();
