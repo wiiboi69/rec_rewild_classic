@@ -5,10 +5,8 @@ using gamesesh;
 
 namespace ws
 {
-	// Token: 0x0200002A RID: 42
 	public class Notification
 	{
-		// Token: 0x0600010B RID: 267
 		public static string ProcessRequest(string jsonData)
 		{
 			Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
@@ -22,12 +20,12 @@ namespace ws
 					if (text2 == "playerSubscriptions/v1/update")
 					{
 						Console.WriteLine("[WSS] Game client sent presence update.");
-						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, GameSessions.StatusSessionInstance()));
+						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(ResponseResults.SubscriptionUpdateunkon, GameSessions.StatusSessionInstance()));
 					}
 					if (text2 == "heartbeat2")
 					{
 						Console.WriteLine("[WSS] Heartbeat 2 sent by game client.");
-						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(4, GameSessions.StatusSessionInstance()));
+						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(ResponseResults.PresenceHeartbeatResponse, GameSessions.StatusSessionInstance()));
 					}
 				}
 				Console.WriteLine("[WSS] Unknown API call: " + text);
@@ -40,7 +38,6 @@ namespace ws
 			return result;
 		}
 
-		// Token: 0x0200002B RID: 43
 		public enum ResponseResults
 		{
 			RelationshipChanged = 1,
@@ -51,7 +48,8 @@ namespace ws
 			SubscriptionUpdateProfile = 11,
 			SubscriptionUpdatePresence,
 			SubscriptionUpdateGameSession,
-			SubscriptionUpdateRoom = 15,
+			SubscriptionUpdateunkon,
+            SubscriptionUpdateRoom = 15,
 			ModerationQuitGame = 20,
 			ModerationUpdateRequired,
 			ModerationKick,
@@ -74,31 +72,16 @@ namespace ws
 
 		public class Reponse
 		{
-			public int Id { get; set; }
+			public ResponseResults Id { get; set; }
 
 			public object Msg { get; set; }
 			
-			public static Notification.Reponse createResponse(int id, object msg)
+			public static Notification.Reponse createResponse(ResponseResults id, object msg)
 			{
 				return new Notification.Reponse
 				{
 					Id = id,
 					Msg = msg
-				};
-			}
-
-			public static Notification.Reponse createBannedResponse()
-			{
-				return new Notification.Reponse
-				{
-					Id = (int)ResponseResults.ModerationKick,
-					Msg = new api.ModerationBlockDetails()
-                    {
-						ReportCategory = 1,
-						Duration = int.MaxValue,
-						GameSessionId = 100L,
-						Message = "You have been banned. You are probably a little kid and are now whining at your VR headset. If you aren't a little kid, DM me to appeal."
-					}
 				};
 			}
 		}
