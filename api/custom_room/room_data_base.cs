@@ -7,7 +7,7 @@ using server;
 
 namespace rewild_room_sesh
 {
-	internal sealed class room_data_base : rr_room_data
+	public class room_data_base : rr_room_data
     {
 		public static Dictionary<string, room> get_all_custom_rooms()
 		{
@@ -90,14 +90,7 @@ namespace rewild_room_sesh
 			public int ReleaseStatus { get; set; }
 		}
 
-		public sealed class c000062
-		{
-			public string RoomName { get; set; }
-            public long RoomId { get; set; }
-            public string ImageName { get; set; }
-		}
-
-		public sealed class Tags
+		public class Tags
 		{
 			public string Tag { get; set; }
             public int Type { get; set; }

@@ -125,52 +125,26 @@ namespace rewild_room_sesh
 
         public enum error_code
         {
-            // Token: 0x0400729C RID: 29340
             Success,
-            // Token: 0x0400729D RID: 29341
             Unknown,
-            // Token: 0x0400729E RID: 29342
             PermissionDenied,
-            // Token: 0x0400729F RID: 29343
             RoomNotActive,
-            // Token: 0x040072A0 RID: 29344
             RoomDoesNotExist,
-            // Token: 0x040072A1 RID: 29345
             RoomHasNoDataBlob,
-            // Token: 0x040072A2 RID: 29346
             DuplicateName = 10,
-            // Token: 0x040072A3 RID: 29347
             ReservedName,
-            // Token: 0x040072A4 RID: 29348
             InappropriateName,
-            // Token: 0x040072A5 RID: 29349
             InappropriateDescription,
-            // Token: 0x040072A6 RID: 29350
             TooManyRooms = 20,
-            // Token: 0x040072A7 RID: 29351
             InvalidMaxPlayers = 30,
-            // Token: 0x040072A8 RID: 29352
             DataHistoryDoesNotExist = 40,
-            // Token: 0x040072A9 RID: 29353
             DataHistoryAlreadyActive,
-            // Token: 0x040072AA RID: 29354
             InvalidTags = 50,
-            // Token: 0x040072AB RID: 29355
             NoStartingRoomScene = 55,
-            // Token: 0x040072AC RID: 29356
             RoomUnderModerationReview = 100,
-            // Token: 0x040072AD RID: 29357
             PlayerHasRoomUnderModerationReview,
-            // Token: 0x040072AE RID: 29358
             AccessibilityUnderModerationLock,
-            // Token: 0x040072AF RID: 29359
             JuniorStatusFail = 200
         }
-
-        public sealed class c00009c
-		{
-			public string Name { get; set; }
-            public List<room_data_base.c000062> FeaturedRooms { get; set; }
-		}
 	}
 }

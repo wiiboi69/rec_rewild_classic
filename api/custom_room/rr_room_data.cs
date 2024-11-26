@@ -5,7 +5,7 @@ using static rewild_room_sesh.room_data_base;
 
 namespace rewild_room_sesh
 {
-    internal class rr_room_data
+    public class rr_room_data
     {
 
         public static Dictionary<string, room> Base_cloneable_room = new Dictionary<string, room>

@@ -18,6 +18,7 @@ namespace api2018
 		{
 			int level = int.Parse(File.ReadAllText("SaveData\\Profile\\level.txt"));
 			string name = File.ReadAllText("SaveData\\Profile\\username.txt");
+			string despayname = File.ReadAllText("SaveData\\Profile\\displayName.txt");
             string bio = File.ReadAllText("SaveData\\Profile\\bio.txt");
 
             return JsonConvert.SerializeObject(new logincached
@@ -27,7 +28,7 @@ namespace api2018
 				{
 					Id = userid,
 					Username = name,
-					DisplayName = name,
+					DisplayName = despayname,
 					Bio = bio,
 					XP = 9999,
 					Level = level,

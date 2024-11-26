@@ -56,7 +56,7 @@ namespace rewild_room_sesh
                         result = "200 OK",
                         nonblocking = true,
                         target = "Notification",
-                        arguments = new object[] { JsonConvert.SerializeObject(Notification.Reponse.createResponse(12, heartbeat.get_heartbeat())) },
+                        arguments = new object[] { JsonConvert.SerializeObject(Notification.Reponse.createResponse(Notification.ResponseResults.SubscriptionUpdatePresence, heartbeat.get_heartbeat())) },
                         error = "",
                         invocationId = "naaaa",
                         item = ""

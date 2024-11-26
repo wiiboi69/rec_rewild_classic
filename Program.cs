@@ -513,7 +513,9 @@ namespace start
                 Console.WriteLine(msg);
             }
         }
-        public static string msg = "//This is the server sending and recieving data from recroom." + Environment.NewLine + "//Ignore this if you don't know what this means." + Environment.NewLine + "//Please start up the build now.";
+        public static string msg = "//This is the server sending and recieving data from recroom.\n" + 
+                                   "//Ignore this if you don't know what this means.zn" + 
+                                   "//Please start up the build now.";
         public static string version = "";
         public static int api_port = 0;
         public static string appversion = "0.0.1";

@@ -61,16 +61,12 @@ namespace server
 					}
 					string text;
 					string s = "";
-					using (StreamReader streamReader = new StreamReader(request.InputStream, request.ContentEncoding))
-					{
-						text = streamReader.ReadToEnd();
-					}
                     byte[] array;
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
                         context.Request.InputStream.CopyTo(memoryStream);
                         array = memoryStream.ToArray();
-
+                        text = Encoding.ASCII.GetString(array);
                     }
                     if (text.Length > 0xfff)
                     {
@@ -343,14 +339,9 @@ namespace server
 					{
 						CustomRooms.RoomGet(Url.Remove(0, 22));
 					}
-					if (Url == "rooms/v4/details/29")
+					if (Url.StartsWith("rooms/v4/details"))
 					{
-						//s = File.ReadAllText("SaveData\\Rooms\\Downloaded\\RoomDetails.json");
-						Thread.Sleep(100);
-					}
-					else if (Url.StartsWith("rooms/v4/details"))
-					{
-						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("/api/rooms/v4/details/".Length))));
+						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("/rooms/v4/details/".Length))));
 					}
 					if (Url == "images/v1/slideshow")
 					{
@@ -364,9 +355,7 @@ namespace server
 					Thread.Sleep(200);
 					outputStream.Close();
 					this.listener.Stop();
-
 				}
-				
 			}
 			catch (Exception ex4)
 			{

@@ -20,7 +20,7 @@ namespace ws
 					if (text2 == "playerSubscriptions/v1/update")
 					{
 						Console.WriteLine("[WSS] Game client sent presence update.");
-						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(ResponseResults.SubscriptionUpdateunkon, GameSessions.StatusSessionInstance()));
+						return JsonConvert.SerializeObject(Notification.Reponse.createResponse(ResponseResults.SubscriptionUpdatePresence, GameSessions.StatusSessionInstance()));
 					}
 					if (text2 == "heartbeat2")
 					{
