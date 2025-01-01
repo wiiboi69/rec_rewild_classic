@@ -8,8 +8,8 @@ namespace api2017
 	{
 		public static string GetOrCreate(ulong userid)
 		{
-			int level = int.Parse(File.ReadAllText("SaveData\\Profile\\level.txt"));
-			string name = File.ReadAllText("SaveData\\Profile\\username.txt");
+			int level = int.Parse(File.ReadAllText("SaveData/Profile/level.txt"));
+			string name = File.ReadAllText("SaveData/Profile/username.txt");
 			return JsonConvert.SerializeObject(new Profiles
 			{
 				Id = userid,
@@ -28,8 +28,8 @@ namespace api2017
 		}
 		public static string GetOrCreateArray(ulong userid)
 		{
-			int level = int.Parse(File.ReadAllText("SaveData\\Profile\\level.txt"));
-			string name = File.ReadAllText("SaveData\\Profile\\username.txt");
+			int level = int.Parse(File.ReadAllText("SaveData/Profile/level.txt"));
+			string name = File.ReadAllText("SaveData/Profile/username.txt");
 			return JsonConvert.SerializeObject(new Profiles[]
 			{
 				new Profiles

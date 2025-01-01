@@ -134,6 +134,6 @@ namespace api
 		private static List<Setting> playerSettings;
 
 		
-		public static string SettingsPath = "\\SaveData\\settings.txt";
+		public static string SettingsPath = "/SaveData/settings.txt";
 	}
 }

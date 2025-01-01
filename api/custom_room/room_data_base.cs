@@ -15,7 +15,7 @@ namespace rewild_room_sesh
 			string[] directories = Directory.GetDirectories(room_util.check_room_dir());
 			for (int i = 0; i < directories.Length; i++)
 			{
-				room custom_room_file = JsonConvert.DeserializeObject<room>(File.ReadAllText(directories[i] + "\\RoomDetails.json"));
+				room custom_room_file = JsonConvert.DeserializeObject<room>(File.ReadAllText(directories[i] + "/RoomDetails.json"));
 				room_list_custom.Add(custom_room_file.Room.Name, custom_room_file);
 			}
 			return room_list_custom;
@@ -38,7 +38,17 @@ namespace rewild_room_sesh
 			return main_room["DormRoom"];
 		}
 
-        public sealed class subrooms
+
+
+		public class rewild_studio_subroom
+		{
+            public string? AssetBundleName { get; set; }
+            public string? DataSceneName { get; set; }
+            public List<string> RequiredAssetBundleNames { get; set; } = new List<string>();
+            public List<string> RequiredSubSceneNames { get; set; } = new List<string>();
+            public List<string> LevelRoomSubSceneNames { get; set; } = new List<string>();
+        }
+        public class subrooms
         {
 			public long RoomSceneId { get; set; }
 			public ulong RoomId { get; set; }
@@ -46,6 +56,7 @@ namespace rewild_room_sesh
             public string Name { get; set; }
             public bool IsSandbox { get; set; }
             public string DataBlobName { get; set; }
+            public rewild_studio_subroom? rewild_studio_data { get; set; } = null;
             public int MaxPlayers { get; set; }
             public bool CanMatchmakeInto { get; set; }
             public DateTime DataModifiedAt { get; set; }
@@ -57,7 +68,7 @@ namespace rewild_room_sesh
 			public bool SupportsJoinInProgress { get; set; }
 		}
 
-		public sealed class room
+		public class room
         {
 			public room_data Room { get; set; }
             public List<subrooms> Scenes { get; set; }
@@ -71,7 +82,7 @@ namespace rewild_room_sesh
             public List<Tags> Tags { get; set; }
 		}
 
-		public sealed class room_data
+		public class room_data
 		{
             public ulong RoomId { get; set; }
 			public string Name { get; set; }

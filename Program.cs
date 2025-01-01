@@ -18,15 +18,13 @@ namespace start
     {
         static void Main()
         {
-            //startup for rec_rewild_classic
-            
             Setup.setup();
             goto Tutorial;
 
         Tutorial:
             if (Setup.firsttime == true)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Title = "rec_rewild_classic Intro";
                 Console.WriteLine("Welcome to rec_rewild_classic " + appversion + "!");
                 Console.WriteLine("Is this your first time using rec_rewild_classic?");
@@ -67,7 +65,7 @@ namespace start
 
         Start:
             Console.Title = "rec_rewild_classic Startup Menu";
-            Console.WriteLine("rec_rewild_classic - a fork of openrec for rec room 2016 to 2018. (Version: " + appversion + ")");
+            Console.WriteLine("rec_rewild_classic - A fork of OpenRec for Rec Room 2016 to 2018. (Version: " + appversion + ")");
             Console.WriteLine("Download source code here: https://github.com/wiiboi69/Rec_rewild_classic");
 
            // Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
@@ -120,20 +118,20 @@ namespace start
                         .PageSize(10)
                         .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
                         .AddChoices(new[] {
-                            "Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt"),
+                            "Private Rooms: " + File.ReadAllText("SaveData/App/privaterooms.txt"),
                             "Custom Room Downloader",
                             "Reset SaveData",
                             "Go Back",
                         }));
                 if (readline4.StartsWith("Private Rooms"))
                 {
-                    if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Disabled")
+                    if (File.ReadAllText("SaveData/App/privaterooms.txt") == "Disabled")
                     {
-                        File.WriteAllText("SaveData\\App\\privaterooms.txt", "Enabled");
+                        File.WriteAllText("SaveData/App/privaterooms.txt", "Enabled");
                     }
                     else
                     {
-                        File.WriteAllText("SaveData\\App\\privaterooms.txt", "Disabled");
+                        File.WriteAllText("SaveData/App/privaterooms.txt", "Disabled");
                     }
                     Console.Clear();
                     Console.WriteLine("Success!");
@@ -164,32 +162,32 @@ namespace start
                 }
                 else if (readline4 == "Reset SaveData")
                 {
-                    File.Delete("SaveData\\avatar.txt");
-                    File.Delete("SaveData\\avataritems.txt");
-                    File.Delete("SaveData\\equipment.txt");
-                    File.Delete("SaveData\\consumables.txt");
-                    File.Delete("SaveData\\gameconfigs.txt");
-                    File.Delete("SaveData\\storefronts2.txt");
-                    File.Delete("SaveData\\Profile\\username.txt");
-                    File.Delete("SaveData\\Profile\\level.txt"); 
-                    File.Delete("SaveData\\Profile\\userid.txt");
-                    File.Delete("SaveData\\myrooms.txt"); 
-                    File.Delete("SaveData\\settings.txt");
-                    File.Delete("SaveData\\App\\privaterooms.txt");
-                    File.Delete("SaveData\\App\\facefeaturesadd.txt");
-                    File.Delete("SaveData\\profileimage.png");
-                    File.Delete("SaveData\\App\\firsttime.txt");
+                    File.Delete("SaveData/avatar.txt");
+                    File.Delete("SaveData/avataritems.txt");
+                    File.Delete("SaveData/equipment.txt");
+                    File.Delete("SaveData/consumables.txt");
+                    File.Delete("SaveData/gameconfigs.txt");
+                    File.Delete("SaveData/storefronts2.txt");
+                    File.Delete("SaveData/Profile/username.txt");
+                    File.Delete("SaveData/Profile/level.txt"); 
+                    File.Delete("SaveData/Profile/userid.txt");
+                    File.Delete("SaveData/myrooms.txt"); 
+                    File.Delete("SaveData/settings.txt");
+                    File.Delete("SaveData/App/privaterooms.txt");
+                    File.Delete("SaveData/App/facefeaturesadd.txt");
+                    File.Delete("SaveData/profileimage.png");
+                    File.Delete("SaveData/App/firsttime.txt");
                     
-                    File.Delete("SaveData\\avataritems2.txt");
+                    File.Delete("SaveData/avataritems2.txt");
                  
-                    File.Delete("SaveData\\Rooms\\Downloaded\\roomname.txt");
-                    File.Delete("SaveData\\Rooms\\Downloaded\\roomid.txt");
-                    File.Delete("SaveData\\Rooms\\Downloaded\\datablob.txt");
-                    File.Delete("SaveData\\Rooms\\Downloaded\\roomsceneid.txt");
-                    File.Delete("SaveData\\Rooms\\Downloaded\\imagename.txt");
-                    File.Delete("SaveData\\Rooms\\Downloaded\\cheercount.txt");
-                    File.Delete("SaveData\\Rooms\\Downloaded\\favcount.txt");
-                    File.Delete("SaveData\\Rooms\\Downloaded\\visitcount.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/roomname.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/roomid.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/datablob.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/roomsceneid.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/imagename.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/cheercount.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/favcount.txt");
+                    File.Delete("SaveData/Rooms/Downloaded/visitcount.txt");
                     Console.WriteLine("Success!");
                     Setup.setup();
                     goto Settings;
@@ -214,46 +212,46 @@ namespace start
                         .PageSize(10)
                         .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
                         .AddChoices(new[] {
-                            "Change Username:    " + File.ReadAllText("SaveData\\Profile\\username.txt"),
-                            "Change displayName: " + File.ReadAllText("SaveData\\Profile\\displayName.txt"),
-                            "Change userid:      " + File.ReadAllText("SaveData\\Profile\\userid.txt"),
+                            "Change Username:    " + File.ReadAllText("SaveData/Profile/username.txt"),
+                            "Change Display Name: " + File.ReadAllText("SaveData/Profile/displayName.txt"),
+                            "Change User ID:      " + File.ReadAllText("SaveData/Profile/userid.txt"),
                             "Change Profile Image",
-                            "Change Level:       " + File.ReadAllText("SaveData\\Profile\\level.txt"),
-                            "Change bio:         " + File.ReadAllText("SaveData\\Profile\\bio.txt"),
+                            "Change Level:       " + File.ReadAllText("SaveData/Profile/level.txt"),
+                            "Change Bio:         " + File.ReadAllText("SaveData/Profile/bio.txt"),
                             "Profile Downloader",
                             "Go Back",
                         }));
 
                 if (readline3.StartsWith("Change Username"))
                 {
-                    Console.WriteLine("Current Username: " + File.ReadAllText("SaveData\\Profile\\username.txt"));
+                    Console.WriteLine("Current Username: " + File.ReadAllText("SaveData/Profile/username.txt"));
                     Console.WriteLine("New Username: ");
                     string newusername = Console.ReadLine();
-                    File.WriteAllText("SaveData\\Profile\\username.txt", newusername);
+                    File.WriteAllText("SaveData/Profile/username.txt", newusername);
                     Console.Clear();
                     Console.WriteLine("Success!");
                     goto Profile;
                 }
-                else if (readline3.StartsWith("Change displayName"))
+                else if (readline3.StartsWith("Change Display Name"))
                 {
-                    Console.WriteLine("Current displayName: " + File.ReadAllText("SaveData\\Profile\\displayName.txt"));
+                    Console.WriteLine("Current displayName: " + File.ReadAllText("SaveData/Profile/displayName.txt"));
                     Console.WriteLine("New displayName: ");
                     string newlevel = Console.ReadLine();
-                    File.WriteAllText("SaveData\\Profile\\displayName.txt", newlevel);
+                    File.WriteAllText("SaveData/Profile/displayName.txt", newlevel);
                     Console.Clear();
                     Console.WriteLine("Success!");
                     goto Profile;
                 }
-                else if (readline3.StartsWith("Change userid"))
+                else if (readline3.StartsWith("Change User ID"))
                 {
 
-                    Console.WriteLine("Current userid: " + File.ReadAllText("SaveData\\Profile\\userid.txt"));
+                    Console.WriteLine("Current userid: " + File.ReadAllText("SaveData/Profile/userid.txt"));
                     Console.WriteLine("New userid: ");
                     string newlevel = Console.ReadLine();
                     int temp = 0;
                     if (int.TryParse(newlevel, out temp))
                     {
-                        File.WriteAllText("SaveData\\Profile\\userid.txt", temp.ToString());
+                        File.WriteAllText("SaveData/Profile/userid.txt", temp.ToString());
                         Console.Clear();
                         Console.WriteLine("Success!");
                     }
@@ -267,13 +265,13 @@ namespace start
                 else if (readline3.StartsWith("Change Level"))
                 {
 
-                    Console.WriteLine("Current Level: " + File.ReadAllText("SaveData\\Profile\\Level.txt"));
+                    Console.WriteLine("Current Level: " + File.ReadAllText("SaveData/Profile/Level.txt"));
                     Console.WriteLine("New Level: ");
                     string newlevel = Console.ReadLine();
                     int temp = 0;
                     if (int.TryParse(newlevel, out temp))
                     {
-                        File.WriteAllText("SaveData\\Profile\\Level.txt", temp.ToString());
+                        File.WriteAllText("SaveData/Profile/Level.txt", temp.ToString());
                         Console.Clear();
                         Console.WriteLine("Success!");
                     }
@@ -284,12 +282,12 @@ namespace start
                     }
                     goto Profile;
                 }
-                else if (readline3.StartsWith("Change bio"))
+                else if (readline3.StartsWith("Change Bio"))
                 {
-                    Console.WriteLine("Current bio: " + File.ReadAllText("SaveData\\Profile\\bio.txt"));
+                    Console.WriteLine("Current bio: " + File.ReadAllText("SaveData/Profile/bio.txt"));
                     Console.WriteLine("New bio: ");
                     string newlevel = Console.ReadLine();
-                    File.WriteAllText("SaveData\\Profile\\bio.txt", newlevel);
+                    File.WriteAllText("SaveData/Profile/bio.txt", newlevel);
                     Console.Clear();
                     Console.WriteLine("Success!");
                     goto Profile;
@@ -305,7 +303,7 @@ namespace start
                         string medialink = Console.ReadLine();
                         try
                         {
-                            File.WriteAllBytes("SaveData\\profileimage.png", new WebClient().DownloadData(medialink));
+                            File.WriteAllBytes("SaveData/profileimage.png", new WebClient().DownloadData(medialink));
                         }
                         catch
                         {
@@ -325,7 +323,7 @@ namespace start
                         {
                             byte[] imagefile = File.ReadAllBytes(imagedir);
 
-                            File.WriteAllBytes(maindir + "\\SaveData\\profileimage.png", imagefile);
+                            File.WriteAllBytes(maindir + "/SaveData/profileimage.png", imagefile);
 
                         }
                         catch (Exception ex4)
@@ -366,7 +364,7 @@ namespace start
                         
                             List<ProfieStealer.Root> profile = JsonConvert.DeserializeObject<List<ProfieStealer.Root>>(data);
                             byte[] profileimage = new WebClient().DownloadData("https://img.rec.net/" + profile[0].profileImage + "?cropSquare=true&width=192&height=192");
-                            File.WriteAllBytes("SaveData\\profileimage.png", profileimage);
+                            File.WriteAllBytes("SaveData/profileimage.png", profileimage);
                             
                         }
                         catch

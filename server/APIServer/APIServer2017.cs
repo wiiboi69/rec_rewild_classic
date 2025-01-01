@@ -82,7 +82,7 @@ namespace server
 						s = getorcreate.GetOrCreateArray(ulong.Parse(text.Remove(0, 32)));
 					 	APIServer_Base.CachedPlayerID = ulong.Parse(text.Remove(0, 32));
                         APIServer_Base.CachedPlatformID = ulong.Parse(text.Remove(0, 22));
-						File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
+						File.WriteAllText("SaveData/Profile/userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
 					}
 
 					if (Url == "platformlogin/v2")
@@ -112,7 +112,7 @@ namespace server
                     }
 					if (Url == "avatar/v2")
 					{
-						s = File.ReadAllText("SaveData\\avatar.txt");
+						s = File.ReadAllText("SaveData/avatar.txt");
 					}
 					if (Url == "avatar/v2/saved")
                     {
@@ -124,9 +124,9 @@ namespace server
 						if (!(text.Contains("FaceFeatures")))
 						{
 							string postdatacache = text;
-							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData\\App\\facefeaturesadd.txt");
+							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData/App/facefeaturesadd.txt");
 						}
-						File.WriteAllText("SaveData\\avatar.txt", text);
+						File.WriteAllText("SaveData/avatar.txt", text);
 					}
 					if (Url == "messages/v2/get")
 					{
@@ -138,7 +138,7 @@ namespace server
 					}
 					if (Url == "settings/v2/")
 					{
-						s = File.ReadAllText("SaveData\\settings.txt");
+						s = File.ReadAllText("SaveData/settings.txt");
 					}
 					if (Url == "settings/v2/set")
 					{
@@ -146,11 +146,11 @@ namespace server
 					}
 					if (Url == "avatar/v3/items")
 					{
-						s = File.ReadAllText("SaveData\\avataritems.txt");
+						s = File.ReadAllText("SaveData/avataritems.txt");
 					}
 					if (Url == "equipment/v1/getUnlocked")
 					{
-						s = File.ReadAllText("SaveData\\equipment.txt");
+						s = File.ReadAllText("SaveData/equipment.txt");
 					}
 					if (Url == "avatar/v2/gifts")
 					{
@@ -184,7 +184,7 @@ namespace server
                     {
 						s = BracketResponse;
 						int NewLength = text.Length - 50;
-						File.WriteAllBytes("SaveData\\profileimage.png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(NewLength - 48, 48)));
+						File.WriteAllBytes("SaveData/profileimage.png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(NewLength - 48, 48)));
 					}
 					Console.WriteLine("API Response: " + s);
 					byte[] bytes = Encoding.UTF8.GetBytes(s);

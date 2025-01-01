@@ -106,7 +106,7 @@ namespace rewild_room_sesh
 			{
 				Directory.CreateDirectory(text);
 			}
-			File.WriteAllText(text + "\\RoomDetails.json", JsonConvert.SerializeObject(room_data.RoomDetails));
+			File.WriteAllText(text + "/RoomDetails.json", JsonConvert.SerializeObject(room_data.RoomDetails));
 			return room_data;
 		}
 

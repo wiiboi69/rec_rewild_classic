@@ -97,7 +97,7 @@ namespace server
 						s = getcachedlogins.GetDebugLogin(ulong.Parse(text.Remove(0, 32)), ulong.Parse(text.Remove(0, 22)));
 						APIServer_Base.CachedPlayerID = ulong.Parse(text.Remove(0, 32));
                         APIServer_Base.CachedPlatformID = ulong.Parse(text.Remove(0, 22));
-						File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
+						File.WriteAllText("SaveData/Profile/userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
 					}
 					if (Url == "platformlogin/v1/loginaccount")
 					{
@@ -145,7 +145,7 @@ namespace server
 					}
 					if (Url == "gameconfigs/v1/all")
 					{
-						s = File.ReadAllText("SaveData\\gameconfigs.txt");
+						s = File.ReadAllText("SaveData/gameconfigs.txt");
 					}
 					if (Url.StartsWith("storefronts/v3/giftdropstore"))
 					{
@@ -157,9 +157,10 @@ namespace server
 					}
 					if (Url == "avatar/v2")
 					{
-						s = File.ReadAllText("SaveData\\avatar.txt");
+						s = File.ReadAllText("SaveData/avatar.txt");
 					}
-					if (Url == "avatar/v2/saved")
+
+                    if (Url == "avatar/v2/saved")
 					{
 						s = BracketResponse;
 					}
@@ -169,13 +170,13 @@ namespace server
 						if (!(text.Contains("FaceFeatures")))
 						{
 							string postdatacache = text;
-							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData\\App\\facefeaturesadd.txt");
+							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData/App/facefeaturesadd.txt");
 						}
-						File.WriteAllText("SaveData\\avatar.txt", text);
+						File.WriteAllText("SaveData/avatar.txt", text);
 					}
 					if (Url == "settings/v2/")
 					{
-						s = File.ReadAllText("SaveData\\settings.txt");
+						s = File.ReadAllText("SaveData/settings.txt");
 					}
 					if (Url == "settings/v2/set")
 					{
@@ -191,12 +192,24 @@ namespace server
 					}
 					if (Url == "avatar/v3/items")
 					{
-						s = File.ReadAllText("SaveData\\avataritems2.txt");
+						s = File.ReadAllText("SaveData/avataritems2.txt");
 					}
-					if (Url == "equipment/v1/getUnlocked")
+                    if (Url == "rewild_studio/avatar/avatar_mask")
+                    {
+						s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Masks.json");
+                    }
+                    if (Url == "rewild_studio/avatar/avatar_Swatch")
+                    {
+                        s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Swatches.json");
+                    }
+                    if (Url == "rewild_studio/avatar/avatar_Decal")
+                    {
+                        s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Decals.json");
+                    }
+                    if (Url == "equipment/v1/getUnlocked")
 					{
-                        //s = File.ReadAllText("SaveData\\equipment.txt");
                         s = BracketResponse;
+                        //s = File.ReadAllText("SaveData/equipment.txt");
                     }
                     if (Url == "avatar/v1/saved")
 					{
@@ -210,7 +223,7 @@ namespace server
 						}
 						//else
 						{
-						//	s = File.ReadAllText("SaveData\\consumables.txt");
+						//	s = File.ReadAllText("SaveData/consumables.txt");
 						}
 					}
 					if (Url == "avatar/v2/gifts")
@@ -231,7 +244,7 @@ namespace server
                     }
                     if (Url == "rooms/v1/myrooms")
 					{
-						s = File.ReadAllText("SaveData\\myrooms.txt");
+						s = File.ReadAllText("SaveData/myrooms.txt");
 					}
 					if (Url == "rooms/v2/myrooms")
 					{
@@ -239,7 +252,7 @@ namespace server
 					}
 					if (Url == "rooms/v2/baserooms")
 					{
-						s = File.ReadAllText("SaveData\\baserooms.txt");
+						s = File.ReadAllText("SaveData/baserooms.txt");
 					}
 					if (Url == "rooms/v1/mybookmarkedrooms")
 					{
@@ -310,13 +323,13 @@ namespace server
 						//{
 						//c000004.m000007(),
 						//c000041.f000043.Room.Name,
-						//"\\room\\",
+						//"/room/",
 						//text26,
 						//".room"
 						//}), m00005d(list.ToArray(), "data.dat"));
 						//c000041.f000043.Scenes[0].DataBlobName = text26 + ".room";
 						//c000041.f000043.Scenes[0].DataModifiedAt = DateTime.Now;
-						//File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "\\RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
+						//File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "/RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
 						//s = JsonConvert.SerializeObject(c00005d.m000035());
 					}
 					if (Url == "presence/v3/heartbeat")
@@ -341,7 +354,7 @@ namespace server
 					}
 					if (Url.StartsWith("rooms/v4/details"))
 					{
-						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("/rooms/v4/details/".Length))));
+						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("rooms/v4/details/".Length))));
 					}
 					if (Url == "images/v1/slideshow")
 					{

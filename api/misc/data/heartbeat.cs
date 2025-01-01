@@ -19,7 +19,7 @@ namespace rewild_room_sesh
 			}
 			return new heartbeat_2018
 			{
-				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
+				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData/Profile/userid.txt")),
 				IsOnline = true,
 				PlayerType = 2,
 				GameSession = gameSession
