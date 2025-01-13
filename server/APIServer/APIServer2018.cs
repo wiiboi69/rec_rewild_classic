@@ -303,7 +303,11 @@ namespace server
 					{
 						s = "{\"IsPure\":true}";
 					}
-					if (Url == "avatar/v3/saved")
+                    if (rawUrl == "playerevents//v1")
+                    {
+                        s = "[]";
+                    }
+                    if (Url == "avatar/v3/saved")
 					{
 						s = BracketResponse;
 					}

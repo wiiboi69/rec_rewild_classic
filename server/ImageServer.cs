@@ -41,26 +41,26 @@ namespace server
 				{
 					text = streamReader.ReadToEnd();
 				}
-				if (rawUrl.StartsWith("/alt/") || rawUrl.StartsWith("/" + File.ReadAllText("SaveData\\Profile\\username.txt")))
+                if (rawUrl.StartsWith("/alt/") || rawUrl.StartsWith("/" + File.ReadAllText("SaveData\\Profile\\username.txt")))
                 {
-					i = File.ReadAllBytes("SaveData/profileimage.png");
-					flag = true;
+                    i = File.ReadAllBytes("SaveData/profileimage.png");
+                    flag = true;
 
                 }
-				else if (rawUrl.StartsWith("//room/"))
+                else if (rawUrl.StartsWith("//room/"))
                 {
-					string temp = rawUrl.Substring("//room/".Length);
+                    string temp = rawUrl.Substring("//room/".Length);
                     if (File.Exists($"SaveData/Rooms/cdn/{temp}"))
-					{
-						i = File.ReadAllBytes($"SaveData/Rooms/cdn/{temp}");
-					}
-					else
-						i = new WebClient().DownloadData("https://cdn.rec.net" + rawUrl.Remove(0, 1));
-					flag = true;
+                    {
+                        i = File.ReadAllBytes($"SaveData/Rooms/cdn/{temp}");
+                    }
+                    else
+                        i = new WebClient().DownloadData("https://cdn.rec.net" + rawUrl.Remove(0, 1));
+                    flag = true;
 
                 }
                 else if (rawUrl.StartsWith("//data/"))
-				{
+                {
                     string temp = rawUrl.Substring("//data/".Length);
                     if (File.Exists($"SaveData/Rooms/cdn/{temp}"))
                     {
@@ -84,7 +84,7 @@ namespace server
                 {
                     string temp = rawUrl.Substring("/rewild_studio/Img/".Length);
                     i = new WebClient().DownloadData($"https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Textures/{temp}");
-					flag = true;
+                    flag = true;
                 }
                 else if (rawUrl.StartsWith("SaveData/images/"))
                 {
@@ -132,11 +132,21 @@ namespace server
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine($"[ImageServer.cs] {rawUrl} image not found on github. 404");
-                        i = notfound;
-                        flag = true;
-                    }
+                        try
+                        {
+                            Console.WriteLine($"[ImageServer.cs] {rawUrl} image not found on github. 404, Trying to download from img.rec.net instead");
+                            string temp = rawUrl.Substring("/".Length);
+                            i = new WebClient().DownloadData($"https://img.rec.net/{temp}");
+                            Console.WriteLine($"{i}");
+                            flag = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"[ImageServer.cs] error: {ex.Message}");
+                            i = notfound;
+                        }
 
+                    }
                 }
                 /*
                 else
