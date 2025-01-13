@@ -120,6 +120,24 @@ namespace server
                     }
                     flag = true;
                 }
+                else if (rawUrl.StartsWith("/"))
+                {
+                    try
+                    {
+                        string temp = rawUrl.Substring("/".Length);
+                        i = new WebClient().DownloadData($"https://github.com/wiiboi69/rec_rewild_classic/raw/refs/heads/main/Images/{temp}");
+                        Console.WriteLine($"{i}");
+
+                        flag = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"[ImageServer.cs] {rawUrl} image not found on github. 404");
+                        i = notfound;
+                        flag = true;
+                    }
+
+                }
                 /*
                 else
                 {
@@ -151,8 +169,7 @@ namespace server
 				Stream outputStream = response.OutputStream;
 				outputStream.Write(bytes, 0, bytes.Length);
 				Thread.Sleep(1);
-				outputStream.Close();
-				this.listener.Stop();
+				outputStream.Flush();
 			}
 		}
 		public static string VersionCheckResponse = "{\"ValidVersion\":true}";

@@ -358,8 +358,8 @@ namespace server
 					}
 					if (Url.StartsWith("rooms/v2/search?value="))
 					{
-						CustomRooms.RoomGet(Url.Remove(0, 22));
-					}
+                        s = JsonConvert.SerializeObject(rewild_custom_room_2018.room_find(Url.Remove(0, 22)));
+                    }
 					if (Url.StartsWith("rooms/v4/details"))
 					{
 						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("rooms/v4/details/".Length))));

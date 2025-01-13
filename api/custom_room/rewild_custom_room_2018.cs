@@ -12,12 +12,15 @@ namespace rewild_room_sesh
 		
 		public static List<room_data_base.room_data> room_find(string name)
 		{
-			string[] array = name.Split(new char[]
+			Console.WriteLine("Finding room");
+            name = Uri.UnescapeDataString(name);
+            string[] array = name.Split(new char[]
 			{
 				' '
 			});
 			List<room_data_base.room_data> list = new List<room_data_base.room_data>();
-			foreach (KeyValuePair<string, room_data_base.room> keyValuePair in room_data_base.main_room)
+            Console.WriteLine("Searching through room");
+            foreach (KeyValuePair<string, room_data_base.room> keyValuePair in room_data_base.main_room)
 			{
 				room_data_base.room value = keyValuePair.Value;
 				bool flag = true;
@@ -25,10 +28,12 @@ namespace rewild_room_sesh
 				{
 					if (flag)
 					{
-						if (text.StartsWith("#"))
+                        Console.WriteLine($"Checking word: {text}");
+                        if (text.StartsWith("#"))
 						{
 							bool flag2 = false;
-							foreach (room_data_base.Tags c in value.Tags)
+                            Console.WriteLine($"Checking for tag: {text}");
+                            foreach (room_data_base.Tags c in value.Tags)
 							{
 								if ("#" + c.Tag.ToLower() == text.ToLower())
 								{
@@ -38,18 +43,21 @@ namespace rewild_room_sesh
 							if (!flag2)
 							{
 								flag = false;
-							}
+                                Console.WriteLine($"No matching tag found for {text} skipping room {value.Room.Name}");
+                            }
 						}
 						else if (!value.Room.Name.ToLower().Contains(text.ToLower()))
 						{
 							flag = false;
-						}
+                            Console.WriteLine($"Room {value.Room.Name} does not contain the text {text} skipping");
+                        }
 					}
 				}
 				if (flag)
 				{
 					list.Add(value.Room);
-				}
+                    Console.WriteLine($"Room {value.Room.Name} added to list");
+                }
 			}
 			return list;
 		}
