@@ -123,7 +123,11 @@ namespace server
 					{
 						s = Amplitude.amplitude();
 					}
-					if (Url == "images/v2/named")
+                    if (Url == "config/v1/mod_amplitude")
+                    {
+                        s = Amplitude.amplitude();
+                    }
+                    if (Url == "images/v2/named")
 					{
 						s = APIServer_Base.ImagesV2Named;
 					}
@@ -294,7 +298,11 @@ namespace server
 					{
 						s = BracketResponse;
 					}
-					if (Url == "checklist/v1/current")
+                    if (Url == "rooms/v1/report")
+                    {
+                        s = "{\"Success\":false,\"Message\":\"no\"}";
+                    }
+                    if (Url == "checklist/v1/current")
 					{
                         s = BracketResponse;
                         //s = APIServer_Base.ChecklistV1Current;
@@ -365,10 +373,9 @@ namespace server
 					response.ContentLength64 = (long)bytes.Length;
 					Stream outputStream = response.OutputStream;
 					outputStream.Write(bytes, 0, bytes.Length);
-					Thread.Sleep(200);
-					outputStream.Close();
-					this.listener.Stop();
-				}
+					Thread.Sleep(50);
+					outputStream.Flush();
+                }
 			}
 			catch (Exception ex4)
 			{
