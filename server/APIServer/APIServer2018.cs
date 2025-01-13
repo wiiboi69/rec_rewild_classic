@@ -131,11 +131,20 @@ namespace server
 					{
 						s = APIServer_Base.ImagesV2Named;
 					}
-					if (Url == "PlayerReporting/v1/moderationBlockDetails")
-					{
-						s = APIServer_Base.ModerationBlockDetails;
-					}
-					if (Url == "//api/chat/v2/myChats?mode=0&count=50")
+                    if (Url == "PlayerReporting/v1/moderationBlockDetails")
+                    {
+                        var temp = new
+                        {
+                            ReportCategory = BanCategory.Unknown,
+                            Duration = 0,
+                            GameSessionId = 0,
+                            Message = ""
+                        };
+                        string temp2 = JsonConvert.SerializeObject(temp);
+						s = temp2;
+                    }
+
+                    if (Url == "//api/chat/v2/myChats?mode=0&count=50")
 					{
 						s = BracketResponse;
 					}
@@ -397,7 +406,25 @@ namespace server
 
         public static string BlankResponse = "";
         public static string BracketResponse = "[]";
-
+        public enum BanCategory
+        {
+            Moderator = -1,
+            Unknown,
+            DEPRECATED_MicrophoneAbuse,
+            Harassment,
+            Cheating,
+            DEPRECATED_ImmatureBehavior,
+            AFK,
+            Misc,
+            Underage,
+            VoteKick = 10,
+            CoC_Underage = 100,
+            CoC_Sexual,
+            CoC_Discrimination,
+            CoC_Trolling,
+            CoC_NameOrProfile,
+            IssuingInaccurateReports = 1000
+        }
 
         private HttpListener listener = new HttpListener(); 
 	}
