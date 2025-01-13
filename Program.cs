@@ -162,32 +162,7 @@ namespace start
                 }
                 else if (readline4 == "Reset SaveData")
                 {
-                    File.Delete("SaveData/avatar.txt");
-                    File.Delete("SaveData/avataritems.txt");
-                    File.Delete("SaveData/equipment.txt");
-                    File.Delete("SaveData/consumables.txt");
-                    File.Delete("SaveData/gameconfigs.txt");
-                    File.Delete("SaveData/storefronts2.txt");
-                    File.Delete("SaveData/Profile/username.txt");
-                    File.Delete("SaveData/Profile/level.txt"); 
-                    File.Delete("SaveData/Profile/userid.txt");
-                    File.Delete("SaveData/myrooms.txt"); 
-                    File.Delete("SaveData/settings.txt");
-                    File.Delete("SaveData/App/privaterooms.txt");
-                    File.Delete("SaveData/App/facefeaturesadd.txt");
-                    File.Delete("SaveData/profileimage.png");
-                    File.Delete("SaveData/App/firsttime.txt");
-                    
-                    File.Delete("SaveData/avataritems2.txt");
-                 
-                    File.Delete("SaveData/Rooms/Downloaded/roomname.txt");
-                    File.Delete("SaveData/Rooms/Downloaded/roomid.txt");
-                    File.Delete("SaveData/Rooms/Downloaded/datablob.txt");
-                    File.Delete("SaveData/Rooms/Downloaded/roomsceneid.txt");
-                    File.Delete("SaveData/Rooms/Downloaded/imagename.txt");
-                    File.Delete("SaveData/Rooms/Downloaded/cheercount.txt");
-                    File.Delete("SaveData/Rooms/Downloaded/favcount.txt");
-                    File.Delete("SaveData/Rooms/Downloaded/visitcount.txt");
+                    Directory.Delete("SaveData", true);
                     Console.WriteLine("Success!");
                     Setup.setup();
                     goto Settings;
