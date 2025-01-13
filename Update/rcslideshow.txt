@@ -2,9 +2,9 @@
     "Images": [
         {
             "SavedImageId": 1,
-            "ImageName": "1c603274267b4f45858f7506ab48b4fa",
-            "Username": "Origami",
-            "RoomName": "forsophie"
+            "ImageName": "egg.png",
+            "Username": "Coach",
+            "RoomName": "DormRoom"
         },
         {
             "SavedImageId": 2,
