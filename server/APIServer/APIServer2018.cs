@@ -132,6 +132,14 @@ namespace server
                         string temp = HttpUtility.UrlDecode(text.Substring("Name=".Length));
 						Console.WriteLine(temp);
                         File.WriteAllText("SaveData\\Profile\\displayName.txt", temp);
+						s = "{\"Success\":true,\"Message\":\"" + temp + "\"}";
+                    }
+                    if (Url == "players/v1/bio")
+                    {
+                        string temp2 = HttpUtility.UrlDecode(text.Substring("Bio=".Length));
+                        Console.WriteLine(temp2);
+                        File.WriteAllText("SaveData\\Profile\\bio.txt", temp2);
+                        s = "{\"Success\":true,\"Message\":\"" + temp2 + "\"}";
                     }
                     if (Url == "config/v1/amplitude")
 					{
