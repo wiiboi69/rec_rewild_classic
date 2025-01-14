@@ -491,7 +491,7 @@ namespace start
                                    "//Please start up the build now.";
         public static string version = "";
         public static int api_port = 0;
-        public static string appversion = "0.0.1";
+        public static string appversion = "0.0.2";
         public static string maindir = Directory.GetCurrentDirectory();
 
 
