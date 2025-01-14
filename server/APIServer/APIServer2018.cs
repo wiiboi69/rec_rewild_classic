@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using ws;
+using Rec_rewild.api;
 
 namespace server
 {
@@ -51,7 +52,11 @@ namespace server
 					{
 						Url = rawUrl.Remove(0, 5);
 					}
-					if (!(Url == ""))
+                    if (rawUrl.StartsWith("//api/"))
+                    {
+                        Url = rawUrl.Remove(0, 6);
+                    }
+                    if (!(Url == ""))
 					{
 						Console.WriteLine("API Requested: " + Url);
 					}
@@ -299,10 +304,25 @@ namespace server
 					{
 						s = room_sesh.Create_GameSession(text);
 					}
-					if (rawUrl == "//api/sanitize/v1/isPure")
+					if (Url == "sanitize/v1/isPure")
 					{
 						s = "{\"IsPure\":true}";
 					}
+                    if (Url == "images/v3/uploadsaved")
+                    {
+                        bool flag1;
+                        string rnfn;
+                        string temp1 = ImageUpload_2018.SaveImageFile(array, out flag1, out rnfn);
+
+                        if (flag1)
+                        {
+                            s = "{\"success\":false,\"error\":\"failed to uploaded image\",\"ImageName\":\"\"}";
+                        }
+                        else
+                        {
+                            s = "{\"success\":true,\"error\":\"\",\"ImageName\":\"" + rnfn + "\",\"value\":\"File saved: " + rnfn + "\"}";
+                        }
+                    }
                     if (rawUrl == "playerevents//v1")
                     {
                         s = "[]";

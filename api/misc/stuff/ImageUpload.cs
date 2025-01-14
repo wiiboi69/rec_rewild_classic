@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace Rec_rewild.api
 {
-    internal class ImageUpload
+    internal class ImageUpload_2018
     {
         public static string SaveImageFile(byte[] request, out bool flag, out string rnfn)
         {

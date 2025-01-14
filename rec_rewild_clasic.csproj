@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ApplicationIcon>icon2.ico</ApplicationIcon>
     <AssemblyName>rec_rewild_classic</AssemblyName>
     <RootNamespace>rec_rewild_classic</RootNamespace>
