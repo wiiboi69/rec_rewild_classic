@@ -97,6 +97,7 @@ namespace rewild_room_sesh
 			room_data.RoomDetails.Scenes[0].DataBlobName = string.Empty;
 			room_data.RoomDetails.Scenes[0].DataModifiedAt = DateTime.Now;
 			room_data.RoomDetails.Room.CreatorPlayerId = server.APIServer_Base.CachedPlayerID;
+			//room_data.RoomDetails.Room.
 			
 			foreach (var room in room_data_base.get_all_custom_rooms())
 			{

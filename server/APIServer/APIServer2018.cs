@@ -12,6 +12,9 @@ using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using ws;
 using Rec_rewild.api;
+using start;
+using Spectre.Console;
+using System.Web;
 
 namespace server
 {
@@ -124,7 +127,13 @@ namespace server
 					{
 						s = BracketResponse;
 					}
-					if (Url == "config/v1/amplitude")
+                    if (Url == "players/v2/displayname")
+                    {
+                        string temp = HttpUtility.UrlDecode(text.Substring("Name=".Length));
+						Console.WriteLine(temp);
+                        File.WriteAllText("SaveData\\Profile\\displayName.txt", temp);
+                    }
+                    if (Url == "config/v1/amplitude")
 					{
 						s = Amplitude.amplitude();
 					}
@@ -320,7 +329,16 @@ namespace server
                         }
                         else
                         {
-                            s = "{\"success\":true,\"error\":\"\",\"ImageName\":\"" + rnfn + "\",\"value\":\"File saved: " + rnfn + "\"}";
+                            string name = File.ReadAllText("SaveData/Profile/username.txt");
+                            var imageData = new ImageData
+                            {
+                                SavedImageId = 1,
+                                ImageName = rnfn,
+                                Username = name,
+                                RoomName = null  
+                            };
+                            string json = JsonConvert.SerializeObject(imageData, Formatting.Indented);
+							s = json;
                         }
                     }
                     if (rawUrl == "playerevents//v1")
@@ -449,6 +467,15 @@ namespace server
             CoC_NameOrProfile,
             IssuingInaccurateReports = 1000
         }
+
+        public class ImageData
+        {
+            public int SavedImageId { get; set; }
+            public string ImageName { get; set; }
+            public string Username { get; set; }
+            public string RoomName { get; set; }  
+        }
+
 
         private HttpListener listener = new HttpListener(); 
 	}
