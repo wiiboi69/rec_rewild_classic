@@ -185,6 +185,7 @@ namespace start
                         .EnableSearch()
                         .Title("")
                         .PageSize(10)
+                        .MoreChoicesText("quick tip: you can change this ingame")
                         .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
                         .AddChoices(new[] {
                             "Change Username:    " + File.ReadAllText("SaveData/Profile/username.txt"),

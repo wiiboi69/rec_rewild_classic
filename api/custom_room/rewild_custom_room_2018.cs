@@ -109,7 +109,7 @@ namespace rewild_room_sesh
                     room_data.RoomDetails = null;
                     return room_data;
                 }
-            }
+            }  
 
             room_data_base.get_all_custom_rooms().Add(clone_data.Name, clonable_room);
 			string text = room_util.check_room_dir() + room_data.RoomDetails.Room.Name;

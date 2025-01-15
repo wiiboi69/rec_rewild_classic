@@ -283,7 +283,7 @@ namespace server
 					}
                     if (Url == "rooms/v2/myrooms")
                     {               
-                        s = JsonConvert.SerializeObject(room_data_base.get_all_custom_room_fix(), Formatting.Indented); // yeah.
+                        s = JsonConvert.SerializeObject(room_data_base.get_all_custom_room_fix(), Formatting.Indented); // yeah... this is a mess
                     }
                     if (Url == "rooms/v2/baserooms")
 					{
@@ -334,19 +334,47 @@ namespace server
                         if (flag1)
                         {
                             s = "{\"success\":false,\"error\":\"failed to uploaded image\",\"ImageName\":\"\"}";
+                            Console.Beep();
+                            Console.WriteLine("Failed to upload image");
                         }
                         else
                         {
                             string name = File.ReadAllText("SaveData/Profile/username.txt");
+                            Random random = new Random();
                             var imageData = new ImageData
                             {
-                                SavedImageId = 1,
+                                SavedImageId = random.Next(1, 99999999),
                                 ImageName = rnfn,
                                 Username = name,
-                                RoomName = null  
+                                RoomName = null
                             };
-                            string json = JsonConvert.SerializeObject(imageData, Formatting.Indented);
-							s = json;
+                            s = JsonConvert.SerializeObject(imageData, Formatting.Indented);
+                        }
+                    }
+                    if (Url == "images/v3/profile")
+                    {
+                        bool flag1;
+                        string rnfn;
+                        string temp1 = ImageUpload_2018.SaveImageFile(array, out flag1, out rnfn);
+
+                        if (flag1)
+                        {
+                            s = "{\"success\":false,\"error\":\"failed to uploaded image\",\"ImageName\":\"\"}";
+							Console.Beep();
+							Console.WriteLine("Failed to upload image");
+                        }
+                        else
+                        {
+                            string name = File.ReadAllText("SaveData/Profile/username.txt");
+                            Random random = new Random();
+                            var imageData = new ImageData
+                            {
+                                SavedImageId = random.Next(1, 99999999),
+                                ImageName = rnfn,
+                                Username = name,
+                                RoomName = null
+                            };
+                            s = JsonConvert.SerializeObject(imageData, Formatting.Indented);
                         }
                     }
                     if (rawUrl == "playerevents//v1")
