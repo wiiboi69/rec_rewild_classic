@@ -281,11 +281,11 @@ namespace server
 					{
 						s = File.ReadAllText("SaveData/myrooms.txt");
 					}
-					if (Url == "rooms/v2/myrooms")
-					{
-						s = BracketResponse;
-					}
-					if (Url == "rooms/v2/baserooms")
+                    if (Url == "rooms/v2/myrooms")
+                    {               
+                        s = JsonConvert.SerializeObject(room_data_base.get_all_custom_room_fix(), Formatting.Indented); // yeah.
+                    }
+                    if (Url == "rooms/v2/baserooms")
 					{
 						s = File.ReadAllText("SaveData/baserooms.txt");
 					}

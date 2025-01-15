@@ -486,8 +486,8 @@ namespace start
                 Console.WriteLine(msg);
             }
         }
-        public static string msg = "//This is the server sending and recieving data from recroom.\n" + 
-                                   "//Ignore this if you don't know what this means.zn" + 
+        public static string msg = "//This is the server sending and recieving data from Rec Room.\n" + 
+                                   "//Ignore this if you don't know what this means." + 
                                    "//Please start up the build now.";
         public static string version = "";
         public static int api_port = 0;

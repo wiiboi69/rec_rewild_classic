@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
+using server;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using static rewild_room_sesh.room_data_base;
 
 namespace rewild_room_sesh
 {
@@ -97,9 +99,9 @@ namespace rewild_room_sesh
 			room_data.RoomDetails.Scenes[0].DataBlobName = string.Empty;
 			room_data.RoomDetails.Scenes[0].DataModifiedAt = DateTime.Now;
 			room_data.RoomDetails.Room.CreatorPlayerId = server.APIServer_Base.CachedPlayerID;
-			//room_data.RoomDetails.Room.
-			
-			foreach (var room in room_data_base.get_all_custom_rooms())
+            //room_data.RoomDetails.Room.
+
+            foreach (var room in room_data_base.get_all_custom_rooms())
 			{
 				if (room.Value.Room.Name == clone_data.Name)
 				{
