@@ -86,15 +86,6 @@ namespace server
                     i = new WebClient().DownloadData($"https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Textures/{temp}");
                     flag = true;
                 }
-                else if (rawUrl.StartsWith("SaveData/images/"))
-                {
-                    string temp = rawUrl.Substring("SaveData/images/".Length);
-                    if (File.Exists($"SaveData/images/{temp}"))
-                    {
-                        i = File.ReadAllBytes($"SaveData/images/{temp}");
-                        flag = true;
-                    }
-                }
                 else if (rawUrl.StartsWith("/Profile") || rawUrl.StartsWith("/profile"))
                 {
                     try
@@ -119,6 +110,17 @@ namespace server
                         i = new WebClient().DownloadData("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/main/CDN/video" + rawUrl);
                     }
                     flag = true;
+                }
+                else if (rawUrl.Contains("SaveData/images/", StringComparison.OrdinalIgnoreCase))
+                {
+                    string temp = rawUrl.Substring("SaveData/images/".Length).Trim('/');
+                    string filePath = Path.Combine("SaveData", "images", temp);
+                    if (File.Exists(filePath))
+                    {
+                        Console.WriteLine($"[ImageServer.cs] debugging: {filePath}");
+                        i = File.ReadAllBytes(filePath);
+                        flag = true;
+                    }
                 }
                 else if (rawUrl.StartsWith("/"))
                 {
