@@ -80,6 +80,10 @@ namespace server
                         array = memoryStream.ToArray();
                         text = Encoding.ASCII.GetString(array);
                     }
+                    if (text.EndsWith('\n')) // check 2
+                    {
+                        Console.WriteLine("API Data: unviewable");
+                    }
                     if (text.Length > 0xfff)
                     {
                         Console.WriteLine("API Data: unviewable");
