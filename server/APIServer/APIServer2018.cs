@@ -18,6 +18,7 @@ using System.Web;
 using static rewild_room_sesh.c000079;
 using static rewild_room_sesh.room_data_base;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace server
 {
@@ -406,10 +407,14 @@ namespace server
 						s = APIServer_Base.ChallengesV1GetCurrent;
 					}
 					if (Url == "rooms/v1/featuredRoomGroup")
-					{
-						s = BracketResponse;
+                    {
+                        s = BracketResponse;
 					}
-					if (Url == "rooms/v1/clone")
+                    if (Url == "rooms/v1/filters")
+                    {
+                        s = APIServer_Base.FiltersResponse;
+                    }
+                    if (Url == "rooms/v1/clone")
 					{
 						s = JsonConvert.SerializeObject(rewild_custom_room_2018.clone_room(text));
 					}
