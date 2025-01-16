@@ -15,6 +15,9 @@ using Rec_rewild.api;
 using start;
 using Spectre.Console;
 using System.Web;
+using static rewild_room_sesh.c000079;
+using static rewild_room_sesh.room_data_base;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace server
 {
@@ -412,22 +415,41 @@ namespace server
 					}
 					if (Url.StartsWith("rooms/v2/saveData"))
 					{
-						//string text26 = "5GDNL91ZY43PXN2YJENTBL";
-						//string path = c000004.m000007() + c000041.f000043.Room.Name;
-						//File.WriteAllBytes(string.Concat(new string[]
-						//{
-						//c000004.m000007(),
-						//c000041.f000043.Room.Name,
-						//"/room/",
-						//text26,
-						//".room"
-						//}), m00005d(list.ToArray(), "data.dat"));
-						//c000041.f000043.Scenes[0].DataBlobName = text26 + ".room";
-						//c000041.f000043.Scenes[0].DataModifiedAt = DateTime.Now;
-						//File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "/RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
-						//s = JsonConvert.SerializeObject(c00005d.m000035());
+                        //string text26 = "5GDNL91ZY43PXN2YJENTBL";
+                        //string path = c000004.m000007() + c000041.f000043.Room.Name;
+                        //File.WriteAllBytes(string.Concat(new string[]
+                        //{
+                        //c000004.m000007(),
+                        //c000041.f000043.Room.Name,
+                        //"/room/",
+                        //text26,
+                        //".room"
+                        //}), m00005d(list.ToArray(), "data.dat"));
+                        //c000041.f000043.Scenes[0].DataBlobName = text26 + ".room";
+                        //c000041.f000043.Scenes[0].DataModifiedAt = DateTime.Now;
+                        //File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "/RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
+                        //s = JsonConvert.SerializeObject(c00005d.m000035());
 					}
-					if (Url == "presence/v3/heartbeat")
+                    if (Url.StartsWith("rooms/v2/modify"))
+                    {
+                        // RoomData.c000061 c69 = JsonConvert.DeserializeObject<RoomData.c000061>(@string);
+                        // RoomData.c000060 c70 = RoomData.m000023((int)c69.RoomId);
+                        //if (c69.Description != null)
+                        // {
+                        //  c70.Room.Description = c69.Description;
+                        //  }
+                        //  if (c69.ImageName != null)
+                        //  {
+                        //      c70.Room.ImageName = c69.ImageName;
+                        //   }
+                        //   File.WriteAllText("SaveData/Rooms/" + c70.Room.Name + "/RoomDetails.json", JsonConvert.SerializeObject(c70));
+                        //   text2 = JsonConvert.SerializeObject(new c000099.c00009b
+                        //  {
+                        //   Result = 0,
+                        //       RoomDetails = c70
+                        //  });
+                    }
+                    if (Url == "presence/v3/heartbeat")
 					{
 						s = JsonConvert.SerializeObject(Notification.Reponse.createResponse(Notification.ResponseResults.PresenceHeartbeatResponse, heartbeat.get_heartbeat()));
 					}
