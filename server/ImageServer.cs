@@ -36,23 +36,23 @@ namespace server
 				string rawUrl = request.RawUrl;
 				string text;
 				bool flag = false;
-				byte[] i = File.ReadAllBytes("SaveData\\profileimage.png"); 
+				byte[] i = File.ReadAllBytes("SaveData/profileimage.png"); 
 				using (StreamReader streamReader = new StreamReader(request.InputStream, request.ContentEncoding))
 				{
 					text = streamReader.ReadToEnd();
 				}
-				if (rawUrl.StartsWith("/alt/") || rawUrl.StartsWith("/" + File.ReadAllText("SaveData\\Profile\\username.txt")))
+				if (rawUrl.StartsWith("/alt/") || rawUrl.StartsWith("/" + File.ReadAllText("SaveData/Profile/username.txt")))
                 {
-					i = File.ReadAllBytes("SaveData\\profileimage.png");
+					i = File.ReadAllBytes("SaveData/profileimage.png");
 					flag = true;
 
                 }
 				else if (rawUrl.StartsWith("//room/"))
                 {
 					string temp = rawUrl.Substring("//room/".Length);
-                    if (File.Exists($"SaveData\\Rooms\\cdn\\{temp}"))
+                    if (File.Exists($"SaveData/Rooms/cdn/{temp}"))
 					{
-						i = File.ReadAllBytes($"SaveData\\Rooms\\cdn\\{temp}");
+						i = File.ReadAllBytes($"SaveData/Rooms/cdn/{temp}");
 					}
 					else
 						i = new WebClient().DownloadData("https://cdn.rec.net" + rawUrl.Remove(0, 1));
@@ -62,9 +62,9 @@ namespace server
                 else if (rawUrl.StartsWith("//data/"))
 				{
                     string temp = rawUrl.Substring("//data/".Length);
-                    if (File.Exists($"SaveData\\Rooms\\cdn\\{temp}"))
+                    if (File.Exists($"SaveData/Rooms/cdn/{temp}"))
                     {
-                        i = File.ReadAllBytes($"SaveData\\Rooms\\cdn\\{temp}");
+                        i = File.ReadAllBytes($"SaveData/Rooms/cdn/{temp}");
                     }
                     else
                         i = new WebClient().DownloadData("https://cdn.rec.net" + rawUrl.Remove(0, 1));
@@ -74,9 +74,9 @@ namespace server
                 else if (rawUrl.StartsWith("//asset/"))
                 {
                     string temp = rawUrl.Substring("//asset/".Length);
-                    if (File.Exists($"SaveData\\Rooms\\cdn\\{temp}"))
+                    if (File.Exists($"SaveData/Rooms/cdn/{temp}"))
                     {
-                        i = File.ReadAllBytes($"SaveData\\Rooms\\cdn\\{temp}");
+                        i = File.ReadAllBytes($"SaveData/Rooms/cdn/{temp}");
                         flag = true;
                     }
                 }
@@ -89,9 +89,9 @@ namespace server
                 else if (rawUrl.StartsWith("SaveData/images/"))
                 {
                     string temp = rawUrl.Substring("SaveData/images/".Length);
-                    if (File.Exists($"SaveData\\images\\{temp}"))
+                    if (File.Exists($"SaveData/images/{temp}"))
                     {
-                        i = File.ReadAllBytes($"SaveData\\images\\{temp}");
+                        i = File.ReadAllBytes($"SaveData/images/{temp}");
                         flag = true;
                     }
                 }
@@ -99,7 +99,7 @@ namespace server
                 {
                     try
                     {
-                        i = File.ReadAllBytes("SaveData\\profile.png");
+                        i = File.ReadAllBytes("SaveData/profile.png");
                     }
                     catch
                     { }

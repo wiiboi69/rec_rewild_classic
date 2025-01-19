@@ -335,14 +335,13 @@ namespace server
                         {
                             string name = File.ReadAllText("SaveData/Profile/username.txt");
                             Random random = new Random();
-                            var imageData = new ImageData
+                            var imageData = new
                             {
                                 SavedImageId = random.Next(1, 99999999),
                                 ImageName = rnfn,
                                 Username = name,
-                                RoomName = null
                             };
-                            s = JsonConvert.SerializeObject(imageData, Formatting.Indented);
+                            s = JsonConvert.SerializeObject(imageData);
                         }
                     }
                     if (Url == "images/v3/profile")
@@ -361,12 +360,11 @@ namespace server
                         {
                             string name = File.ReadAllText("SaveData/Profile/username.txt");
                             Random random = new Random();
-                            var imageData = new ImageData
+                            var imageData = new
                             {
                                 SavedImageId = random.Next(1, 99999999),
                                 ImageName = rnfn,
-                                Username = name,
-                                RoomName = null
+                                Username = name
                             };
                             s = JsonConvert.SerializeObject(imageData, Formatting.Indented);
                         }
