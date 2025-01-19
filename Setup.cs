@@ -9,10 +9,11 @@ namespace start
 	class Setup
 	{
 		public static bool firsttime = false;
-		public static void setup()
+        public static void setup()
 		{
-			//sets up all the important files so rec_rewild_classic doesnt crash
-			Console.WriteLine("Setting up... (May take a minute to download everything.)");
+
+            //sets up all the important files so rec_rewild_classic doesnt crash
+            Console.WriteLine("Setting up... (May take a minute to download everything.)");
             Directory.CreateDirectory("SaveData\\App\\");
             Directory.CreateDirectory("SaveData\\Profile\\");
             Directory.CreateDirectory("SaveData\\Images\\");

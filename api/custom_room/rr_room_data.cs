@@ -270,6 +270,71 @@ namespace rewild_room_sesh
         public static Dictionary<string, room> main_room = new Dictionary<string, room>
         {
             {
+                "rewild_studio_hub",
+                new room
+                {
+                    Room = new room_data_base.room_data
+                    {
+                        RoomId = 30UL,
+                        Name = "rewild_studio_hub",
+                        Description = "A rewild studio hub room.",
+                        ReleaseStatus = 1,
+                        ReplicationId = "rewild_studio_hub",
+                        CreatorPlayerId = APIServer_Base.CachedPlayerID,
+                        ImageName = "DefaultRoomImage.jpg",
+                        State = 0,
+                        Accessibility = 1,
+                        SupportsLevelVoting = false,
+                        IsAGRoom = false,
+                        CloningAllowed = false,
+                        SupportsScreens = true,
+                        SupportsTeleportVR = true,
+                        SupportsWalkVR = true
+                    },
+                    Scenes = new List<subrooms>
+                    {
+                        new subrooms
+                        {
+                            RoomSceneId = 30L,
+                            RoomId = 30UL,
+							RoomSceneLocationId = "74c62a36-4362-468b-81ec-65c45bfe0e5f",
+                            rewild_studio_data = new rewild_studio_subroom()
+                            {
+                                AssetBundleName = "rrs_hub_data",
+                                DataSceneName = "rrs_hub"
+                            },
+							Name = "rrs_hub",
+                            IsSandbox = false,
+                            DataBlobName = string.Empty,
+                            MaxPlayers = 20,
+                            CanMatchmakeInto = true,
+                            DataModifiedAt = DateTime.Now,
+                            ReplicationId = "",
+                            SupportsJoinInProgress = true,
+                            ReleaseStatus = 1,
+                            UseAgeBasedMatchmaking = true,
+                            UseLevelBasedMatchmaking = true,
+                            UseRecRoyaleMatchmaking = false
+                        }
+                    },
+                    CoOwners = new List<ulong>(),
+                    InvitedCoOwners = new List<ulong>(),
+                    Hosts = new List<ulong>(),
+                    InvitedHosts = new List<ulong>(),
+                    CheerCount = 1,
+                    FavoriteCount = 1,
+                    VisitCount = 1,
+                    Tags = new List<Tags>
+                    {
+                        new Tags
+                        {
+                            Tag = "rro",
+                            Type = 2
+                        }
+                    }
+                }
+            },
+            {
                 "DormRoom",
                 new room
                 {

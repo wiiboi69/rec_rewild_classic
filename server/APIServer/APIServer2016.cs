@@ -30,7 +30,6 @@ namespace server
 		{
 			try
 			{
-				//2 different servers for 3 different stages of the game, the apis change so much idk anymore
 				this.listener.Prefixes.Add("http://localhost:" + start.Program.version + "/");
 
 				for (; ; )
@@ -112,7 +111,17 @@ namespace server
 						}
 						File.WriteAllText("SaveData\\avatar.txt", text);
 					}
-					if (Url == "messages/v2/get")
+                    //anticheat/v1/config
+                    if (Url == "anticheat/v1/config")
+                    {
+						s = JsonConvert.SerializeObject(new
+						{
+							Enabled = false,
+                            BannedPlayers = new ulong[0]
+                        });
+                        //s = "{\"Enabled\":False,\"BannedPlayers\":[]}";
+                    }
+                    if (Url == "messages/v2/get")
 					{
 						s = BracketResponse;
 					}
@@ -167,7 +176,7 @@ namespace server
 					response.ContentLength64 = (long)bytes.Length;
 					Stream outputStream = response.OutputStream;
 					outputStream.Write(bytes, 0, bytes.Length);
-					Thread.Sleep(20);
+					//Thread.Sleep(20);
 					outputStream.Close();
 					this.listener.Stop();
 				}

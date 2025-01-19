@@ -34,10 +34,9 @@ namespace server
 			{
 				//2 different servers for 3 different stages of the game, the apis change so much idk anymore
 				this.listener.Prefixes.Add("http://localhost:" + start.Program.api_port + "/");
-
+				this.listener.Start();
 				for (; ; )
 				{
-					this.listener.Start();
 					Console.WriteLine("[APIServer.cs] is listening.");
 					HttpListenerContext context = this.listener.GetContext();
 					HttpListenerRequest request = context.Request;
@@ -159,7 +158,8 @@ namespace server
 					{
 						s = File.ReadAllText("SaveData\\avatar.txt");
 					}
-					if (Url == "avatar/v2/saved")
+
+                    if (Url == "avatar/v2/saved")
 					{
 						s = BracketResponse;
 					}
@@ -193,10 +193,22 @@ namespace server
 					{
 						s = File.ReadAllText("SaveData\\avataritems2.txt");
 					}
-					if (Url == "equipment/v1/getUnlocked")
+                    if (Url == "rewild_studio/avatar/avatar_mask")
+                    {
+						s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Masks.json");
+                    }
+                    if (Url == "rewild_studio/avatar/avatar_Swatch")
+                    {
+                        s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Swatches.json");
+                    }
+                    if (Url == "rewild_studio/avatar/avatar_Decal")
+                    {
+                        s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Decals.json");
+                    }
+                    if (Url == "equipment/v1/getUnlocked")
 					{
-                        //s = File.ReadAllText("SaveData\\equipment.txt");
                         s = BracketResponse;
+                        //s = File.ReadAllText("SaveData\\equipment.txt");
                     }
                     if (Url == "avatar/v1/saved")
 					{
@@ -337,11 +349,11 @@ namespace server
 					}
 					if (Url.StartsWith("rooms/v2/search?value="))
 					{
-						CustomRooms.RoomGet(Url.Remove(0, 22));
+                        s = JsonConvert.SerializeObject(rewild_custom_room_2018.room_find(Url.Remove(0, 22)));
 					}
 					if (Url.StartsWith("rooms/v4/details"))
 					{
-						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("/rooms/v4/details/".Length))));
+						s = JsonConvert.SerializeObject(room_data_base.Get_room_detail(ulong.Parse(Url.Substring("rooms/v4/details/".Length))));
 					}
 					if (Url == "images/v1/slideshow")
 					{
@@ -352,9 +364,10 @@ namespace server
 					response.ContentLength64 = (long)bytes.Length;
 					Stream outputStream = response.OutputStream;
 					outputStream.Write(bytes, 0, bytes.Length);
-					Thread.Sleep(200);
-					outputStream.Close();
-					this.listener.Stop();
+					outputStream.Flush();
+					//Thread.Sleep(200);
+					//outputStream.Close();
+					//this.listener.Stop();
 				}
 			}
 			catch (Exception ex4)

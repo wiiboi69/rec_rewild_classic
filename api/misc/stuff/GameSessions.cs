@@ -126,7 +126,8 @@ namespace gamesesh
 		public class PlayerStatus
 		{
 			public ulong PlayerId { get; set; }
-			public bool IsOnline { get; set; }
+			public ulong SessionId { get; set; } = 1;
+            public bool IsOnline { get; set; }
 			public bool InScreenMode { get; set; }
 			public SessionInstance GameSession { get; set; }
 		}

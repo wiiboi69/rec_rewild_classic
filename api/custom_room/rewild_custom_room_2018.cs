@@ -12,7 +12,9 @@ namespace rewild_room_sesh
 		
 		public static List<room_data_base.room_data> room_find(string name)
 		{
-			string[] array = name.Split(new char[]
+            name = Uri.UnescapeDataString(name);
+
+            string[] array = name.Split(new char[]
 			{
 				' '
 			});

@@ -11,6 +11,7 @@ namespace ws
 		{
 			Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonData);
 			string result;
+			Console.WriteLine(jsonData);
 			if (dictionary.ContainsKey("api"))
 			{
 				string text = (string)dictionary["api"];
@@ -34,7 +35,9 @@ namespace ws
 			else
 			{
 				result = jsonData;
-			}
+				result = "{\"SessionId\":1}";
+
+            }
 			return result;
 		}
 

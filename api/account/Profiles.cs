@@ -7,8 +7,11 @@ namespace api2017
     class Profiles
     {
 		public ulong Id { get; set; }
-		public string Username { get; set; }
-		public string DisplayName { get; set; }
+		public ulong XpRequiredToLevelUp { get; set; } = 0;
+        //XpRequiredToLevelUp
+        public string Username { get; set; }
+        public string Auth { get; set; } = string.Empty;
+        public string DisplayName { get; set; }
 		public string Bio { get; set; }
         public int XP { get; set; }
 		public int Level { get; set; }
