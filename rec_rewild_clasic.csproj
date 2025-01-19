@@ -14,6 +14,12 @@
     <Company>rec_rewild_classic</Company>
     <Version>0.4.0</Version>
     <UseWindowsForms>False</UseWindowsForms>
+    <Configurations>Debug;Release;Debug_aot</Configurations>
+    <NativeAOTEnabled Condition="'$(Configuration)'=='Debug_aot'">true</NativeAOTEnabled>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(NativeAOTEnabled)' == 'true'">
+    <PublishAot>true</PublishAot>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="9.0.1" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="9.0.1"/>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Spectre.Console" Version="0.49.2-preview.0.44" />
   </ItemGroup>
@@ -37,6 +43,11 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="e:\vs_Source\Repos\rec_rewild_classic\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="e:\vs_Source\Repos\rec_rewild_classic\.editorconfig" />
   </ItemGroup>
 
 </Project>

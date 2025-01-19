@@ -166,7 +166,7 @@ namespace start.Program_menu
                         string data = "";
                         try
                         {
-                            data = new WebClient().DownloadString("https://accounts.rec.net/account/search?name=" + username);
+                            data = new WebClient().DownloadString("https://apim.rec.net/accounts/account/search?name=" + username);
                         }
                         catch
                         {

@@ -65,11 +65,19 @@ namespace start
             }
 
         Start:
+
             Console.Title = "rec_rewild_classic Startup Menu";
             Console.WriteLine("rec_rewild_classic - A fork of OpenRec for Rec Room 2016 to 2018. (Version: " + appversion + ")");
             Console.WriteLine("Download source code here: https://github.com/wiiboi69/Rec_rewild_classic");
+            string ver_build = "";
+#if DEBUG_AOT
+            ver_build = "Native AOT build";
+#else
+            ver_build = "c# build";
+#endif
+            Console.WriteLine($"rec_rewild_classic build: {ver_build}");
 
-           // Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
+            // Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
             if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt").Contains(appversion)))
             {
                 Console.WriteLine("\nThis version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
@@ -107,10 +115,12 @@ namespace start
             if (readline == "Change Settings")
             {
                 setting_menu.setting();
+                goto Start;
             }
             if (readline == "Modify Profile")
             {
                 profile_menu.player_profile();
+                goto Start;
             }
             if (readline == "Build Download Links")
             {
