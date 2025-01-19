@@ -14,7 +14,7 @@ namespace rewild_room_sesh
             return text;
         }
 
-        public static string text = "SaveData\\Rooms\\custom\\";
+        public static string text = "SaveData/Rooms/custom/";
 
         public static string Region = "us";
 

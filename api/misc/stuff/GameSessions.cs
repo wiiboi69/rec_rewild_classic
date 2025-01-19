@@ -14,7 +14,7 @@ namespace gamesesh
 			long gamesessionid = long.Parse(start.Program.version + "1");
 			Console.WriteLine("rec_rewild_classic GameSession Room");
 			GameSessions.JoinRandomRequest joinRandomRequest = JsonConvert.DeserializeObject<GameSessions.JoinRandomRequest>(jsonData);
-			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
+			if (File.ReadAllText("SaveData/App/privaterooms.txt") == "Enabled")
 			{
 				gamesessionid = new Random().Next(0, 99);
 			}
@@ -51,7 +51,7 @@ namespace gamesesh
 		{
 			return JsonConvert.SerializeObject(new GameSessions.PlayerStatus
 			{
-				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
+				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData/Profile/userid.txt")),
 				IsOnline = true,
 				InScreenMode = false,
 				GameSession = Config.localGameSession
@@ -61,7 +61,7 @@ namespace gamesesh
 		{
 			long gamesessionid = 20161L;
 			Console.WriteLine("rec_rewild_classic GameSession Custom Room");
-			if (File.ReadAllText("SaveData\\App\\privaterooms.txt") == "Enabled")
+			if (File.ReadAllText("SaveData/App/privaterooms.txt") == "Enabled")
 			{
 				gamesessionid = new Random().Next(0, 99);
 			}
@@ -95,7 +95,7 @@ namespace gamesesh
 		{
 			return new PlayerStatus
 			{
-				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
+				PlayerId = Convert.ToUInt64(File.ReadAllText("SaveData/Profile/userid.txt")),
 				IsOnline = true,
 				InScreenMode = false,
 				GameSession = Config.localGameSession

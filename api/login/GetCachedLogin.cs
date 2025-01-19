@@ -11,10 +11,10 @@ namespace api2018
 	{
 		public static string GetDebugLogin(ulong userid, ulong platformid)
 		{
-			int level = int.Parse(File.ReadAllText("SaveData\\Profile\\level.txt"));
-            string name = File.ReadAllText("SaveData\\Profile\\username.txt");
-            string despayname = File.ReadAllText("SaveData\\Profile\\displayName.txt");
-            string bio = File.ReadAllText("SaveData\\Profile\\bio.txt");
+			int level = int.Parse(File.ReadAllText("SaveData/Profile/level.txt"));
+            string name = File.ReadAllText("SaveData/Profile/username.txt");
+            string despayname = File.ReadAllText("SaveData/Profile/displayName.txt");
+            string bio = File.ReadAllText("SaveData/Profile/bio.txt");
             return JsonConvert.SerializeObject(new List<getcachedlogins>
 			{
 				new getcachedlogins

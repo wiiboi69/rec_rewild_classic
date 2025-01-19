@@ -12,7 +12,7 @@ namespace server
         public static ulong CachedPlayerID = ulong.Parse(File.ReadAllText("SaveData\\Profile\\userid.txt"));
         public static ulong CachedPlatformID = 10000;
         public static int CachedVersionMonth = 01;
-
+        public static string FiltersResponse = "{\"PinnedFilters\":[\"recroomoriginal\",\"community\"],\"PopularFilters\":[\"rro\",\"weed\"]}";
         public static string PlayerEventsResponse = "{\"Created\":[],\"Responses\":[]}";
         public static string VersionCheckResponse2 = "{\"VersionStatus\":0}";
         public static string VersionCheckResponse = "{\"ValidVersion\":true}";

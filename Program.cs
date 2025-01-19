@@ -72,7 +72,7 @@ namespace start
            // Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
             if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt").Contains(appversion)))
             {
-                Console.WriteLine("This version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
+                Console.WriteLine("\nThis version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
             }            
             //Console.WriteLine("//Custom Room Downloader has been moved to the settings tab!" + Environment.NewLine);
             //Console.WriteLine("(1) What's New" + Environment.NewLine +"(2) Change Settings" + Environment.NewLine + "(3) Modify Profile" + Environment.NewLine + "(4) Build Download Links" + Environment.NewLine + "(5) Start Server");
@@ -212,7 +212,7 @@ namespace start
                                    "//Please start up the build now.";
         public static string version = "";
         public static int api_port = 0;
-        public static string appversion = "0.0.1";
+        public static string appversion = "0.0.2";
         public static string maindir = Directory.GetCurrentDirectory();
 
         public static string ShowDialog()

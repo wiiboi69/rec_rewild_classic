@@ -95,11 +95,11 @@ namespace server
 					if (Url.StartsWith("images/v1/profile/"))
 					{
 						image = true;
-						imagebyte = File.ReadAllBytes("SaveData\\profileimage.png");
+						imagebyte = File.ReadAllBytes("SaveData/profileimage.png");
 					}
 					if (Url == "avatar/v2")
 					{
-						s = File.ReadAllText("SaveData\\avatar.txt");
+						s = File.ReadAllText("SaveData/avatar.txt");
 					}
 					if (Url == "avatar/v2/set")
 					{
@@ -107,9 +107,9 @@ namespace server
 						if (!(text.Contains("FaceFeatures")))
 						{
 							string postdatacache = text;
-							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData\\App\\facefeaturesadd.txt");
+							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData/App/facefeaturesadd.txt");
 						}
-						File.WriteAllText("SaveData\\avatar.txt", text);
+						File.WriteAllText("SaveData/avatar.txt", text);
 					}
                     //anticheat/v1/config
                     if (Url == "anticheat/v1/config")
@@ -131,7 +131,7 @@ namespace server
 					}
 					if (Url == "settings/v2/")
 					{
-						s = File.ReadAllText("SaveData\\settings.txt");
+						s = File.ReadAllText("SaveData/settings.txt");
 					}
 					if (Url == "settings/v2/set")
 					{
@@ -139,7 +139,7 @@ namespace server
 					}
 					if (Url == "avatar/v3/items")
 					{
-						s = File.ReadAllText("SaveData\\avataritems.txt");
+						s = File.ReadAllText("SaveData/avataritems.txt");
 					}
 					if (Url == "avatar/v2/gifts")
 					{
@@ -161,7 +161,7 @@ namespace server
 					{
 						s = BracketResponse;
 						int NewLength = text.Length - 50;
-						File.WriteAllBytes("SaveData\\profileimage.png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(NewLength - 48, 48)));
+						File.WriteAllBytes("SaveData/profileimage.png", Encoding.UTF8.GetBytes(text.Remove(0, 50).Remove(NewLength - 48, 48)));
 					}
 					Console.WriteLine("API Response: " + s);
 					byte[] bytes = null;

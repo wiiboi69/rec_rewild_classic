@@ -1,20 +1,5 @@
 [
     {
-        "RoomId": 29,
-        "Name": "Custom Room",
-        "Description": "Custom Room",
-        "CreatorPlayerId": 1,
-        "ImageName": "CustomRoom.png",
-        "State": 0,
-        "Accessibility": 1,
-        "SupportsLevelVoting": false,
-        "IsAGRoom": true,
-        "CloningAllowed": false,
-        "SupportsScreens": true,
-        "SupportsWalkVR": true,
-        "SupportsTeleportVR": true
-    },
-    {
         "RoomId": 3,
         "Name": "3DCharades",
         "Description": "Take turns drawing, acting, and guessing funny phrases with your friends!",
@@ -109,7 +94,7 @@
         "Name": "GoldenTrophy",
         "Description": "The goblin king stole Coach's Golden Trophy. Team up and embark on an epic quest to recover it!",
         "CreatorPlayerId": 72963398,
-        "ImageName": "38e9d0d4eff94556a0b106508249dcf9",
+        "ImageName": "GT.png",
         "State": 0,
         "Accessibility": 1,
         "SupportsLevelVoting": false,

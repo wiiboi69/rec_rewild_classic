@@ -11,6 +11,14 @@ using System.Collections.Generic;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using ws;
+using Rec_rewild.api;
+using start;
+using Spectre.Console;
+using System.Web;
+using static rewild_room_sesh.c000079;
+using static rewild_room_sesh.room_data_base;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace server
 {
@@ -50,7 +58,11 @@ namespace server
 					{
 						Url = rawUrl.Remove(0, 5);
 					}
-					if (!(Url == ""))
+                    if (rawUrl.StartsWith("//api/"))
+                    {
+                        Url = rawUrl.Remove(0, 6);
+                    }
+                    if (!(Url == ""))
 					{
 						Console.WriteLine("API Requested: " + Url);
 					}
@@ -66,6 +78,10 @@ namespace server
                         context.Request.InputStream.CopyTo(memoryStream);
                         array = memoryStream.ToArray();
                         text = Encoding.ASCII.GetString(array);
+                    }
+                    if (text.EndsWith('\n')) // check 2
+                    {
+                        Console.WriteLine("API Data: unviewable");
                     }
                     if (text.Length > 0xfff)
                     {
@@ -96,7 +112,7 @@ namespace server
 						s = getcachedlogins.GetDebugLogin(ulong.Parse(text.Remove(0, 32)), ulong.Parse(text.Remove(0, 22)));
 						APIServer_Base.CachedPlayerID = ulong.Parse(text.Remove(0, 32));
                         APIServer_Base.CachedPlatformID = ulong.Parse(text.Remove(0, 22));
-						File.WriteAllText("SaveData\\Profile\\userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
+						File.WriteAllText("SaveData/Profile/userid.txt", Convert.ToString(APIServer_Base.CachedPlayerID));
 					}
 					if (Url == "platformlogin/v1/loginaccount")
 					{
@@ -118,7 +134,21 @@ namespace server
 					{
 						s = BracketResponse;
 					}
-					if (Url == "config/v1/amplitude")
+                    if (Url == "players/v2/displayname")
+                    {
+                        string temp = HttpUtility.UrlDecode(text.Substring("Name=".Length));
+						Console.WriteLine(temp);
+                        File.WriteAllText("SaveData\\Profile\\displayName.txt", temp);
+						s = "{\"Success\":true,\"Message\":\"" + temp + "\"}";
+                    }
+                    if (Url == "players/v1/bio")
+                    {
+                        string temp2 = HttpUtility.UrlDecode(text.Substring("Bio=".Length));
+                        Console.WriteLine(temp2);
+                        File.WriteAllText("SaveData\\Profile\\bio.txt", temp2);
+                        s = "{\"Success\":true,\"Message\":\"" + temp2 + "\"}";
+                    }
+                    if (Url == "config/v1/amplitude")
 					{
 						s = Amplitude.amplitude();
 					}
@@ -144,7 +174,7 @@ namespace server
 					}
 					if (Url == "gameconfigs/v1/all")
 					{
-						s = File.ReadAllText("SaveData\\gameconfigs.txt");
+						s = File.ReadAllText("SaveData/gameconfigs.txt");
 					}
 					if (Url.StartsWith("storefronts/v3/giftdropstore"))
 					{
@@ -156,7 +186,7 @@ namespace server
 					}
 					if (Url == "avatar/v2")
 					{
-						s = File.ReadAllText("SaveData\\avatar.txt");
+						s = File.ReadAllText("SaveData/avatar.txt");
 					}
 
                     if (Url == "avatar/v2/saved")
@@ -169,13 +199,13 @@ namespace server
 						if (!(text.Contains("FaceFeatures")))
 						{
 							string postdatacache = text;
-							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData\\App\\facefeaturesadd.txt");
+							text = postdatacache.Remove(postdatacache.Length - 1, 1) + File.ReadAllText("SaveData/App/facefeaturesadd.txt");
 						}
-						File.WriteAllText("SaveData\\avatar.txt", text);
+						File.WriteAllText("SaveData/avatar.txt", text);
 					}
 					if (Url == "settings/v2/")
 					{
-						s = File.ReadAllText("SaveData\\settings.txt");
+						s = File.ReadAllText("SaveData/settings.txt");
 					}
 					if (Url == "settings/v2/set")
 					{
@@ -191,7 +221,7 @@ namespace server
 					}
 					if (Url == "avatar/v3/items")
 					{
-						s = File.ReadAllText("SaveData\\avataritems2.txt");
+						s = File.ReadAllText("SaveData/avataritems2.txt");
 					}
                     if (Url == "rewild_studio/avatar/avatar_mask")
                     {
@@ -208,7 +238,7 @@ namespace server
                     if (Url == "equipment/v1/getUnlocked")
 					{
                         s = BracketResponse;
-                        //s = File.ReadAllText("SaveData\\equipment.txt");
+                        //s = File.ReadAllText("SaveData/equipment.txt");
                     }
                     if (Url == "avatar/v1/saved")
 					{
@@ -222,7 +252,7 @@ namespace server
 						}
 						//else
 						{
-						//	s = File.ReadAllText("SaveData\\consumables.txt");
+						//	s = File.ReadAllText("SaveData/consumables.txt");
 						}
 					}
 					if (Url == "avatar/v2/gifts")
@@ -243,15 +273,15 @@ namespace server
                     }
                     if (Url == "rooms/v1/myrooms")
 					{
-						s = File.ReadAllText("SaveData\\myrooms.txt");
+						s = File.ReadAllText("SaveData/myrooms.txt");
 					}
-					if (Url == "rooms/v2/myrooms")
+                    if (Url == "rooms/v2/myrooms")
+                    {               
+                        s = JsonConvert.SerializeObject(room_data_base.get_all_custom_room_fix(), Formatting.Indented); // yeah... this is a mess
+                    }
+                    if (Url == "rooms/v2/baserooms")
 					{
-						s = BracketResponse;
-					}
-					if (Url == "rooms/v2/baserooms")
-					{
-						s = File.ReadAllText("SaveData\\baserooms.txt");
+						s = File.ReadAllText("SaveData/baserooms.txt");
 					}
 					if (Url == "rooms/v1/mybookmarkedrooms")
 					{
@@ -285,15 +315,75 @@ namespace server
 					{
 						s = room_sesh.Create_GameSession(text);
 					}
-					if (rawUrl == "//api/sanitize/v1/isPure")
+					if (Url == "sanitize/v1/isPure")
 					{
 						s = "{\"IsPure\":true}";
 					}
-					if (Url == "avatar/v3/saved")
+                    if (Url == "images/v3/uploadsaved")
+                    {
+                        bool flag1;
+                        string rnfn;
+                        string temp1 = ImageUpload_2018.SaveImageFile(array, out flag1, out rnfn);
+
+                        if (flag1)
+                        {
+                            s = "{\"success\":false,\"error\":\"failed to uploaded image\",\"ImageName\":\"\"}";
+                            Console.Beep();
+                            Console.WriteLine("Failed to upload image");
+                        }
+                        else
+                        {
+                            string name = File.ReadAllText("SaveData/Profile/username.txt");
+                            Random random = new Random();
+                            var imageData = new ImageData
+                            {
+                                SavedImageId = random.Next(1, 99999999),
+                                ImageName = rnfn,
+                                Username = name,
+                                RoomName = null
+                            };
+                            s = JsonConvert.SerializeObject(imageData, Formatting.Indented);
+                        }
+                    }
+                    if (Url == "images/v3/profile")
+                    {
+                        bool flag1;
+                        string rnfn;
+                        string temp1 = ImageUpload_2018.SaveImageFile(array, out flag1, out rnfn);
+
+                        if (flag1)
+                        {
+                            s = "{\"success\":false,\"error\":\"failed to uploaded image\",\"ImageName\":\"\"}";
+							Console.Beep();
+							Console.WriteLine("Failed to upload image");
+                        }
+                        else
+                        {
+                            string name = File.ReadAllText("SaveData/Profile/username.txt");
+                            Random random = new Random();
+                            var imageData = new ImageData
+                            {
+                                SavedImageId = random.Next(1, 99999999),
+                                ImageName = rnfn,
+                                Username = name,
+                                RoomName = null
+                            };
+                            s = JsonConvert.SerializeObject(imageData, Formatting.Indented);
+                        }
+                    }
+                    if (rawUrl == "playerevents//v1")
+                    {
+                        s = "[]";
+                    }
+                    if (Url == "avatar/v3/saved")
 					{
 						s = BracketResponse;
 					}
-					if (Url == "checklist/v1/current")
+                    if (Url == "rooms/v1/report")
+                    {
+                        s = "{\"Success\":false,\"Message\":\"no\"}";
+                    }
+                    if (Url == "checklist/v1/current")
 					{
                         s = BracketResponse;
                         //s = APIServer_Base.ChecklistV1Current;
@@ -307,31 +397,54 @@ namespace server
 						s = APIServer_Base.ChallengesV1GetCurrent;
 					}
 					if (Url == "rooms/v1/featuredRoomGroup")
-					{
-						s = BracketResponse;
+                    {
+                        s = BracketResponse;
 					}
-					if (Url == "rooms/v1/clone")
+                    if (Url == "rooms/v1/filters")
+                    {
+                        s = APIServer_Base.FiltersResponse;
+                    }
+                    if (Url == "rooms/v1/clone")
 					{
 						s = JsonConvert.SerializeObject(rewild_custom_room_2018.clone_room(text));
 					}
 					if (Url.StartsWith("rooms/v2/saveData"))
 					{
-						//string text26 = "5GDNL91ZY43PXN2YJENTBL";
-						//string path = c000004.m000007() + c000041.f000043.Room.Name;
-						//File.WriteAllBytes(string.Concat(new string[]
-						//{
-						//c000004.m000007(),
-						//c000041.f000043.Room.Name,
-						//"\\room\\",
-						//text26,
-						//".room"
-						//}), m00005d(list.ToArray(), "data.dat"));
-						//c000041.f000043.Scenes[0].DataBlobName = text26 + ".room";
-						//c000041.f000043.Scenes[0].DataModifiedAt = DateTime.Now;
-						//File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "\\RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
-						//s = JsonConvert.SerializeObject(c00005d.m000035());
+                        //string text26 = "5GDNL91ZY43PXN2YJENTBL";
+                        //string path = c000004.m000007() + c000041.f000043.Room.Name;
+                        //File.WriteAllBytes(string.Concat(new string[]
+                        //{
+                        //c000004.m000007(),
+                        //c000041.f000043.Room.Name,
+                        //"/room/",
+                        //text26,
+                        //".room"
+                        //}), m00005d(list.ToArray(), "data.dat"));
+                        //c000041.f000043.Scenes[0].DataBlobName = text26 + ".room";
+                        //c000041.f000043.Scenes[0].DataModifiedAt = DateTime.Now;
+                        //File.WriteAllText(c000004.m000007() + c000041.f000043.Room.Name + "/RoomDetails.json", JsonConvert.SerializeObject(c000041.f000043));
+                        //s = JsonConvert.SerializeObject(c00005d.m000035());
 					}
-					if (Url == "presence/v3/heartbeat")
+                    if (Url.StartsWith("rooms/v2/modify"))
+                    {
+                        // RoomData.c000061 c69 = JsonConvert.DeserializeObject<RoomData.c000061>(@string);
+                        // RoomData.c000060 c70 = RoomData.m000023((int)c69.RoomId);
+                        //if (c69.Description != null)
+                        // {
+                        //  c70.Room.Description = c69.Description;
+                        //  }
+                        //  if (c69.ImageName != null)
+                        //  {
+                        //      c70.Room.ImageName = c69.ImageName;
+                        //   }
+                        //   File.WriteAllText("SaveData/Rooms/" + c70.Room.Name + "/RoomDetails.json", JsonConvert.SerializeObject(c70));
+                        //   text2 = JsonConvert.SerializeObject(new c000099.c00009b
+                        //  {
+                        //   Result = 0,
+                        //       RoomDetails = c70
+                        //  });
+                    }
+                    if (Url == "presence/v3/heartbeat")
 					{
 						s = JsonConvert.SerializeObject(Notification.Reponse.createResponse(Notification.ResponseResults.PresenceHeartbeatResponse, heartbeat.get_heartbeat()));
 					}

@@ -15,21 +15,21 @@ namespace api
         public static void RoomDecode(string text)
         {
             ModernRooms.Root root2 = JsonConvert.DeserializeObject<ModernRooms.Root>(text);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomname.txt", root2.Name);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomid.txt", Convert.ToString(root2.RoomId));
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\datablob.txt", root2.SubRooms[0].DataBlob);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomsceneid.txt", root2.SubRooms[0].UnitySceneId);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\imagename.txt", root2.ImageName);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\cheercount.txt", Convert.ToString(root2.Stats.CheerCount));
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\favcount.txt", Convert.ToString(root2.Stats.FavoriteCount));
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\visitcount.txt", Convert.ToString(root2.Stats.VisitCount));
+            File.WriteAllText("SaveData/Rooms/Downloaded/roomname.txt", root2.Name);
+            File.WriteAllText("SaveData/Rooms/Downloaded/roomid.txt", Convert.ToString(root2.RoomId));
+            File.WriteAllText("SaveData/Rooms/Downloaded/datablob.txt", root2.SubRooms[0].DataBlob);
+            File.WriteAllText("SaveData/Rooms/Downloaded/roomsceneid.txt", root2.SubRooms[0].UnitySceneId);
+            File.WriteAllText("SaveData/Rooms/Downloaded/imagename.txt", root2.ImageName);
+            File.WriteAllText("SaveData/Rooms/Downloaded/cheercount.txt", Convert.ToString(root2.Stats.CheerCount));
+            File.WriteAllText("SaveData/Rooms/Downloaded/favcount.txt", Convert.ToString(root2.Stats.FavoriteCount));
+            File.WriteAllText("SaveData/Rooms/Downloaded/visitcount.txt", Convert.ToString(root2.Stats.VisitCount));
             room = new Room
             {
                 RoomId = 29,
                 Name = root2.Name,
                 Description = "rec_rewild_classic Downloaded Room",
                 ImageName = root2.ImageName,
-                CreatorPlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
+                CreatorPlayerId = Convert.ToUInt64(File.ReadAllText("SaveData/Profile/userid.txt")),
                 State = 0,
                 Accessibility = 1,
                 SupportsLevelVoting = false,
@@ -84,7 +84,7 @@ namespace api
                 }
 
             };
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\RoomDetails.json", JsonConvert.SerializeObject(root));
+            File.WriteAllText("SaveData/Rooms/Downloaded/RoomDetails.json", JsonConvert.SerializeObject(root));
         }
 
         public static void RoomGet(string roomnames)
@@ -97,7 +97,7 @@ namespace api
                 Name = root2.Name,
                 Description = "rec_rewild_classic Downloaded Room",
                 ImageName = root2.ImageName,
-                CreatorPlayerId = Convert.ToUInt64(File.ReadAllText("SaveData\\Profile\\userid.txt")),
+                CreatorPlayerId = Convert.ToUInt64(File.ReadAllText("SaveData/Profile/userid.txt")),
                 State = 0,
                 Accessibility = 1,
                 SupportsLevelVoting = false,
@@ -152,15 +152,15 @@ namespace api
                 }
 
             };
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomname.txt", root2.Name);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomid.txt", Convert.ToString(root2.RoomId));
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\datablob.txt", root2.SubRooms[0].DataBlob);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\roomsceneid.txt", root2.SubRooms[0].UnitySceneId);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\imagename.txt", root2.ImageName);
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\cheercount.txt", Convert.ToString(root2.Stats.CheerCount));
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\favcount.txt", Convert.ToString(root2.Stats.FavoriteCount));
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\visitcount.txt", Convert.ToString(root2.Stats.VisitCount));
-            File.WriteAllText("SaveData\\Rooms\\Downloaded\\RoomDetails.json", JsonConvert.SerializeObject(root));
+            File.WriteAllText("SaveData/Rooms/Downloaded/roomname.txt", root2.Name);
+            File.WriteAllText("SaveData/Rooms/Downloaded/roomid.txt", Convert.ToString(root2.RoomId));
+            File.WriteAllText("SaveData/Rooms/Downloaded/datablob.txt", root2.SubRooms[0].DataBlob);
+            File.WriteAllText("SaveData/Rooms/Downloaded/roomsceneid.txt", root2.SubRooms[0].UnitySceneId);
+            File.WriteAllText("SaveData/Rooms/Downloaded/imagename.txt", root2.ImageName);
+            File.WriteAllText("SaveData/Rooms/Downloaded/cheercount.txt", Convert.ToString(root2.Stats.CheerCount));
+            File.WriteAllText("SaveData/Rooms/Downloaded/favcount.txt", Convert.ToString(root2.Stats.FavoriteCount));
+            File.WriteAllText("SaveData/Rooms/Downloaded/visitcount.txt", Convert.ToString(root2.Stats.VisitCount));
+            File.WriteAllText("SaveData/Rooms/Downloaded/RoomDetails.json", JsonConvert.SerializeObject(root));
         }
             
             

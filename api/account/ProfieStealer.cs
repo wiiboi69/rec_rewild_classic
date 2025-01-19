@@ -129,14 +129,14 @@ namespace api
         {
             List<Root> profile = JsonConvert.DeserializeObject<List<Root>>(data);
 
-            File.WriteAllText("SaveData\\Profile\\username.txt", profile[value].username);
+            File.WriteAllText("SaveData/Profile/username.txt", profile[value].username);
             string temp = new WebClient().DownloadString($"https://apim.rec.net/accounts/account/{profile[value].accountId}/bio");
             Root_bio bio = JsonConvert.DeserializeObject<Root_bio>(temp);
 
-            File.WriteAllText("SaveData\\Profile\\bio.txt", bio.bio);
-            File.WriteAllText("SaveData\\Profile\\displayName.txt", profile[value].displayName);
+            File.WriteAllText("SaveData/Profile/bio.txt", bio.bio);
+            File.WriteAllText("SaveData/Profile/displayName.txt", profile[value].displayName);
             byte[] profileimage = new WebClient().DownloadData("https://img.rec.net/" + profile[value].profileImage + "?cropSquare=true");
-            File.WriteAllBytes("SaveData\\profileimage.png", profileimage);
+            File.WriteAllBytes("SaveData/profileimage.png", profileimage);
         }
 
         /// <summary>
@@ -146,10 +146,10 @@ namespace api
         {
             List<Root> profile = JsonConvert.DeserializeObject<List<Root>>(data);
 
-            File.WriteAllText("SaveData\\Profile\\username.txt", profile[0].username);
-            File.WriteAllText("SaveData\\Profile\\displayName.txt", profile[0].displayName);
+            File.WriteAllText("SaveData/Profile/username.txt", profile[0].username);
+            File.WriteAllText("SaveData/Profile/displayName.txt", profile[0].displayName);
             byte[] profileimage = new WebClient().DownloadData("https://img.rec.net/" + profile[0].profileImage + "?cropSquare=true&width=192&height=192");
-            File.WriteAllBytes("SaveData\\profileimage.png", profileimage);
+            File.WriteAllBytes("SaveData/profileimage.png", profileimage);
         }
         public class Root_bio
         {

@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using server;
+using static rewild_room_sesh.room_data_base;
 
 namespace rewild_room_sesh
 {
@@ -15,13 +16,23 @@ namespace rewild_room_sesh
 			string[] directories = Directory.GetDirectories(room_util.check_room_dir());
 			for (int i = 0; i < directories.Length; i++)
 			{
-				room custom_room_file = JsonConvert.DeserializeObject<room>(File.ReadAllText(directories[i] + "\\RoomDetails.json"));
+				room custom_room_file = JsonConvert.DeserializeObject<room>(File.ReadAllText(directories[i] + "/RoomDetails.json"));
 				room_list_custom.Add(custom_room_file.Room.Name, custom_room_file);
-			}
-			return room_list_custom;
-		}
+            }
+            return room_list_custom;
+        }
 
-		public static room Get_room_detail(ulong p0)
+        public static List<room_data_base.room_data> get_all_custom_room_fix()
+        {
+            List<room_data_base.room_data> list = new List<room_data_base.room_data>();
+            foreach (KeyValuePair<string, room_data_base.room> keyValuePair in room_data_base.get_all_custom_rooms())
+            {
+                list.Add(keyValuePair.Value.Room);
+            }
+            return list;
+        }
+
+        public static room Get_room_detail(ulong p0)
 		{
 			room temp = new room();
 			foreach (KeyValuePair<string, room> keyValuePair in main_room)

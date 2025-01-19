@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
+using server;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using static rewild_room_sesh.room_data_base;
 
 namespace rewild_room_sesh
 {
@@ -12,14 +14,15 @@ namespace rewild_room_sesh
 		
 		public static List<room_data_base.room_data> room_find(string name)
 		{
+			Console.WriteLine("Finding room");
             name = Uri.UnescapeDataString(name);
-
             string[] array = name.Split(new char[]
 			{
 				' '
 			});
 			List<room_data_base.room_data> list = new List<room_data_base.room_data>();
-			foreach (KeyValuePair<string, room_data_base.room> keyValuePair in room_data_base.main_room)
+            Console.WriteLine("Searching through room");
+            foreach (KeyValuePair<string, room_data_base.room> keyValuePair in room_data_base.main_room)
 			{
 				room_data_base.room value = keyValuePair.Value;
 				bool flag = true;
@@ -91,8 +94,9 @@ namespace rewild_room_sesh
 			room_data.RoomDetails.Scenes[0].DataBlobName = string.Empty;
 			room_data.RoomDetails.Scenes[0].DataModifiedAt = DateTime.Now;
 			room_data.RoomDetails.Room.CreatorPlayerId = server.APIServer_Base.CachedPlayerID;
-			
-			foreach (var room in room_data_base.get_all_custom_rooms())
+            //room_data.RoomDetails.Room.
+
+            foreach (var room in room_data_base.get_all_custom_rooms())
 			{
 				if (room.Value.Room.Name == clone_data.Name)
 				{
@@ -100,7 +104,7 @@ namespace rewild_room_sesh
                     room_data.RoomDetails = null;
                     return room_data;
                 }
-            }
+            }  
 
             room_data_base.get_all_custom_rooms().Add(clone_data.Name, clonable_room);
 			string text = room_util.check_room_dir() + room_data.RoomDetails.Room.Name;
@@ -108,7 +112,7 @@ namespace rewild_room_sesh
 			{
 				Directory.CreateDirectory(text);
 			}
-			File.WriteAllText(text + "\\RoomDetails.json", JsonConvert.SerializeObject(room_data.RoomDetails));
+			File.WriteAllText(text + "/RoomDetails.json", JsonConvert.SerializeObject(room_data.RoomDetails));
 			return room_data;
 		}
 

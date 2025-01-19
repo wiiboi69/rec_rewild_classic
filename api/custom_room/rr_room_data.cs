@@ -837,7 +837,7 @@ namespace rewild_room_sesh
                         Name = "GoldenTrophy",
                         Description = "The goblin king stole Coach's Golden Trophy. Team up and embark on an epic quest to recover it!",
                         CreatorPlayerId = 782441001UL,
-                        ImageName = "38e9d0d4eff94556a0b106508249dcf9",
+                        ImageName = "GT.png",
                         State = 0,
                         Accessibility = 1,
                         SupportsLevelVoting = false,
