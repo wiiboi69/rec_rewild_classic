@@ -175,7 +175,7 @@ namespace start.Program_menu
                             goto Profile;
                         }
 
-                        List<cdn_editor.Root> profile = JsonConvert.DeserializeObject<List<cdn_editor.Root>>(data);
+                        List<ProfieStealer.Root> profile = JsonConvert.DeserializeObject<List<ProfieStealer.Root>>(data);
                         byte[] profileimage = new WebClient().DownloadData("https://img.rec.net/" + profile[0].profileImage + "?cropSquare=true&width=192&height=192");
                         File.WriteAllBytes("SaveData\\profileimage.png", profileimage);
 
@@ -215,12 +215,12 @@ namespace start.Program_menu
                     Console.WriteLine("Failed to download profile...");
                     goto Profile;
                 }
-
+                /*
                 if (!cdn_editor.Profilefind(data2, take_int: 12))
                 {
                     goto download_profile;
                 }
-
+                */
                 Console.Clear();
                 goto Profile;
             }
