@@ -115,6 +115,9 @@ namespace rewild_room_sesh
             {
                 if (keyValuePair.Value.Room.RoomId == (ulong)roomid)
                 {
+                    if (keyValuePair.Value.Scenes[(int)subroomid].rewild_studio_data != null)
+                        return keyValuePair.Value.Scenes[(int)subroomid].rewild_studio_data;
+                        /*
                     foreach (var keyValuePai1r in keyValuePair.Value.Scenes)
                     {
                         if (keyValuePai1r.RoomId == (ulong)subroomid)
@@ -123,6 +126,7 @@ namespace rewild_room_sesh
                                 return keyValuePai1r.rewild_studio_data;
                         }
                     }
+                        */
                 }
             }
             return null;
