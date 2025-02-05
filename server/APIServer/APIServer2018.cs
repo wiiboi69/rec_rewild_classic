@@ -19,6 +19,7 @@ using static rewild_room_sesh.c000079;
 using static rewild_room_sesh.room_data_base;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Net.Mime.MediaTypeNames;
+using System.Linq;
 
 namespace server
 {
@@ -263,7 +264,14 @@ namespace server
 					{
 						s = BlankResponse;
 					}
-					if (Url == "storefronts/v1/allGiftDrops/2")
+                    if (Url.StartsWith("rewild_studio/asset/") && Url.EndsWith("/info"))
+                    {
+                        string temp = Url.Substring("rewild_studio/asset/".Length);
+                        List<string> longs = new List<string>();
+                        longs = temp.Split('/').ToList();
+                        s = JsonConvert.SerializeObject(room_data_base.Get_rewild_subroom_bundle_detail(roomid: long.Parse(longs[0]), subroomid: long.Parse(longs[1])));
+                    }
+                    if (Url == "storefronts/v1/allGiftDrops/2")
 					{
 						s = BracketResponse;
 					}
@@ -273,16 +281,18 @@ namespace server
                     }
                     if (Url == "rooms/v1/myrooms")
 					{
-						s = File.ReadAllText("SaveData/myrooms.txt");
-					}
+                        //s = File.ReadAllText("SaveData/myrooms.txt");
+                        s = JsonConvert.SerializeObject(room_data_base.get_all_custom_room_fix(), Formatting.Indented); // yeah... this is a mess
+                    }
                     if (Url == "rooms/v2/myrooms")
                     {               
                         s = JsonConvert.SerializeObject(room_data_base.get_all_custom_room_fix(), Formatting.Indented); // yeah... this is a mess
                     }
                     if (Url == "rooms/v2/baserooms")
 					{
-						s = File.ReadAllText("SaveData/baserooms.txt");
-					}
+						//s = File.ReadAllText("SaveData/baserooms.txt");
+                        s = JsonConvert.SerializeObject(room_data_base.get_all_base_cloneable_rooms(), Formatting.Indented);
+                    }
 					if (Url == "rooms/v1/mybookmarkedrooms")
 					{
 						s = BracketResponse;

@@ -15,6 +15,25 @@ namespace start.Program_menu
                 File.WriteAllText("SaveData\\app\\server_cdn.json", "[]");
             string temp_str = File.ReadAllText("SaveData\\app\\server_cdn.json");
             List<Root> profile = JsonConvert.DeserializeObject<List<Root>>(temp_str);
+            profile.Add(new Root
+            {
+                base_url = "https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/",
+                room_url = "CDN/room",
+                image_url = "Images",
+                data_url = "",
+                built_in = true,
+                cdn_type = server_url.all
+            });
+            profile.Add(new Root
+            {
+                base_url = "",
+                name = "rec.net server",
+                room_url = "cdn.rec.net/rooms",
+                image_url = "Img.rec.net",
+                data_url = "cdn.rec.net/data",
+                built_in = true,
+                cdn_type = server_url.all
+            });
             if (take_int == 0)
             {
                 take_int = profile.Count;
@@ -31,7 +50,7 @@ namespace start.Program_menu
         Refreshpage:
             Console.Clear();
         Refreshpage_2:
-            Console.WriteLine($"┌──────────────────────────┤ cdn server ├──────────────────────────┐");
+            Console.WriteLine($"┌──────────────────────────────────────────┤ cdn server ├──────────────────────────────────────────┐");
 
             skippage = (int)Math.Floor((float)(take + 1) / 10f);
             if (take > take_int)
@@ -44,8 +63,13 @@ namespace start.Program_menu
                 temp2 = "";
 
                 Root root = profile[i];
-                temp = $"│ [{i}]  {root.base_url}  {root.cdn_type.ToString()}";
-                for (int j = $"│ [{i}]  {root.base_url}  {root.cdn_type.ToString()}".Length; j < 67; j++)
+                string temp11 = root.base_url;
+                if (!string.IsNullOrEmpty(root.name))
+                {
+                    temp11 = root.name;
+                }
+                temp = $"│ [{i}]  {temp11}  {root.cdn_type.ToString()}";
+                for (int j = $"│ [{i}]  {temp11}  {root.cdn_type.ToString()}".Length; j < (67 + 32); j++)
                 {
                     temp2 = temp2 + " ";
                 }
@@ -71,8 +95,8 @@ namespace start.Program_menu
             {
                 data_2 = "───────┤";
             }
-            Console.WriteLine($"{data_1}──────────────────────┤ Exit ├──────────────────────{data_2}");
-            Console.WriteLine($"└─────────────────────────────┘ Page {skippage} / {maxpage}");
+            Console.WriteLine($"{data_1}──────────────────────────────────────┤ Exit ├──────────────────────────────────────{data_2}");
+            Console.WriteLine($"└─────────────────────────────────────────────┘ Page {skippage} / {maxpage}");
             while (true)
             {
                 input = Console.ReadLine();
@@ -141,6 +165,7 @@ namespace start.Program_menu
             public bool built_in;
             public server_url cdn_type { get; set; }
             public string base_url { get; set; }
+            public string? name { get; set; } = null;
             public string? data_url { get; set; }
             public string? image_url { get; set; }
             public string? room_url { get; set; }

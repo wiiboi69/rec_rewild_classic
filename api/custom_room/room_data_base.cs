@@ -16,10 +16,53 @@ namespace rewild_room_sesh
 			string[] directories = Directory.GetDirectories(room_util.check_room_dir());
 			for (int i = 0; i < directories.Length; i++)
 			{
-				room custom_room_file = JsonConvert.DeserializeObject<room>(File.ReadAllText(directories[i] + "/RoomDetails.json"));
-				room_list_custom.Add(custom_room_file.Room.Name, custom_room_file);
+                try
+                {
+                    room custom_room_file = JsonConvert.DeserializeObject<room>(File.ReadAllText(directories[i] + "/RoomDetails.json"));
+                    room_list_custom.Add(custom_room_file.Room.Name, custom_room_file);
+                }
+                catch { }
             }
             return room_list_custom;
+        }
+
+        public static List<room_data> get_all_base_cloneable_rooms()
+        {
+            List<room_data> room_list_custom = new List<room_data>();
+            foreach (var item in Base_cloneable_room)
+            {
+                room_list_custom.Add(item.Value.Room);
+            }
+            return room_list_custom;
+        }
+
+        public static List<room> get_all_base_rooms()
+        {
+            List<room> room_list_custom = new List<room>();
+            foreach (var item in Base_cloneable_room)
+            {
+                room_list_custom.Add(item.Value);
+            }
+            return room_list_custom;
+        }
+        public static List<room> get_all_rooms()
+        {
+            List<room> room_list_custom = new List<room>();
+            foreach (var item in main_room)
+            {
+                room_list_custom.Add(item.Value);
+            }
+            return room_list_custom;
+        }
+
+        public static List<room> get_all_custom_room_detail_fix()
+        {
+            List<room> list = new List<room>();
+            foreach (KeyValuePair<string, room> keyValuePair in get_all_custom_rooms())
+            {
+                list.Add(keyValuePair.Value);
+            }
+            return list;
         }
 
         public static List<room_data_base.room_data> get_all_custom_room_fix()
@@ -46,12 +89,46 @@ namespace rewild_room_sesh
                     return temp;
 				}
 			}
-			return main_room["DormRoom"];
+            //get_all_custom_room_detail_fix
+            foreach (var keyValuePair in get_all_custom_room_detail_fix())
+            {
+
+                if (keyValuePair.Room.RoomId == p0)
+                {
+                    temp = keyValuePair;
+                    temp.InvitedCoOwners = new List<ulong> { };
+                    temp.InvitedHosts = new List<ulong> { };
+                    return temp;
+                }
+            }
+            return main_room["DormRoom"];
 		}
+        /// <summary>
+        /// rrs in 2018:: this get a a subroom bundle detail data
+        /// </summary>
+        /// <param name="roomid">a room id</param>
+        /// <param name="subroomid"></param>
+        /// <returns></returns>
+        public static rewild_studio_subroom Get_rewild_subroom_bundle_detail(long roomid, long subroomid)
+        {
+            foreach (var keyValuePair in main_room)
+            {
+                if (keyValuePair.Value.Room.RoomId == (ulong)roomid)
+                {
+                    foreach (var keyValuePai1r in keyValuePair.Value.Scenes)
+                    {
+                        if (keyValuePai1r.RoomId == (ulong)subroomid)
+                        {
+                            if (keyValuePai1r != null)
+                                return keyValuePai1r.rewild_studio_data;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
 
-
-
-		public class rewild_studio_subroom
+        public class rewild_studio_subroom
 		{
             public string? AssetBundleName { get; set; }
             public string? DataSceneName { get; set; }

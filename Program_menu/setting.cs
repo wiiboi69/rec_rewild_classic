@@ -20,12 +20,13 @@ namespace start.Program_menu
             string readline4 = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .EnableSearch()
-                    .Title("")
+                    .Title("rec_rewild_classic Settings Menu")
                     .PageSize(10)
                     .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
                     .AddChoices(new[] {
                             "Private Rooms: " + File.ReadAllText("SaveData\\App\\privaterooms.txt"),
-                            "Custom Room Downloader",
+                            //"Custom Room Downloader",
+                            "CDN server",
                             "Reset SaveData",
                             "Go Back",
                     }));
@@ -43,6 +44,12 @@ namespace start.Program_menu
                 Console.WriteLine("Success!");
                 goto Settings;
             }
+            else if (readline4 == "CDN server")
+            {
+                cdn_setting_menu.cdn_setting();
+                goto Settings;
+            }
+            /*
             else if (readline4 == "Custom Room Downloader")
             {
                 Console.Title = "rec_rewild_classic Custom Room Downloader";
@@ -66,8 +73,18 @@ namespace start.Program_menu
                 Console.WriteLine("Success!");
                 goto Settings;
             }
+            */
             else if (readline4 == "Reset SaveData")
             {
+                Console.WriteLine("are you sure about deleting your save data?");
+                Console.WriteLine("Yes or No");
+
+                string tmp_1 = Console.ReadLine();
+
+                if (tmp_1.ToLower() != "y")
+                {
+                    goto Settings;
+                }
 
                 File.Delete("SaveData\\avatar.txt");
                 File.Delete("SaveData\\avataritems.txt");

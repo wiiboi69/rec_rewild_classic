@@ -297,14 +297,16 @@ namespace rewild_room_sesh
                         {
                             RoomSceneId = 30L,
                             RoomId = 30UL,
-							RoomSceneLocationId = "74c62a36-4362-468b-81ec-65c45bfe0e5f",
+                            RoomSceneLocationId = "a75f7547-79eb-47c6-8986-6767abcb4f92",
+
+							//RoomSceneLocationId = "74c62a36-4362-468b-81ec-65c45bfe0e5f",
                             rewild_studio_data = new rewild_studio_subroom()
                             {
                                 AssetBundleName = "rrs_hub_data",
                                 DataSceneName = "rrs_hub"
                             },
 							Name = "rrs_hub",
-                            IsSandbox = false,
+                            IsSandbox = true,
                             DataBlobName = string.Empty,
                             MaxPlayers = 20,
                             CanMatchmakeInto = true,

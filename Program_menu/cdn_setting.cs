@@ -13,7 +13,7 @@ namespace start.Program_menu
         {
             Console.Clear();
         Settings:
-            Console.Title = "rec_rewild_classic cdn setting Menu";
+            Console.Title = "rec_rewild_classic cdn server Menu";
             string[] strings = new[] {
                             "add a cdn room server url",
                             "add a cdn image server url",
@@ -25,16 +25,17 @@ namespace start.Program_menu
             string readline4 = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .EnableSearch()
-                    .Title("")
+                    .Title("rec_rewild_classic cdn server Menu")
                     .PageSize(10)
                     .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
                     .AddChoices(strings));
 
             if (readline4 == "list all of cdn server urls")
             {
-
                 Console.Clear();
-                Console.WriteLine("Success!");
+                cdn_editor.cdn_list();
+                Console.Clear();
+                //Console.WriteLine("Success!");
                 goto Settings;
             }
             

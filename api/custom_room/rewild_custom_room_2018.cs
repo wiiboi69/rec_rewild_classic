@@ -59,9 +59,9 @@ namespace rewild_room_sesh
 			return list;
 		}
 
-		public static room_data_base.room Get_cloneable_room(ulong p0)
+		public static room Get_cloneable_room(ulong p0)
 		{
-			foreach (KeyValuePair<string, room_data_base.room> keyValuePair in room_data_base.Base_cloneable_room)
+			foreach (KeyValuePair<string, room> keyValuePair in room_data_base.Base_cloneable_room)
 			{
 				if (keyValuePair.Value.Room.RoomId == p0)
 				{
@@ -75,7 +75,8 @@ namespace rewild_room_sesh
 		{
 			room_dto room_data = new room_dto();
 			clone_dto clone_data = JsonConvert.DeserializeObject<clone_dto>(p0);
-			room_data_base.room clonable_room = Get_cloneable_room(clone_data.RoomId);
+            room clonable_room = new room();
+            clonable_room = Get_cloneable_room(clone_data.RoomId);
 			if (clonable_room == null)
 			{
 				room_data.Result = error_code.RoomDoesNotExist;
@@ -83,38 +84,71 @@ namespace rewild_room_sesh
                 return room_data;
             }
 
-			room_data.Result = 0;
-			room_data.RoomDetails = clonable_room;
-			room_data.RoomDetails.Room.Name = clone_data.Name;
-			ulong roomId = (ulong)new Random().Next(100, 9999999);
-			room_data.RoomDetails.Room.RoomId = roomId;
-			room_data.RoomDetails.Room.IsAGRoom = false;
-			room_data.RoomDetails.Scenes[0].IsSandbox = true;
-			room_data.RoomDetails.Scenes[0].RoomId = roomId;
-			room_data.RoomDetails.Scenes[0].DataBlobName = string.Empty;
-			room_data.RoomDetails.Scenes[0].DataModifiedAt = DateTime.Now;
-			room_data.RoomDetails.Room.CreatorPlayerId = server.APIServer_Base.CachedPlayerID;
-            //room_data.RoomDetails.Room.
-
             foreach (var room in room_data_base.get_all_custom_rooms())
-			{
-				if (room.Value.Room.Name == clone_data.Name)
-				{
+            {
+                if (room.Value.Room.Name == clone_data.Name)
+                {
                     room_data.Result = error_code.DuplicateName;
                     room_data.RoomDetails = null;
                     return room_data;
                 }
-            }  
+            }
 
-            room_data_base.get_all_custom_rooms().Add(clone_data.Name, clonable_room);
-			string text = room_util.check_room_dir() + room_data.RoomDetails.Room.Name;
+            foreach (var room in room_data_base.get_all_rooms())
+            {
+                if (room.Room.Name == clone_data.Name)
+                {
+                    room_data.Result = error_code.ReservedName;
+                    room_data.RoomDetails = null;
+                    return room_data;
+                }
+            }
+
+            foreach (var room in room_data_base.get_all_base_rooms())
+            {
+                if (room.Room.Name == clone_data.Name)
+                {
+                    room_data.Result = error_code.ReservedName;
+                    room_data.RoomDetails = null;
+                    return room_data;
+                }
+            }
+
+            room_data.Result = 0;
+			room_data.RoomDetails = clonable_room;
+			room_data.RoomDetails.Room.Name = clone_data.Name;
+
+			ulong roomId = (ulong)new Random().NextInt64(500, 99999999);
+
+			room_data.RoomDetails.Room.RoomId = roomId;
+			room_data.RoomDetails.Room.IsAGRoom = false;
+			room_data.RoomDetails.Room.CreatorPlayerId = APIServer_Base.CachedPlayerID;
+
+            ulong subroom_idx = roomId;
+
+            foreach (var room in room_data.RoomDetails.Scenes)
+            {
+                room.RoomId = subroom_idx;
+                room.IsSandbox = true;
+                room.DataModifiedAt = DateTime.UtcNow;
+                subroom_idx += 1;
+            }
+
+            //get_all_custom_rooms().Add(clone_data.Name, clonable_room);
+
+			string text = Path.Combine(room_util.check_room_dir(), room_data.RoomDetails.Room.Name);
+
 			if (!Directory.Exists(text))
 			{
 				Directory.CreateDirectory(text);
+			    File.WriteAllText(Path.Combine(text, "RoomDetails.json"), JsonConvert.SerializeObject(room_data.RoomDetails, Formatting.Indented));
+			    return room_data;
 			}
-			File.WriteAllText(text + "/RoomDetails.json", JsonConvert.SerializeObject(room_data.RoomDetails));
-			return room_data;
-		}
+
+            room_data.Result = error_code.DuplicateName;
+            room_data.RoomDetails = null;
+            return room_data;
+        }
 
 		public sealed class clone_dto
 		{
@@ -125,7 +159,7 @@ namespace rewild_room_sesh
 		public sealed class room_dto
 		{
 			public error_code Result { get; set; }
-            public room_data_base.room RoomDetails { get;set; }
+            public room RoomDetails { get;set; }
 
 		}
 
