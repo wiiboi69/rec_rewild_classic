@@ -78,26 +78,79 @@ namespace start
             Console.WriteLine($"rec_rewild_classic build: {ver_build}");
 
             // Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
-            if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt").Contains(appversion)))
+            try
             {
-                Console.WriteLine("\nThis version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
-            }            
+                if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt").Contains(appversion)))
+                {
+                    Console.WriteLine("\nThis version of rec_rewild_classic is outdated. We recommend you install the latest version, rec_rewild_classic " + new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt"));
+                }            
+            }
+            catch 
+            {
+                Console.WriteLine("unable to get rec_rewild_classic version from github");
+            }
             //Console.WriteLine("//Custom Room Downloader has been moved to the settings tab!" + Environment.NewLine);
-            //Console.WriteLine("(1) What's New" + Environment.NewLine +"(2) Change Settings" + Environment.NewLine + "(3) Modify Profile" + Environment.NewLine + "(4) Build Download Links" + Environment.NewLine + "(5) Start Server");
 
-            string readline = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .EnableSearch()
-                    .Title("")
-                    .PageSize(10)
-                    .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
-                    .AddChoices(new[] {
-                        "What's New",
-                        "Change Settings",
-                        "Modify Profile",
-                        "Build Download Links",
-                        "Start Server",
-                    }));
+            string readline = "";
+            string readline_override = "";
+            try
+            {
+               readline = AnsiConsole.Prompt(
+                   new SelectionPrompt<string>()
+                       .EnableSearch()
+                       .Title("")
+                       .PageSize(10)
+                       .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                       .AddChoices(new[] {
+                            "What's New",
+                            "Change Settings",
+                            "Modify Profile",
+                            "Build Download Links",
+                            "Start Server",
+                       }));
+            }
+            catch 
+            {
+                Console.WriteLine(
+                      "(1) What's New"
+                    + Environment.NewLine
+                    + "(2) Change Settings"
+                    + Environment.NewLine
+                    + "(3) Modify Profile"
+                    + Environment.NewLine
+                    + "(4) Build Download Links"
+                    + Environment.NewLine
+                    + "(5) Start Server"
+                );
+                string readline222 = Console.ReadLine();
+
+
+                switch (readline222)
+                {
+                    case "1":
+                        readline = "What's New";
+                        break;
+                    case "2":
+                        readline = "Change Settings";
+                        break;
+                    case "3":
+                        readline = "Modify Profile";
+                        break;
+                    case "4":
+                        readline = "Build Download Links";
+                        break;
+                    case "5":
+                        readline = "Start Server";
+                        readline_override = "September";
+                        break;
+                    default:
+                    goto Start;
+                }
+
+
+
+            }
+
 
             if (readline == "What's New")
             {
@@ -135,23 +188,31 @@ namespace start
             }
             if (readline == "Start Server")
             {
-                Console.Title = "rec_rewild_classic Version Select";
-                string readline2 = AnsiConsole.Prompt(
-                    new SelectionPrompt<string>()
-                        .EnableSearch()
-                        .Title("Please select the version of RecRoom the server should host")
-                        .PageSize(10)
-                        .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
-                        .AddChoices(new[] {
-                            "2016", "2017",
-                        })
-                        .AddChoiceGroup("2018", new[]
-                        {
-                            "May", "July", "September"
-                        })
-                        .AddChoices(new[] {
-                            "back",
-                        }));
+                string readline2 = "";
+                if (!string.IsNullOrEmpty(readline_override))
+                {
+                    readline2 = readline_override;
+                }
+                else
+                {
+                    Console.Title = "rec_rewild_classic Version Select";
+                    readline2 = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                            .EnableSearch()
+                            .Title("Please select the version of RecRoom the server should host")
+                            .PageSize(10)
+                            .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                            .AddChoices(new[] {
+                                "2016", "2017",
+                            })
+                            .AddChoiceGroup("2018", new[]
+                            {
+                                "May", "July", "September"
+                            })
+                            .AddChoices(new[] {
+                                "back",
+                            }));
+                }
                 if (readline2 == "2016")
                 {
                     Console.Title = "rec_rewild_classic December 25th, 2016";

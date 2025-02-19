@@ -115,8 +115,8 @@ namespace rewild_room_sesh
             {
                 if (keyValuePair.Value.Room.RoomId == (ulong)roomid)
                 {
-                    if (keyValuePair.Value.Scenes[(int)subroomid].rewild_studio_data != null)
-                        return keyValuePair.Value.Scenes[(int)subroomid].rewild_studio_data;
+                    if (keyValuePair.Value.Scenes[(int)subroomid - 1].rewild_studio_data != null)
+                        return keyValuePair.Value.Scenes[(int)subroomid - 1].rewild_studio_data;
                         /*
                     foreach (var keyValuePai1r in keyValuePair.Value.Scenes)
                     {
