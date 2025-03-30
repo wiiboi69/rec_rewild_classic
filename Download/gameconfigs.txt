@@ -1,25 +1,19 @@
 [
     {
         "Key": "Gift.MaxDaily",
-        "Value": "100",
+        "Value": "10",
         "StartTime": null,
         "EndTime": null
     },
     {
         "Key": "Gift.Falloff",
-        "Value": "1",
+        "Value": "1.2",
         "StartTime": null,
         "EndTime": null
     },
     {
         "Key": "Gift.DropChance",
-        "Value": "100",
-        "StartTime": null,
-        "EndTime": null
-    },
-    {
-        "Key": "UseHeartbeatWebSocket",
-        "Value": "0",
+        "Value": "0.33",
         "StartTime": null,
         "EndTime": null
     },
@@ -30,13 +24,19 @@
         "EndTime": null
     },
     {
-        "Key": "Screens.ForceVerification",
+        "Key": "VR.ForceVerification",
         "Value": "1",
         "StartTime": null,
         "EndTime": null
     },
     {
         "Key": "forceRegistration",
+        "Value": "1",
+        "StartTime": null,
+        "EndTime": null
+    },
+    {
+        "Key": "UseHeartbeatWebSocket",
         "Value": "0",
         "StartTime": null,
         "EndTime": null
