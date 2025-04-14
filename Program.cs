@@ -272,9 +272,11 @@ namespace start
             }
         }
 
-        public static string msg = "//This is the server sending and recieving data from recroom.\n" + 
-                                   "//Ignore this if you don't know what this means.\n" + 
-                                   "//Please start up the build now.";
+        public static string msg = @"
+// This is the server sending and receiving data from Rec Room.
+// Ignore this if you don't know what this means.
+// Please start up the build now.";
+
         public static string version = "";
         public static int api_port = 0;
         public static string appversion = "0.0.2";
@@ -284,7 +286,7 @@ namespace start
         {
             var ofn = new OpenFileName();
             ofn.lStructSize = Marshal.SizeOf(ofn);
-            // Define Filter for your extensions (Excel, ...)
+            // define filter for your extensions, (png)
             ofn.lpstrFilter = "image Files (*.png)\0*.png\0All Files (*.*)\0*.*\0";
             ofn.lpstrFile = new string(new char[256]);
             ofn.nMaxFile = ofn.lpstrFile.Length;

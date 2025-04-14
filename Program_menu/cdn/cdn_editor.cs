@@ -165,10 +165,10 @@ namespace start.Program_menu
             public bool built_in;
             public server_url cdn_type { get; set; }
             public string base_url { get; set; }
-            public string? name { get; set; } = null;
-            public string? data_url { get; set; }
-            public string? image_url { get; set; }
-            public string? room_url { get; set; }
+            public string name { get; set; } = null;
+            public string data_url { get; set; }
+            public string image_url { get; set; }
+            public string room_url { get; set; }
         }
     }
 }
