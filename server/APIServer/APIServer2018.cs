@@ -15,7 +15,6 @@ using Rec_rewild.api;
 using start;
 using Spectre.Console;
 using System.Web;
-using static rewild_room_sesh.c000079;
 using static rewild_room_sesh.room_data_base;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Net.Mime.MediaTypeNames;
@@ -234,6 +233,14 @@ namespace server
                 {
                     s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/Decals.json");
                 }
+                if (Url == "config/v1/room/all")
+                {
+                    s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/studio/room/room_config.json");
+                }
+                if (Url == "config/v1/room_data/all")
+                {
+                    s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild_server_data/refs/heads/main/AdditionalData/studio/room/room_config_basic.json");
+                }
                 if (Url == "equipment/v1/getUnlocked")
 				{
                     s = BracketResponse;
@@ -377,7 +384,7 @@ namespace server
                 }
                 if (Url == "rooms/v1/report")
                 {
-                    s = "{\"Success\":false,\"Message\":\"no\"}";
+                    s = "{\"Success\":false,\"Message\":\"No\"}";
                 }
                 if (Url == "checklist/v1/current")
 				{
@@ -486,9 +493,7 @@ namespace server
 
 				}
 				File.WriteAllText("crashdump.txt", Convert.ToString(ex4));
-				this.listener.Close();
 
-				new APIServer2018();
 			}
 		}
 

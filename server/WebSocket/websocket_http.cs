@@ -9,16 +9,12 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using api;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using server;
 using rewild_room_sesh;
 
 namespace ws
 {
-    // Token: 0x0200007B RID: 123
     internal class WebSocketHTTP
     {
-        // Token: 0x060003E9 RID: 1001 RVA: 0x0000BFF8 File Offset: 0x0000A1F8
         public WebSocketHTTP()
         {
             try
@@ -31,7 +27,6 @@ namespace ws
             }
         }
 
-        // Token: 0x060003EA RID: 1002 RVA: 0x0000C034 File Offset: 0x0000A234
         public static void ADListen()
         {
             WebSocketHTTP.server.Prefixes.Add("http://localhost:20199/");
@@ -71,7 +66,6 @@ namespace ws
             }
         }
 
-        // Token: 0x060003EB RID: 1003 RVA: 0x0000C150 File Offset: 0x0000A350
         private static async void ProcessRequest(HttpListenerContext ctx)
         {
             HttpListenerWebSocketContext httpListenerWebSocketContext = await ctx.AcceptWebSocketAsync(null);
@@ -174,64 +168,35 @@ namespace ws
             public object Msg { get; set; }
         }
 
-        // Token: 0x04000294 RID: 660
         public static HttpListener server = new HttpListener();
 
-        // Token: 0x04000295 RID: 661
         public static Thread listen = new Thread(new ThreadStart(WebSocketHTTP.ADListen));
 
-        // Token: 0x04000296 RID: 662
         public static Dictionary<string, string> missingApis;
 
-        // Token: 0x04000297 RID: 663
         public static int id = 1;
 
-        // Token: 0x0200007C RID: 124
         public class SockSignalR
         {
-            // Token: 0x04000298 RID: 664
             public WebSocketHTTP.MessageTypes type;
-
-            // Token: 0x04000299 RID: 665
             public string invocationId;
-
-            // Token: 0x0400029A RID: 666
             public bool nonblocking;
-
-            // Token: 0x0400029B RID: 667
             public string target;
-
-            // Token: 0x0400029C RID: 668
             public object[] arguments;
-
-            // Token: 0x0400029D RID: 669
             public object item;
-
-            // Token: 0x0400029E RID: 670
             public object result;
-
-            // Token: 0x0400029F RID: 671
             public string error;
         }
-
-        // Token: 0x0200007D RID: 125
+        
         public enum MessageTypes
         {
-            // Token: 0x040002A1 RID: 673
             Handshake,
-            // Token: 0x040002A2 RID: 674
             Invocation,
-            // Token: 0x040002A3 RID: 675
             StreamItem,
-            // Token: 0x040002A4 RID: 676
             Completion,
-            // Token: 0x040002A5 RID: 677
             StreamInvocation,
-            // Token: 0x040002A6 RID: 678
             CancelInvocation,
-            // Token: 0x040002A7 RID: 679
             Ping,
-            // Token: 0x040002A8 RID: 680
             Close
         }
     }

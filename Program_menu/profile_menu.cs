@@ -5,13 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace start.Program_menu
 {
     internal static class profile_menu
     {
 
-        public static void player_profile()
+        public static async Task player_profile()
         {
             Console.Clear();
             goto Profile;
@@ -166,12 +169,19 @@ namespace start.Program_menu
                         string data = "";
                         try
                         {
-                            data = new WebClient().DownloadString("https://apim.rec.net/accounts/account/search?name=" + username);
+                            WebClient client = new WebClient();
+                            client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0");
+                            client.Headers.Set("Origin", "https://rec.net");
+                            client.Headers.Set("Referer", "https://rec.net/");
+
+                            data = client.DownloadString("https://apim.rec.net/accounts/account/search?name=" + username);
                         }
-                        catch
+                        catch (Exception ex)
                         {
                             Console.Clear();
                             Console.WriteLine("Failed to download profile...");
+                            Console.WriteLine(ex);
+
                             goto Profile;
                         }
 
@@ -207,12 +217,19 @@ namespace start.Program_menu
                 string data2 = "";
                 try
                 {
-                    data2 = new WebClient().DownloadString("https://apim.rec.net/accounts/account/search?name=" + readusername + "&take=5");
+                    WebClient client = new WebClient();
+                    client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0");
+                    client.Headers.Set("Origin", "https://rec.net");
+                    client.Headers.Set("Referer", "https://rec.net/");
+
+                    data2 = client.DownloadString("https://apim.rec.net/accounts/account/search?name=" + readusername + "&take=5");
                 }
-                catch
+                catch (Exception ex)
                 {
                     Console.Clear();
                     Console.WriteLine("Failed to download profile...");
+                    Console.WriteLine(ex);
+
                     goto Profile;
                 }
                 /*

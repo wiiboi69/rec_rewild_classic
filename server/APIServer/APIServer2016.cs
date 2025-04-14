@@ -9,6 +9,8 @@ using api2017;
 using Newtonsoft.Json;
 using rewild_room_sesh;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Mime;
 
 namespace server
 {
@@ -49,6 +51,8 @@ namespace server
             }
         }
 
+        static Dictionary<string, string> keyValueStore = new Dictionary<string, string>();
+
         private void HandleRequest(HttpListenerContext context)
         {
             try
@@ -66,6 +70,7 @@ namespace server
                 string text;
                 string s = "";
                 byte[] array;
+                string contentType = request.ContentType;
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     context.Request.InputStream.CopyTo(memoryStream);
@@ -80,15 +85,32 @@ namespace server
 				{
 					Console.WriteLine("API Requested (rawUrl): " + rawUrl);
 				}
-				if (!(Url == "images/v2/profile"))
+                if (request.HttpMethod == "POST")
+                {
+                    if (contentType == "application/x-www-form-urlencoded")
+                    {
+                        keyValueStore = ParseKeyValuePairs(text);                       
+                    }
+                    else if (contentType == "application/json")
+                    {
+                       
+                    }
+                }
+                if (!(Url == "images/v2/profile"))
 				{
-					Console.WriteLine("API Data: " + text);
+					Console.WriteLine($"API Data: (Content-Type: {contentType}): {text}");
 				}
-				if (Url.StartsWith("versioncheck"))
-				{
-					s = APIServer_Base.VersionCheckResponse;
-				}
-				if (Url == ("config/v2"))
+                else
+                {
+                    Console.WriteLine($"API Data: (Content-Type: {contentType}): unviewable");
+                }
+                if (Url.StartsWith("versioncheck"))
+                {
+                    s = APIServer_Base.VersionCheckResponse;
+                    version_data = request.Headers.Get("X-Rec-Room-Version");
+                    Console.WriteLine(version_data);
+                }
+				if (Url == "config/v2")
 				{
 					s = Config.GetDebugConfig();
 				}
@@ -106,9 +128,14 @@ namespace server
 				}
 				if (Url == "players/v1/getorcreate")
 				{
-					s = getorcreate.GetOrCreate((ulong.Parse(text.Remove(0, 32).Remove(7, text.Length - 39))));
+                    s = getorcreate.GetOrCreate(Get_value<ulong>(keyValueStore, "PlatformId"));
 				}
-				if (Url.StartsWith("images/v1/profile/"))
+                else if (Url.StartsWith("players/v1/"))
+                {
+                    ulong temp_1 = ulong.Parse(Url.Substring("players/v1/".Length));
+                    s = getorcreate.GetOrCreate(temp_1);
+                }
+                if (Url.StartsWith("images/v1/profile/"))
 				{
 					image = true;
 					imagebyte = File.ReadAllBytes("SaveData/profileimage.png");
@@ -135,7 +162,6 @@ namespace server
 						Enabled = false,
                         BannedPlayers = new ulong[0]
                     });
-                    //s = "{\"Enabled\":False,\"BannedPlayers\":[]}";
                 }
                 if (Url == "messages/v2/get")
 				{
@@ -189,28 +215,50 @@ namespace server
 				{
 					bytes = Encoding.UTF8.GetBytes(s);
 				}
-				response.ContentLength64 = (long)bytes.Length;
-				Stream outputStream = response.OutputStream;
-				outputStream.Write(bytes, 0, bytes.Length);
-				//Thread.Sleep(20);
-				outputStream.Close();
-				this.listener.Stop();
-				
-				
-
-			}
+                response.ContentLength64 = (long)bytes.Length;
+                Stream outputStream = response.OutputStream;
+                outputStream.Write(bytes, 0, bytes.Length);
+                outputStream.Flush();
+            }
 			catch (Exception ex4)
 			{
 				Console.WriteLine(ex4);
 				File.WriteAllText("crashdump.txt", Convert.ToString(ex4));
-				this.listener.Close();
-				new APIServer2016();
 			}
 		}
-
+        static T Get_value<T>(Dictionary<string, string> data, string key)
+        {
+            foreach (var item in data)
+            {
+                if (item.Key == key)
+                {
+                    return (T)Convert.ChangeType(item.Value, typeof(T));
+                }
+            }
+            return default(T);
+        }
+        static Dictionary<string, string> ParseKeyValuePairs(string data)
+        {
+            var keyValuePairs = new Dictionary<string, string>();
+            var entries = data.Split('&');
+            foreach (var entry in entries)
+            {
+                var pair = entry.Split('=');
+                if (pair.Length == 2)
+                {
+                    string key = pair[0].Trim();
+                    string value = pair[1].Trim();
+                    keyValuePairs[key] = value;
+                }
+            }
+            return keyValuePairs;
+        }
 
         public static string BlankResponse = "";
         public static string BracketResponse = "[]";
+
+        public static string version_data = "";
+
 
         private HttpListener listener = new HttpListener(); 
 	}

@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 using api;
+using server;
 
 namespace api
 {
@@ -172,7 +173,33 @@ namespace api
                 }
             }
         };
+        public static Objective[][] dailyObjectivessMap_create()
+        {
+            List<Objective[]> objectives = new List<Objective[]>();
+            for (int i = 0; i < 7; i++)
+            {
+                objectives.Add(new Objective[]
+                {
+                    new Objective
+                    {
+                        type = Objective_type.OOBE_GoToLockerRoom,
+                        score = 1
+                    },
+                    new Objective
+                    {
+                        type = Objective_type.OOBE_GoToActivity,
+                        score = 1
+                    },
+                    new Objective
+                    {
+                        type = Objective_type.OOBE_FinishActivity,
+                        score = 1
+                    }
+                });
 
+            }
+            return objectives.ToArray();
+        }
 
         public static List<LevelProgressionEntry> levelProgressionsMap_create()
         {
@@ -215,11 +242,35 @@ namespace api
 
         public static string GetDebugConfig()
 		{
+            if (!string.IsNullOrEmpty(APIServer2016.version_data))
+            {
+                return JsonConvert.SerializeObject(new ConfigBase
+                {
+                    MessageOfTheDay = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/motd.txt"),
+                    CdnBaseUri = "http://localhost:20182/",
+
+                    MatchmakingParams = new MatchmakingConfigParams
+                    {
+                        PreferEmptyRoomsFrequency = 0f,
+                        PreferFullRoomsFrequency = 1f
+                    },
+                    DailyObjectives = dailyObjectivessMap_create(),
+                    ConfigTable = new List<ConfigTableEntry> { },
+
+                    PhotonConfig = new photonConfig
+                    {
+                        CloudRegion = "EU",
+                        CrcCheckEnabled = false,
+                        EnableServerTracingAfterDisconnect = false
+                    }
+                });
+            }
 			return JsonConvert.SerializeObject(new ConfigBase
             {
 				MessageOfTheDay = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/motd.txt"),
 				CdnBaseUri = "http://localhost:20182/",
-				MatchmakingParams = new MatchmakingConfigParams
+               
+                MatchmakingParams = new MatchmakingConfigParams
 				{
 					PreferEmptyRoomsFrequency = 0f,
 					PreferFullRoomsFrequency = 1f

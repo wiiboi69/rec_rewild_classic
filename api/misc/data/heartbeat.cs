@@ -25,7 +25,6 @@ namespace rewild_room_sesh
 				GameSession = gameSession
 			};
 		}
-
 	
 		public sealed class heartbeat_2018
 		{

@@ -297,16 +297,14 @@ namespace rewild_room_sesh
                         {
                             RoomSceneId = 30L,
                             RoomId = 30UL,
-                            RoomSceneLocationId = "a75f7547-79eb-47c6-8986-6767abcb4f92",
-
-							//RoomSceneLocationId = "74c62a36-4362-468b-81ec-65c45bfe0e5f",
+                            RoomSceneLocationId = "74c62a36-4362-468b-81ec-65c45bfe0e5f",
                             rewild_studio_data = new rewild_studio_subroom()
                             {
                                 AssetBundleName = "rrs_hub_data",
                                 DataSceneName = "rrs_hub"
                             },
 							Name = "rrs_hub",
-                            IsSandbox = true,
+                            IsSandbox = false,
                             DataBlobName = string.Empty,
                             MaxPlayers = 20,
                             CanMatchmakeInto = true,
@@ -315,7 +313,7 @@ namespace rewild_room_sesh
                             SupportsJoinInProgress = true,
                             ReleaseStatus = 1,
                             UseAgeBasedMatchmaking = true,
-                            UseLevelBasedMatchmaking = true,
+                            UseLevelBasedMatchmaking = false,
                             UseRecRoyaleMatchmaking = false
                         }
                     },
@@ -399,6 +397,66 @@ namespace rewild_room_sesh
                 }
             },
             {
+                "CrimsonTrophy",
+                new room
+                {
+                    Room = new room_data_base.room_data
+                    {
+                        RoomId = 32UL,
+                        Name = "CrimsonTrophy",
+                        Description = "a Golden Trophy and Crimson Cauldron into one room",
+                        ReleaseStatus = 2,
+                        ReplicationId = "DormRoom",
+                        CreatorPlayerId = APIServer_Base.CachedPlayerID,
+                        ImageName = "DefaultRoomImage.jpg",
+                        State = 0,
+                        Accessibility = 1,
+                        SupportsLevelVoting = false,
+                        IsAGRoom = true,
+                        CloningAllowed = false,
+                        SupportsScreens = true,
+                        SupportsTeleportVR = true,
+                        SupportsWalkVR = true
+                    },
+                    Scenes = new List<subrooms>
+                    {
+                        new subrooms
+                        {
+                            RoomSceneId = 32L,
+                            RoomId = 32UL,
+							RoomSceneLocationId = "83d06153-5164-43e6-b222-b6f949786131",
+							Name = "home",
+                            IsSandbox = false,
+                            DataBlobName = string.Empty,
+                            MaxPlayers = 20,
+                            CanMatchmakeInto = true,
+                            DataModifiedAt = DateTime.Now,
+                            ReplicationId = "",
+                            SupportsJoinInProgress = true,
+                            ReleaseStatus = 2,
+                            UseAgeBasedMatchmaking = true,
+                            UseLevelBasedMatchmaking = true,
+                            UseRecRoyaleMatchmaking = false
+                        }
+                    },
+                    CoOwners = new List<ulong>(),
+                    InvitedCoOwners = new List<ulong>(),
+                    Hosts = new List<ulong>(),
+                    InvitedHosts = new List<ulong>(),
+                    CheerCount = 1,
+                    FavoriteCount = 1,
+                    VisitCount = 1,
+                    Tags = new List<Tags>
+                    {
+                        new Tags
+                        {
+                            Tag = "rro",
+                            Type = 2
+                        }
+                    }
+                }
+            },
+            {
                 "RecCenter",
                 new room
                 {
@@ -424,13 +482,11 @@ namespace rewild_room_sesh
                         {
                             RoomSceneId = 1L,
                             RoomId = 2UL,
-                            //RoomSceneLocationId = "rrs_hub_data-rrs_hub",
-
 							RoomSceneLocationId = "cbad71af-0831-44d8-b8ef-69edafa841f6",
-							Name = "reccenter",
+							Name = "RecCenter",
                             IsSandbox = false,
                             DataBlobName = string.Empty,
-                            MaxPlayers = 20,
+                            MaxPlayers = 4,
                             CanMatchmakeInto = true,
                             DataModifiedAt = DateTime.Now
                         }
