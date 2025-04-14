@@ -75,9 +75,8 @@ namespace start
 #else
             ver_build = "c# build";
 #endif
-            Console.WriteLine($"rec_rewild_classic build: {ver_build}");
+            Console.WriteLine($"rec_rewild_classic server: {ver_build}");
 
-            // Console.WriteLine("Discord: https://discord.gg/daC8QUhnFP" + Environment.NewLine);
             try
             {
                 if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt").Contains(appversion)))
@@ -89,7 +88,6 @@ namespace start
             {
                 Console.WriteLine("unable to get rec_rewild_classic version from github");
             }
-            //Console.WriteLine("//Custom Room Downloader has been moved to the settings tab!" + Environment.NewLine);
 
             string readline = "";
             string readline_override = "";
@@ -146,11 +144,7 @@ namespace start
                     default:
                     goto Start;
                 }
-
-
-
             }
-
 
             if (readline == "What's New")
             {
@@ -308,8 +302,6 @@ namespace start
         [DllImport("comdlg32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern bool GetOpenFileName(ref OpenFileName ofn);
 
-
-
         // From https://www.pinvoke.net/default.aspx/Structures/OPENFILENAME.html
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public struct OpenFileName
@@ -338,8 +330,5 @@ namespace start
             public int dwReserved;
             public int flagsEx;
         }
-
-
     }
-
 }

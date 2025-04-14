@@ -10,6 +10,7 @@ namespace api
     internal class ConfigBase
     {
         public string CdnBaseUri { get; set; }
+        public string ShareBaseUrl { get; set; }
         public List<ConfigTableEntry> ConfigTable { get; set; }
         public Objective[][] DailyObjectives { get; set; }
         public List<LevelProgressionEntry> LevelProgressionMaps { get; set; }
@@ -27,271 +28,245 @@ namespace api
             {
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToLockerRoom,
-                    score = 1
+                    type = Objective_type.QuestGames_Scifi1,
+                    score = 1,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToActivity,
-                    score = 1
+                    type = Objective_type.QuestEnemyKills_Scifi1,
+                    score = 10,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_FinishActivity,
-                    score = 1
+                    type = Objective_type.ArenaGames,
+                    score = 1,
+                    xp = 200
                 }
             },
             new Objective[]
             {
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToLockerRoom,
-                    score = 1
+                    type = Objective_type.PaintballCTFGames,
+                    score = 2,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToActivity,
-                    score = 1
+                    type = Objective_type.VisitACustomRoom,
+                    score = 1,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_FinishActivity,
-                    score = 1
+                    type = Objective_type.ScoreBasketInRecCenter,
+                    score = 1,
+                    xp = 200
                 }
             },
             new Objective[]
             {
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToLockerRoom,
-                    score = 1
+                    type = Objective_type.DodgeballGames,
+                    score = 2,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToActivity,
-                    score = 1
+                    type = Objective_type.DodgeballHits,
+                    score = 2,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_FinishActivity,
-                    score = 1
+                    type = Objective_type.CheerAPlayer,
+                    score = 1,
+                    xp = 200
                 }
             },
             new Objective[]
             {
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToLockerRoom,
-                    score = 1
+                    type = Objective_type.PaintballTeamBattleGames,
+                    score = 2,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToActivity,
-                    score = 1
+                    type = Objective_type.PaintballTeamBattleHits,
+                    score = 20,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_FinishActivity,
-                    score = 1
+                    type = Objective_type.VisitACustomRoom,
+                    score = 1,
+                    xp = 200
                 }
             },
             new Objective[]
             {
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToLockerRoom,
-                    score = 1
+                    type = Objective_type.QuestGames_Goblin1,
+                    score = 1,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToActivity,
-                    score = 1
+                    type = Objective_type.QuestEnemyKills_Goblin1,
+                    score = 10,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_FinishActivity,
-                    score = 1
+                    type = Objective_type.CheerAPlayer,
+                    score = 1,
+                    xp = 200
                 }
             },
             new Objective[]
             {
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToLockerRoom,
-                    score = 1
+                    type = Objective_type.PaintballAnyModeGames,
+                    score = 2,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToActivity,
-                    score = 1
+                    type = Objective_type.PaintballAnyModeHits,
+                    score = 20,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_FinishActivity,
-                    score = 1
+                    type = Objective_type.ArenaGames,
+                    score = 1,
+                    xp = 200
                 }
             },
             new Objective[]
             {
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToLockerRoom,
-                    score = 1
+                    type = Objective_type.QuestGames_Goblin2,
+                    score = 1,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_GoToActivity,
-                    score = 1
+                    type = Objective_type.QuestEnemyKills_Goblin2,
+                    score = 10,
+                    xp = 200
                 },
                 new Objective
                 {
-                    type = Objective_type.OOBE_FinishActivity,
-                    score = 1
+                    type = Objective_type.VisitACustomRoom,
+                    score = 1,
+                    xp = 200
                 }
             }
         };
 
+
+        public static List<LevelProgressionEntry> levelProgressionsMap_create()
+        {
+            List<LevelProgressionEntry> levelProgressions = new List<LevelProgressionEntry>();
+            int RequiredXp = 0;
+            for (int Level = 0; Level < 51; Level++)
+            {
+                switch (Level)
+                {
+                    case 0:
+                        RequiredXp = 0;
+                        break;
+                    case < 4:
+                        RequiredXp = 10;
+                        break;
+                    case < 11:
+                        RequiredXp = 20;
+                        break;
+                    case < 21:
+                        RequiredXp = 45;
+                        break;
+                    case < 31:
+                        RequiredXp = 115;
+                        break;
+                    case < 41:
+                        RequiredXp = 360;
+                        break;
+                    default:
+                        RequiredXp = 1080;
+                        break;
+                }
+                levelProgressions.Add(new LevelProgressionEntry
+                {
+                    Level = Level,
+                    RequiredXp = RequiredXp
+                });
+            }
+            return levelProgressions;
+        }
+
         public static string GetDebugConfig()
 		{
-			
 			return JsonConvert.SerializeObject(new ConfigBase
             {
 				MessageOfTheDay = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/motd.txt"),
 				CdnBaseUri = "http://localhost:20182/",
-				LevelProgressionMaps = new List<LevelProgressionEntry>
-				{
-					new LevelProgressionEntry
-					{
-						Level = 0,
-						RequiredXp = 1
-					},
-					new LevelProgressionEntry
-					{
-						Level = 1,
-						RequiredXp = 2
-					},
-					new LevelProgressionEntry
-					{
-						Level = 2,
-						RequiredXp = 3
-					},
-					new LevelProgressionEntry
-					{
-						Level = 3,
-						RequiredXp = 4
-					},
-					new LevelProgressionEntry
-					{
-						Level = 4,
-						RequiredXp = 5
-					},
-					new LevelProgressionEntry
-					{
-						Level = 5,
-						RequiredXp = 6
-					},
-					new LevelProgressionEntry
-					{
-						Level = 6,
-						RequiredXp = 7
-					},
-					new LevelProgressionEntry
-					{
-						Level = 7,
-						RequiredXp = 8
-					},
-					new LevelProgressionEntry
-					{
-						Level = 8,
-						RequiredXp = 9
-					},
-					new LevelProgressionEntry
-					{
-						Level = 9,
-						RequiredXp = 10
-					},
-					new LevelProgressionEntry
-					{
-						Level = 10,
-						RequiredXp = 11
-					},
-					new LevelProgressionEntry
-					{
-						Level = 11,
-						RequiredXp = 12
-					},
-					new LevelProgressionEntry
-					{
-						Level = 12,
-						RequiredXp = 13
-					},
-					new LevelProgressionEntry
-					{
-						Level = 13,
-						RequiredXp = 14
-					},
-					new LevelProgressionEntry
-					{
-						Level = 14,
-						RequiredXp = 15
-					},
-					new LevelProgressionEntry
-					{
-						Level = 15,
-						RequiredXp = 16
-					},
-					new LevelProgressionEntry
-					{
-						Level = 16,
-						RequiredXp = 17
-					},
-					new LevelProgressionEntry
-					{
-						Level = 17,
-						RequiredXp = 18
-					},
-					new LevelProgressionEntry
-					{
-						Level = 18,
-						RequiredXp = 19
-					},
-					new LevelProgressionEntry
-					{
-						Level = 19,
-						RequiredXp = 20
-					},
-					new LevelProgressionEntry
-					{
-						Level = 20,
-						RequiredXp = 21
-					}
-				},
 				MatchmakingParams = new MatchmakingConfigParams
 				{
 					PreferEmptyRoomsFrequency = 0f,
 					PreferFullRoomsFrequency = 1f
 				},
+				LevelProgressionMaps = levelProgressionsMap_create(),
 				DailyObjectives = Config.dailyObjectives,
 				ConfigTable = new List<ConfigTableEntry>
 				{
 					new ConfigTableEntry
 					{
 						Key = "Gift.DropChance",
-						Value = 0.5f.ToString()
+						Value = 0.33f.ToString()
 					},
-					new ConfigTableEntry
+                    new ConfigTableEntry
+                    {
+                        Key = "Gift.Falloff",
+                        Value = 1.2f.ToString()
+                    },
+                    new ConfigTableEntry
+                    {
+                        Key = "Gift.Falloff",
+                        Value = 0xA.ToString()
+                    },
+                    new ConfigTableEntry
 					{
 						Key = "Gift.XP",
 						Value = 0.5f.ToString()
-					}
-				},
-				PhotonConfig = new photonConfig
+					},
+                    new ConfigTableEntry
+                    {
+                        Key = "impossiblesAllowed",
+                        Value = true.ToString()
+                    }
+                },
+                
+                PhotonConfig = new photonConfig
 				{
-					CloudRegion = "us",
+					CloudRegion = "EU",
 					CrcCheckEnabled = false,
 					EnableServerTracingAfterDisconnect = false
 				}
 			});
-		}
-	}
+
+            /*
+             impossiblesAllowed
+             
+             */
+        }
+    }
 }
