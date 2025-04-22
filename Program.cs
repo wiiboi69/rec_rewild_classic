@@ -17,8 +17,18 @@ namespace start
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
+            var arguments = new Dictionary<string, string>();
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i].StartsWith("--") && i + 1 < args.Length && !args[i + 1].StartsWith("--"))
+                {
+                    arguments[args[i]] = args[i + 1];
+                }
+            }
+
             Setup.setup();
             goto Tutorial;
 
@@ -93,19 +103,26 @@ namespace start
             string readline_override = "";
             try
             {
-               readline = AnsiConsole.Prompt(
-                   new SelectionPrompt<string>()
-                       .EnableSearch()
-                       .Title("")
-                       .PageSize(10)
-                       .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
-                       .AddChoices(new[] {
-                            "What's New",
-                            "Change Settings",
-                            "Modify Profile",
-                            "Build Download Links",
-                            "Start Server",
-                       }));
+                if (arguments.ContainsKey("--build"))
+                {
+                    readline = "Start Server";
+                    readline_override = arguments["--build"];
+                   // goto Start_build;
+                }
+
+                readline = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .EnableSearch()
+                        .Title("")
+                        .PageSize(10)
+                        .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                        .AddChoices(new[] {
+                             "What's New",
+                             "Change Settings",
+                             "Modify Profile",
+                             "Build Download Links",
+                             "Start Server",
+                        }));
             }
             catch 
             {
@@ -145,6 +162,7 @@ namespace start
                     goto Start;
                 }
             }
+        Start_build:
 
             if (readline == "What's New")
             {
@@ -185,6 +203,8 @@ namespace start
                 string readline2 = "";
                 if (!string.IsNullOrEmpty(readline_override))
                 {
+                    if (readline_override == "beta")
+                        readline_override = "start Beta server";
                     readline2 = readline_override;
                 }
                 else
@@ -193,7 +213,8 @@ namespace start
                     readline2 = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                             .EnableSearch()
-                            .Title("Please select the version of RecRoom the server should host")
+                            .Title("Please select the version of RecRoom the server should host,\n"+
+                                   "you can select the new beta server by choosing the 'start Beta server' option")
                             .PageSize(10)
                             .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
                             .AddChoices(new[] {
@@ -204,7 +225,7 @@ namespace start
                                 "May", "July", "September"
                             })
                             .AddChoices(new[] {
-                                "back",
+                                "start Beta server", "back",
                             }));
                 }
                 if (readline2 == "2016")
@@ -262,6 +283,20 @@ namespace start
                     new APIServer2018();
                     new WebSocket();
                 }
+                else if (readline2 == "start Beta server")
+                {
+                    Console.Title = "rec_rewild_classic September 27th 2018 with new Beta Server routing system";
+                    version = "2018";
+                    start.Program.api_port = int.Parse(start.Program.version + "0");
+                    Console.Clear();
+                    Console.WriteLine("Version Selected: September 27th, 2018.");
+                    Console.WriteLine("you selected a Beta version of the new Server routing system for the api server");
+                    new NameServer();
+                    new ImageServer();
+                    rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new.APIServer = new rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new();
+                    new WebSocketHTTP();
+                    new Late2018WebSock();
+                }
                 else if (readline2 == "back")
                 {
                     Console.Clear();
@@ -269,6 +304,17 @@ namespace start
                 }
 
                 Console.WriteLine(msg);
+                while (true)
+                {
+                    ConsoleKeyInfo tmp_1 = Console.ReadKey();
+                    if (tmp_1.KeyChar == 'r')
+                    {
+                        if (rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new.Running)
+                        {
+                            rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new.reloadRegisterRoutes();
+                        }
+                    }
+                }
             }
         }
 

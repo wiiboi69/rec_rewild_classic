@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace storefront2018
 {
-	internal class StoreFronts
+	public class StoreFronts
 	{
+        /*
 		public static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
 		{
 			int num = (day - start.DayOfWeek + 7) % 7;
@@ -67,79 +68,42 @@ namespace storefront2018
 			Paintball_ClearCut = 2000,
 			Paintball_Homestead,
 			Paintball_Quarry,
-			// Token: 0x04000128 RID: 296
 			Paintball_River,
-			// Token: 0x04000129 RID: 297
 			Paintball_Dam,
-			// Token: 0x0400012A RID: 298
 			Discgolf_Propulsion = 3000,
-			// Token: 0x0400012B RID: 299
 			Discgolf_Lake,
-			// Token: 0x0400012C RID: 300
 			Discgolf_Mode_CoopCatch = 3500,
-			// Token: 0x0400012D RID: 301
 			Quest_Goblin_A = 4000,
-			// Token: 0x0400012E RID: 302
 			Quest_Goblin_B,
-			// Token: 0x0400012F RID: 303
 			Quest_Goblin_C,
-			// Token: 0x04000130 RID: 304
 			Quest_Goblin_S,
-			// Token: 0x04000131 RID: 305
 			Quest_Goblin_Consumable,
-			// Token: 0x04000132 RID: 306
 			Quest_Cauldron_A = 4010,
-			// Token: 0x04000133 RID: 307
 			Quest_Cauldron_B,
-			// Token: 0x04000134 RID: 308
 			Quest_Cauldron_C,
-			// Token: 0x04000135 RID: 309
 			Quest_Cauldron_S,
-			// Token: 0x04000136 RID: 310
 			Quest_Cauldron_Consumable,
-			// Token: 0x04000137 RID: 311
 			Quest_Pirate1_A = 4100,
-			// Token: 0x04000138 RID: 312
 			Quest_Pirate1_B,
-			// Token: 0x04000139 RID: 313
 			Quest_Pirate1_C,
-			// Token: 0x0400013A RID: 314
 			Quest_Pirate1_S,
-			// Token: 0x0400013B RID: 315
 			Quest_Pirate1_X,
-			// Token: 0x0400013C RID: 316
 			Quest_Pirate1_Consumable,
-			// Token: 0x0400013D RID: 317
 			Quest_SciFi_A = 4500,
-			// Token: 0x0400013E RID: 318
 			Quest_SciFi_B,
-			// Token: 0x0400013F RID: 319
 			Quest_SciFi_C,
-			// Token: 0x04000140 RID: 320
 			Quest_SciFi_S,
-			// Token: 0x04000141 RID: 321
 			Quest_scifi_Consumable,
-			// Token: 0x04000142 RID: 322
 			Charades = 5000,
-			// Token: 0x04000143 RID: 323
 			Soccer = 6000,
-			// Token: 0x04000144 RID: 324
 			Paddleball = 7000,
-			// Token: 0x04000145 RID: 325
 			Dodgeball = 8000,
-			// Token: 0x04000146 RID: 326
 			Lasertag = 9000,
-			// Token: 0x04000147 RID: 327
 			Store_LaserTag = 100000,
-			// Token: 0x04000148 RID: 328
 			Store_RecCenter = 100010,
-			// Token: 0x04000149 RID: 329
 			Consumable = 110000,
-			// Token: 0x0400014A RID: 330
 			Token = 110100,
-			// Token: 0x0400014B RID: 331
 			Punchcard_Challenge_Complete = 110200,
-			// Token: 0x0400014C RID: 332
 			All_Punchcard_Challenges_Complete
 		}
 
@@ -156,18 +120,23 @@ namespace storefront2018
 			LaserTagTickets,
 			RecCenterTokens,
 			LostSkullsGold = 100,
-			RecRoyale_Season1 = 200
+            DraculaSilver,
+            RecRoyale_Season1 = 200
 		}
 
 		public enum StoreFrontTypes
 		{
-			None,
-			LaserTag,
-			RecCenter,
-			Watch,
-			Quest_LostSkulls = 100,
-			RecRoyale = 200
-		}
+            None,
+            LaserTag,
+            RecCenter,
+            Watch,
+            Quest_LostSkulls = 100,
+            Quest_Dracula,
+            RecRoyale = 200,
+            Cafe = 300,
+            Paintball = 400,
+            Bowling = 500
+        }
 
 		public enum ItemRarity
 		{
@@ -606,5 +575,6 @@ namespace storefront2018
 			public int CurrencyType { get; set; }
 			public int Price { get; set; }
 		}
+        */
 	}
 }

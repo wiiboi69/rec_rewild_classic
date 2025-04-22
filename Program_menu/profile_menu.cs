@@ -1,7 +1,9 @@
 ﻿using api;
 using Newtonsoft.Json;
+using rec_rewild_classic.Program_menu;
 using Spectre.Console;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -13,8 +15,7 @@ namespace start.Program_menu
 {
     internal static class profile_menu
     {
-
-        public static async Task player_profile()
+        public static void player_profile()
         {
             Console.Clear();
             goto Profile;
@@ -170,9 +171,14 @@ namespace start.Program_menu
                         try
                         {
                             WebClient client = new WebClient();
-                            client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0");
-                            client.Headers.Set("Origin", "https://rec.net");
-                            client.Headers.Set("Referer", "https://rec.net/");
+                            client.UseDefaultCredentials = true;
+                            client.Headers["Accept"] = "application/json, text/plain, */*";
+                            client.Headers["Accept-Language"] = "en-US,en;q=0.5";
+                            client.Headers["Accept-Encoding"] = "gzip, deflate, br, zstd";
+                            client.Headers["User-Agent"] = "BestHTTP";
+                            client.Headers["Origin"] = "https://rec.net";
+                            client.Headers["Host"] = "apim.rec.net";
+                            client.Headers["Referer"] = "https://rec.net/";
 
                             data = client.DownloadString("https://apim.rec.net/accounts/account/search?name=" + username);
                         }
@@ -217,12 +223,7 @@ namespace start.Program_menu
                 string data2 = "";
                 try
                 {
-                    WebClient client = new WebClient();
-                    client.Headers.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0");
-                    client.Headers.Set("Origin", "https://rec.net");
-                    client.Headers.Set("Referer", "https://rec.net/");
-
-                    data2 = client.DownloadString("https://apim.rec.net/accounts/account/search?name=" + readusername + "&take=5");
+                    data2 = Rec_Net_Client.Get_String("https://apim.rec.net/accounts/account/search?name=" + readusername + "&take=5");
                 }
                 catch (Exception ex)
                 {
@@ -232,12 +233,12 @@ namespace start.Program_menu
 
                     goto Profile;
                 }
-                /*
-                if (!cdn_editor.Profilefind(data2, take_int: 12))
+                
+                if (!ProfieStealer.Profilefind(data2, take_int: 12))
                 {
                     goto download_profile;
                 }
-                */
+                
                 Console.Clear();
                 goto Profile;
             }

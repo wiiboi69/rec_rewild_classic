@@ -35,7 +35,30 @@ namespace api
 				Settings.SaveSettings(Settings.playerSettings);
 			}
 		}
-		public static List<Setting> LoadSettings()
+        public static void SetPlayerSettings(Setting setting)
+        {
+            bool flag = false;
+            Settings.playerSettings = Settings.LoadSettings();
+            foreach (Setting setting2 in Settings.playerSettings)
+            {
+                if (setting2.Key == setting.Key)
+                {
+                    setting2.Value = setting.Value;
+                    Settings.SaveSettings(Settings.playerSettings);
+                    flag = true;
+                }
+            }
+            if (!flag)
+            {
+                Settings.playerSettings.Add(new Setting
+                {
+                    Key = setting.Key,
+                    Value = setting.Value
+                });
+                Settings.SaveSettings(Settings.playerSettings);
+            }
+        }
+        public static List<Setting> LoadSettings()
 		{
 			return JsonConvert.DeserializeObject<List<Setting>>(File.ReadAllText(Environment.CurrentDirectory + Settings.SettingsPath));
 		}

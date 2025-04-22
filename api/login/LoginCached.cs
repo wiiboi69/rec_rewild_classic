@@ -8,7 +8,21 @@ namespace api2018
 {
 	public class logincached
 	{
-		public string Error { get; set; }
+        public class logincached_login
+        {
+            public string AppVersion { get; set; }
+            public int Platform { get; set; }
+            public string PlatformId { get; set; }
+            public ulong ClientTimestamp { get; set; }
+            public ulong BuildTimestamp { get; set; }
+            public string DeviceId { get; set; }
+            public string LoginLockToken { get; set; }
+            public string AuthParams { get; set; }
+            public string Verify { get; set; }
+            public ulong PlayerId { get; set; }
+        }
+
+        public string Error { get; set; }
 		public getcachedlogins Player { get; set; }
 		public string Token { get; set; }
 		public bool FirstLoginOfTheDay { get; set; }

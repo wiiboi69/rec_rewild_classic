@@ -30,10 +30,14 @@ namespace rewild_room_sesh
 				IsFull = false
 			};
 		}
+        public static string Create_GameSession(string p0)
+        {
+            rewild_2018_sesh.Join_GameSession GameSession_join = JsonConvert.DeserializeObject<rewild_2018_sesh.Join_GameSession>(p0);
 
-		public static string Create_GameSession(string p0)
+            return Create_GameSession(GameSession_join);
+        }
+        public static string Create_GameSession(rewild_2018_sesh.Join_GameSession GameSession_join)
 		{
-			rewild_2018_sesh.Join_GameSession GameSession_join = JsonConvert.DeserializeObject<rewild_2018_sesh.Join_GameSession>(p0);
 			Console.WriteLine("[BackEnd] Room Name: " + GameSession_join.RoomName);
 			Thread.Sleep(1);
 			Console.WriteLine("[BackEnd] Scene Name: " + GameSession_join.SceneName);

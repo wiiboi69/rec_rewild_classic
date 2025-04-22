@@ -6,10 +6,10 @@
     <ApplicationIcon>icon2.ico</ApplicationIcon>
     <AssemblyName>rec_rewild_classic</AssemblyName>
     <RootNamespace>rec_rewild_classic</RootNamespace>
-    <Authors>recroom2016</Authors>
+    <Authors>wiiiboi69</Authors>
     <PackageIcon>icon2.png</PackageIcon>
     <PackageIconUrl />
-    <RepositoryUrl>https://github.com/recroom2016/rec_rewild_classic</RepositoryUrl>
+    <RepositoryUrl>https://github.com/wiiboi69/rec_rewild_classic</RepositoryUrl>
     <PackageProjectUrl>https://discord.gg/daC8QUhnFP</PackageProjectUrl>
     <Company>rec_rewild_classic</Company>
     <Version>0.4.0</Version>
@@ -30,6 +30,7 @@
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="9.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Spectre.Console" Version="0.49.2-preview.0.44" />
+    <PackageReference Include="System.Net.Http.WinHttpHandler" Version="10.0.0-preview.3.25171.5" />
   </ItemGroup>
 
   <ItemGroup>

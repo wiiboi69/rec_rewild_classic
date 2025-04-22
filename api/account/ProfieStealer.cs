@@ -4,6 +4,7 @@ using System.Text;
 using System.Net;
 using Newtonsoft.Json;
 using System.IO;
+using rec_rewild_classic.Program_menu;
 
 namespace api
 {
@@ -116,7 +117,6 @@ namespace api
                     }
                 }
             }
-            return true;
         error:
             Console.Clear();
             Console.WriteLine($"{input} was not a valued int or out of range");
@@ -130,12 +130,12 @@ namespace api
             List<Root> profile = JsonConvert.DeserializeObject<List<Root>>(data);
 
             File.WriteAllText("SaveData/Profile/username.txt", profile[value].username);
-            string temp = new WebClient().DownloadString($"https://apim.rec.net/accounts/account/{profile[value].accountId}/bio");
+            string temp = Rec_Net_Client.Get_String($"https://apim.rec.net/accounts/account/{profile[value].accountId}/bio");
             Root_bio bio = JsonConvert.DeserializeObject<Root_bio>(temp);
 
             File.WriteAllText("SaveData/Profile/bio.txt", bio.bio);
             File.WriteAllText("SaveData/Profile/displayName.txt", profile[value].displayName);
-            byte[] profileimage = new WebClient().DownloadData("https://img.rec.net/" + profile[value].profileImage + "?cropSquare=true");
+            byte[] profileimage = Rec_Net_Client.Get_Byte($"https://img.rec.net/{profile[value].profileImage}?cropSquare=true");
             File.WriteAllBytes("SaveData/profileimage.png", profileimage);
         }
 

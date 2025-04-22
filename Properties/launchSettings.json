@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "rec_rewild_clasic": {
+      "commandName": "Project",
+      "commandLineArgs": "--build beta"
+    }
+  }
+}
