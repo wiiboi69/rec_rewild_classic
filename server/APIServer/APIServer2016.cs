@@ -11,6 +11,7 @@ using rewild_room_sesh;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using Rec_rewild.api;
 
 namespace server
 {
@@ -99,7 +100,29 @@ namespace server
                 if (!(Url == "images/v2/profile"))
 				{
 					Console.WriteLine($"API Data: (Content-Type: {contentType}): {text}");
-				}
+                    bool flag1;
+                    string rnfn;
+                    string temp1 = ImageUpload_2018.SaveImageFile(array, out flag1, out rnfn);
+
+                    if (flag1)
+                    {
+                        s = "{\"success\":false,\"error\":\"failed to uploaded image\",\"ImageName\":\"\"}";
+                        Console.Beep();
+                        Console.WriteLine("Failed to upload image");
+                    }
+                    else
+                    {
+                        string name = File.ReadAllText("SaveData/Profile/username.txt");
+                        Random random = new Random();
+                        var imageData = new
+                        {
+                            SavedImageId = random.Next(1, 99999999),
+                            ImageName = rnfn,
+                            Username = name
+                        };
+                        s = JsonConvert.SerializeObject(imageData, Formatting.Indented);
+                    }
+                }
                 else
                 {
                     Console.WriteLine($"API Data: (Content-Type: {contentType}): unviewable");
