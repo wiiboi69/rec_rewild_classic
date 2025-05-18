@@ -1,4 +1,4 @@
-﻿using api;
+﻿using rec_rewild_classic.api;
 using Newtonsoft.Json;
 using rec_rewild_classic.Program_menu;
 using Spectre.Console;
@@ -11,15 +11,13 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace start.Program_menu
+namespace rec_rewild_classic.Program_menu
 {
     internal static class profile_menu
     {
         public static void player_profile()
         {
             Console.Clear();
-            goto Profile;
-
         Profile:
             Console.Title = "rec_rewild_classic Profile Menu";
             string readline3 = AnsiConsole.Prompt(
@@ -34,6 +32,7 @@ namespace start.Program_menu
                             "Change User ID:      " + File.ReadAllText("SaveData\\Profile\\userid.txt"),
                             "Change Profile Image",
                             "Change Level:       " + File.ReadAllText("SaveData\\Profile\\level.txt"),
+                            "Change XP:       " + File.ReadAllText("SaveData\\Profile\\xp.txt"),
                             "Change Bio:         " + File.ReadAllText("SaveData\\Profile\\bio.txt"),
                             "Profile Downloader",
                             "Go Back",
@@ -61,7 +60,6 @@ namespace start.Program_menu
             }
             else if (readline3.StartsWith("Change User ID"))
             {
-
                 Console.WriteLine("Current userid: " + File.ReadAllText("SaveData\\Profile\\userid.txt"));
                 Console.WriteLine("New userid: ");
                 string newlevel = Console.ReadLine();
@@ -81,7 +79,6 @@ namespace start.Program_menu
             }
             else if (readline3.StartsWith("Change Level"))
             {
-
                 Console.WriteLine("Current Level: " + File.ReadAllText("SaveData\\Profile\\Level.txt"));
                 Console.WriteLine("New Level: ");
                 string newlevel = Console.ReadLine();
@@ -96,6 +93,25 @@ namespace start.Program_menu
                 {
                     Console.Clear();
                     Console.WriteLine("failed to set Level!");
+                }
+                goto Profile;
+            }
+            else if (readline3.StartsWith("Change XP"))
+            {
+                Console.WriteLine("Current XP: " + File.ReadAllText("SaveData\\Profile\\XP.txt"));
+                Console.WriteLine("New XP: ");
+                string newXP = Console.ReadLine();
+                int temp = 0;
+                if (int.TryParse(newXP, out temp))
+                {
+                    File.WriteAllText("SaveData\\Profile\\XP.txt", temp.ToString());
+                    Console.Clear();
+                    Console.WriteLine("Success!");
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("failed to set XP!");
                 }
                 goto Profile;
             }
@@ -234,7 +250,7 @@ namespace start.Program_menu
                     goto Profile;
                 }
                 
-                if (!ProfieStealer.Profilefind(data2, take_int: 12))
+                if (!ProfieStealer.Profilefind(data2, take: 12))
                 {
                     goto download_profile;
                 }

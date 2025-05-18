@@ -1,10 +1,10 @@
-﻿using api;
+﻿using rec_rewild_classic.api;
 using Spectre.Console;
 using System;
 using System.IO;
 using System.Net;
 
-namespace start.Program_menu
+namespace rec_rewild_classic.Program_menu
 {
     internal class cdn_setting_menu
     {

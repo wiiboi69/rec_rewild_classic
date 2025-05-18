@@ -1,206 +1,38 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using System.Net;
-using Newtonsoft.Json;
-using api;
-using server;
+using System.Security.AccessControl;
+using System.Text;
+using System.Threading.Tasks;
+using static rec_rewild_classic.api.config.Objective.Objective;
 
-namespace api
+namespace rec_rewild_classic.api.config
 {
-    internal class ConfigBase
+    public class Config
     {
-        public string CdnBaseUri { get; set; }
-        public string ShareBaseUrl { get; set; }
-        public List<ConfigTableEntry> ConfigTable { get; set; }
-        public Objective[][] DailyObjectives { get; set; }
-        public List<LevelProgressionEntry> LevelProgressionMaps { get; set; }
-        public MatchmakingConfigParams MatchmakingParams { get; set; }
-        public string MessageOfTheDay { get; set; }
-        public photonConfig PhotonConfig { get; set; }
-    }
-
-    internal class Config
-    {
-        public static gamesesh.GameSessions.SessionInstance localGameSession;
-        public static Objective[][] dailyObjectives = new Objective[][]
+        public class photonConfig
         {
-            new Objective[]
-            {
-                new Objective
-                {
-                    type = Objective_type.QuestGames_Scifi1,
-                    score = 1,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.QuestEnemyKills_Scifi1,
-                    score = 10,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.ArenaGames,
-                    score = 1,
-                    xp = 200
-                }
-            },
-            new Objective[]
-            {
-                new Objective
-                {
-                    type = Objective_type.PaintballCTFGames,
-                    score = 2,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.VisitACustomRoom,
-                    score = 1,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.ScoreBasketInRecCenter,
-                    score = 1,
-                    xp = 200
-                }
-            },
-            new Objective[]
-            {
-                new Objective
-                {
-                    type = Objective_type.DodgeballGames,
-                    score = 2,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.DodgeballHits,
-                    score = 2,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.CheerAPlayer,
-                    score = 1,
-                    xp = 200
-                }
-            },
-            new Objective[]
-            {
-                new Objective
-                {
-                    type = Objective_type.PaintballTeamBattleGames,
-                    score = 2,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.PaintballTeamBattleHits,
-                    score = 20,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.VisitACustomRoom,
-                    score = 1,
-                    xp = 200
-                }
-            },
-            new Objective[]
-            {
-                new Objective
-                {
-                    type = Objective_type.QuestGames_Goblin1,
-                    score = 1,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.QuestEnemyKills_Goblin1,
-                    score = 10,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.CheerAPlayer,
-                    score = 1,
-                    xp = 200
-                }
-            },
-            new Objective[]
-            {
-                new Objective
-                {
-                    type = Objective_type.PaintballAnyModeGames,
-                    score = 2,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.PaintballAnyModeHits,
-                    score = 20,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.ArenaGames,
-                    score = 1,
-                    xp = 200
-                }
-            },
-            new Objective[]
-            {
-                new Objective
-                {
-                    type = Objective_type.QuestGames_Goblin2,
-                    score = 1,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.QuestEnemyKills_Goblin2,
-                    score = 10,
-                    xp = 200
-                },
-                new Objective
-                {
-                    type = Objective_type.VisitACustomRoom,
-                    score = 1,
-                    xp = 200
-                }
-            }
-        };
-        public static Objective[][] dailyObjectivessMap_create()
-        {
-            List<Objective[]> objectives = new List<Objective[]>();
-            for (int i = 0; i < 7; i++)
-            {
-                objectives.Add(new Objective[]
-                {
-                    new Objective
-                    {
-                        type = Objective_type.OOBE_GoToLockerRoom,
-                        score = 1
-                    },
-                    new Objective
-                    {
-                        type = Objective_type.OOBE_GoToActivity,
-                        score = 1
-                    },
-                    new Objective
-                    {
-                        type = Objective_type.OOBE_FinishActivity,
-                        score = 1
-                    }
-                });
-
-            }
-            return objectives.ToArray();
+            public string CloudRegion { get; set; }
+            public bool CrcCheckEnabled { get; set; }
+            public bool EnableServerTracingAfterDisconnect { get; set; }
         }
-
+        internal class ConfigTableEntry
+        {
+            public string Key { get; set; }
+            public string Value { get; set; }
+        }
+        internal class MatchmakingConfigParams
+        {
+            public float PreferFullRoomsFrequency { get; set; }
+            public float PreferEmptyRoomsFrequency { get; set; }
+        }
+        public class LevelProgressionEntry
+        {
+            public int Level { get; set; }
+            public int RequiredXp { get; set; }
+        }
         public static List<LevelProgressionEntry> levelProgressionsMap_create()
         {
             List<LevelProgressionEntry> levelProgressions = new List<LevelProgressionEntry>();
@@ -239,85 +71,209 @@ namespace api
             }
             return levelProgressions;
         }
-
-        public static string GetDebugConfig()
-		{
-            if (!string.IsNullOrEmpty(APIServer2016.version_data))
+        public static Objective_item[][] dailyObjectives = new Objective_item[][]
+        {
+            new Objective_item[]
             {
-                return JsonConvert.SerializeObject(new ConfigBase
+                new Objective_item
                 {
-                    MessageOfTheDay = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/motd.txt"),
-                    CdnBaseUri = "http://localhost:20182/",
-
-                    MatchmakingParams = new MatchmakingConfigParams
-                    {
-                        PreferEmptyRoomsFrequency = 0f,
-                        PreferFullRoomsFrequency = 1f
-                    },
-                    DailyObjectives = dailyObjectivessMap_create(),
-                    ConfigTable = new List<ConfigTableEntry> { },
-
-                    PhotonConfig = new photonConfig
-                    {
-                        CloudRegion = "EU",
-                        CrcCheckEnabled = false,
-                        EnableServerTracingAfterDisconnect = false
-                    }
-                });
-            }
-			return JsonConvert.SerializeObject(new ConfigBase
-            {
-				MessageOfTheDay = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/motd.txt"),
-				CdnBaseUri = "http://localhost:20182/",
-               
-                MatchmakingParams = new MatchmakingConfigParams
-				{
-					PreferEmptyRoomsFrequency = 0f,
-					PreferFullRoomsFrequency = 1f
-				},
-				LevelProgressionMaps = levelProgressionsMap_create(),
-				DailyObjectives = Config.dailyObjectives,
-				ConfigTable = new List<ConfigTableEntry>
-				{
-					new ConfigTableEntry
-					{
-						Key = "Gift.DropChance",
-						Value = 0.33f.ToString()
-					},
-                    new ConfigTableEntry
-                    {
-                        Key = "Gift.Falloff",
-                        Value = 1.2f.ToString()
-                    },
-                    new ConfigTableEntry
-                    {
-                        Key = "Gift.Falloff",
-                        Value = 0xA.ToString()
-                    },
-                    new ConfigTableEntry
-					{
-						Key = "Gift.XP",
-						Value = 0.5f.ToString()
-					},
-                    new ConfigTableEntry
-                    {
-                        Key = "impossiblesAllowed",
-                        Value = true.ToString()
-                    }
+                    type = ObjectivesType.QuestGames_Scifi1,
+                    score = 1,
+                    xp = 200
                 },
-                
-                PhotonConfig = new photonConfig
-				{
-					CloudRegion = "EU",
-					CrcCheckEnabled = false,
-					EnableServerTracingAfterDisconnect = false
-				}
-			});
-
-            /*
-             impossiblesAllowed
-             
-             */
+                new Objective_item
+                {
+                    type = ObjectivesType.QuestEnemyKills_Scifi1,
+                    score = 10,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.ArenaGames,
+                    score = 1,
+                    xp = 200
+                }
+            },
+            new Objective_item[]
+            {
+                new Objective_item
+                {
+                    type = ObjectivesType.PaintballCTFGames,
+                    score = 2,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.VisitACustomRoom,
+                    score = 1,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.ScoreBasketInRecCenter,
+                    score = 1,
+                    xp = 200
+                }
+            },
+            new Objective_item[]
+            {
+                new Objective_item
+                {
+                    type = ObjectivesType.DodgeballGames,
+                    score = 2,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.DodgeballHits,
+                    score = 2,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.CheerAPlayer,
+                    score = 1,
+                    xp = 200
+                }
+            },
+            new Objective_item[]
+            {
+                new Objective_item
+                {
+                    type = ObjectivesType.PaintballTeamBattleGames,
+                    score = 2,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.PaintballTeamBattleHits,
+                    score = 20,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.VisitACustomRoom,
+                    score = 1,
+                    xp = 200
+                }
+            },
+            new Objective_item[]
+            {
+                new Objective_item
+                {
+                    type = ObjectivesType.QuestGames_Goblin1,
+                    score = 1,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.QuestEnemyKills_Goblin1,
+                    score = 10,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.CheerAPlayer,
+                    score = 1,
+                    xp = 200
+                }
+            },
+            new Objective_item[]
+            {
+                new Objective_item
+                {
+                    type = ObjectivesType.PaintballAnyModeGames,
+                    score = 2,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.PaintballAnyModeHits,
+                    score = 20,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.ArenaGames,
+                    score = 1,
+                    xp = 200
+                }
+            },
+            new Objective_item[]
+            {
+                new Objective_item
+                {
+                    type = ObjectivesType.QuestGames_Goblin2,
+                    score = 1,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.QuestEnemyKills_Goblin2,
+                    score = 10,
+                    xp = 200
+                },
+                new Objective_item
+                {
+                    type = ObjectivesType.VisitACustomRoom,
+                    score = 1,
+                    xp = 200
+                }
+            }
+        };
+        internal class ConfigBase
+        {
+            public string CdnBaseUri { get; set; } = "http://localhost:20182";
+            public string ShareBaseUrl { get; set; } = "http://localhost:" + Program.api_port + "/web/img/view/{0}";
+            public List<ConfigTableEntry> ConfigTable { get; set; } = new List<ConfigTableEntry>
+            {
+                new ConfigTableEntry
+                {
+                    Key = "Gift.DropChance",
+                    Value = 0.33f.ToString()
+                },
+                new ConfigTableEntry
+                {
+                    Key = "Gift.Falloff",
+                    Value = 1.2f.ToString()
+                },
+                new ConfigTableEntry
+                {
+                    Key = "Gift.Falloff",
+                    Value = 0xA.ToString()
+                },
+                new ConfigTableEntry
+                {
+                    Key = "Gift.XP",
+                    Value = 0.5f.ToString()
+                },
+                new ConfigTableEntry
+                {
+                    Key = "impossiblesAllowed",
+                    Value = true.ToString()
+                }
+            };
+            public Objective_item[][] DailyObjectives { get; set; }
+            public List<LevelProgressionEntry> LevelProgressionMaps { get; set; } = levelProgressionsMap_create();
+            public MatchmakingConfigParams MatchmakingParams { get; set; } = new MatchmakingConfigParams
+            {
+                PreferEmptyRoomsFrequency = 1,
+                PreferFullRoomsFrequency = 1
+            };
+            public string MessageOfTheDay { get; set; } = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/motd.txt");
+            public photonConfig PhotonConfig { get; set; } = new photonConfig
+            {
+                CloudRegion = "EU",
+                CrcCheckEnabled = false,
+                EnableServerTracingAfterDisconnect = false
+            };
+        }
+        public static string GetDebugConfig()
+        {
+            return JsonConvert.SerializeObject(new ConfigBase
+            {
+                DailyObjectives = dailyObjectives
+            });
         }
     }
 }
