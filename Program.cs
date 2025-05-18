@@ -1,19 +1,14 @@
 ﻿using System;
-using server;
 using System.IO;
-using ws;
-using api;
 using System.Net;
-using System.Diagnostics;
-using rewild_room_sesh;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using Spectre.Console;
-using System.Linq;
 using System.Runtime.InteropServices;
-using start.Program_menu;
+using rec_rewild_classic.Program_menu;
+using rec_rewild_classic.server;
+using rec_rewild_classic.server.rewild_route;
 
-namespace start
+namespace rec_rewild_classic
 {
     class Program
     {
@@ -30,9 +25,7 @@ namespace start
             }
 
             Setup.setup();
-            goto Tutorial;
 
-        Tutorial:
             if (Setup.firsttime == true)
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -49,6 +42,7 @@ namespace start
                     Console.WriteLine("rec_rewild_classic is server software that emulates the old servers of previous RecRoom versions.");
                     Console.WriteLine("To use rec_rewild_classic, you'll need to have builds aswell!");
                     Console.WriteLine("To download builds, either go to the builds channel or use the links below: (these links are also available from the #builds channel)" + Environment.NewLine);
+                    Console.WriteLine("But if you want to write a mod for it, you can do so but just don't make other people expence bad.");
                     Console.WriteLine(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/builds.txt"));
                     Console.WriteLine("Download a build and press any key to continue:");
                     Console.ReadKey();
@@ -78,15 +72,17 @@ namespace start
 
             Console.Title = "rec_rewild_classic Startup Menu";
             Console.WriteLine("rec_rewild_classic - A fork of OpenRec for Rec Room 2016 to 2018. (Version: " + appversion + ")");
-            Console.WriteLine("Download source code here: https://github.com/wiiboi69/Rec_rewild_classic");
+            Console.WriteLine("Download source code here: https://github.com/wiiboi69/Rec_rewild_classic" + Environment.NewLine);
             string ver_build = "";
 #if DEBUG_AOT
             ver_build = "Native AOT build";
 #else
             ver_build = "c# build";
 #endif
-            Console.WriteLine($"rec_rewild_classic server: {ver_build}");
+            ver_build += " Branch: Dev_Test_2018_Weekly_challenges";
 
+            Console.WriteLine($"rec_rewild_classic server: {ver_build}");
+            /*
             try
             {
                 if (!(new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Download/version.txt").Contains(appversion)))
@@ -98,17 +94,20 @@ namespace start
             {
                 Console.WriteLine("unable to get rec_rewild_classic version from github");
             }
+            */
+
+            Console.WriteLine("This is a dev build of rec_rewild_classic" + Environment.NewLine);
 
             string readline = "";
             string readline_override = "";
+            if (arguments.ContainsKey("--build"))
+            {
+                readline = "Start Server";
+                readline_override = arguments["--build"];
+                // goto Start_build;
+            }
             try
             {
-                if (arguments.ContainsKey("--build"))
-                {
-                    readline = "Start Server";
-                    readline_override = arguments["--build"];
-                   // goto Start_build;
-                }
 
                 readline = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
@@ -156,7 +155,7 @@ namespace start
                         break;
                     case "5":
                         readline = "Start Server";
-                        readline_override = "September";
+                        readline_override = "start Beta server";
                         break;
                     default:
                     goto Start;
@@ -208,99 +207,36 @@ namespace start
                     readline2 = readline_override;
                 }
                 else
-                {
+                {/*
                     Console.Title = "rec_rewild_classic Version Select";
                     readline2 = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                             .EnableSearch()
-                            .Title("Please select the version of RecRoom the server should host,\n"+
-                                   "you can select the new beta server by choosing the 'start Beta server' option")
+                            .Title("Please select the version of RecRoom the server should host")
                             .PageSize(10)
                             .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
                             .AddChoices(new[] {
-                                "2016", "2017",
-                            })
-                            .AddChoiceGroup("2018", new[]
-                            {
-                                "May", "July", "September"
-                            })
-                            .AddChoices(new[] {
                                 "start Beta server", "back",
-                            }));
+                            }));*/
                 }
-                if (readline2 == "2016")
-                {
-                    Console.Title = "rec_rewild_classic December 25th, 2016";
-                    version = "2016";
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: December 25th, 2016.");
-                    new APIServer2016();
-                    new WebSocket();
-                }
-                else if (readline2 == "2017")
-                {
-                    Console.Title = "rec_rewild_classic October 19th 2017";
-                    version = "2017";
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: October 19th, 2017.");
-                    new APIServer2017();
-                    new WebSocket();
-                }
-                else if (readline2 == "May")
-                {
-                    Console.Title = "rec_rewild_classic May 30th 2018";
-                    version = "2018";
-                    start.Program.api_port = int.Parse(start.Program.version + "0");
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: May 30th, 2018.");
-                    new NameServer();
-                    new ImageServer();
-                    new APIServer2018();
-                    new WebSocket();
-                }
-                else if (readline2 == "September")
-                {
-                    Console.Title = "rec_rewild_classic September 27th 2018";
-                    version = "2018";
-                    start.Program.api_port = int.Parse(start.Program.version + "0");
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: September 27th, 2018.");
-                    new NameServer();
-                    new ImageServer();
-                    new APIServer2018();
-                    new WebSocketHTTP();
-                    new Late2018WebSock();
-                }
-                else if (readline2 == "July")
-                {
-                    Console.Title = "rec_rewild_classic July 20th 2018";
-                    version = "2018";
-                    start.Program.api_port = int.Parse(start.Program.version + "0");
-                    Console.Clear();
-                    Console.WriteLine("Version Selected: July 20th, 2018");
-                    new NameServer();
-                    new ImageServer();
-                    new APIServer2018();
-                    new WebSocket();
-                }
-                else if (readline2 == "start Beta server")
+                //if (readline2 == "start Beta server")
                 {
                     Console.Title = "rec_rewild_classic September 27th 2018 with new Beta Server routing system";
                     version = "2018";
-                    start.Program.api_port = int.Parse(start.Program.version + "0");
+                    api_port = int.Parse(version + "0");
                     Console.Clear();
                     Console.WriteLine("Version Selected: September 27th, 2018.");
                     Console.WriteLine("you selected a Beta version of the new Server routing system for the api server");
                     new NameServer();
-                    new ImageServer();
-                    rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new.APIServer = new rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new();
-                    new WebSocketHTTP();
-                    new Late2018WebSock();
+                    //new ImageServer();
+                    APIServer_system.APIServer = new APIServer_system();
+                    //new WebSocketHTTP();
+                    //new Late2018WebSock();
                 }
-                else if (readline2 == "back")
+                //else if (readline2 == "back")
                 {
-                    Console.Clear();
-                    goto Start;
+                //    Console.Clear();
+                //    goto Start;
                 }
 
                 Console.WriteLine(msg);
@@ -309,9 +245,9 @@ namespace start
                     ConsoleKeyInfo tmp_1 = Console.ReadKey();
                     if (tmp_1.KeyChar == 'r')
                     {
-                        if (rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new.Running)
+                        if (APIServer_system.Running)
                         {
-                            rec_rewild_classic.server.APIServer.rewild_route.APIServer2018_new.reloadRegisterRoutes();
+                            APIServer_system.reloadRegisterRoutes();
                         }
                     }
                 }
@@ -325,7 +261,7 @@ namespace start
 
         public static string version = "";
         public static int api_port = 0;
-        public static string appversion = "0.0.2";
+        public static string appversion = "Dev_Test_2018_Weekly_challenges-V1.0.0";
         public static string maindir = Directory.GetCurrentDirectory();
 
         public static string ShowDialog()

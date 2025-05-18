@@ -51,4 +51,8 @@
     <EditorConfigFiles Remove="e:\vs_Source\Repos\rec_rewild_classic\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="api\NewFolder\" />
+  </ItemGroup>
+
 </Project>
