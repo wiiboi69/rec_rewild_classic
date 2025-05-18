@@ -5,7 +5,7 @@ using System.Net;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace rec_rewild_classic.Program_menu
+namespace start.Program_menu
 {
     class cdn_editor
     {
@@ -164,14 +164,8 @@ namespace rec_rewild_classic.Program_menu
         {
             public bool built_in;
             public server_url cdn_type { get; set; }
-            /// <summary>
-            /// the base url for the api, image, cdn and other stuff
-            /// </summary>
             public string base_url { get; set; }
             public string name { get; set; } = null;
-            /// <summary>
-            /// it can be a path or a full url
-            /// </summary>
             public string data_url { get; set; }
             public string image_url { get; set; }
             public string room_url { get; set; }
