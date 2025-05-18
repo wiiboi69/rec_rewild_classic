@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
 using start;
+using static System.Net.WebRequestMethods;
 
 namespace server
 {
@@ -27,7 +28,7 @@ namespace server
 		private void StartListen()
 		{
 			//nameserver is ONLY for 2018
-			this.listener.Prefixes.Add("http://localhost:20181/");
+			this.listener.Prefixes.Add("http://localhost:2035/");
             for (; ; )
             {
                 this.listener.Start();
@@ -45,6 +46,31 @@ namespace server
                     Images = "http://localhost:20182"
                 };
                 s = JsonConvert.SerializeObject(data);
+                if (rawUrl.StartsWith("/new"))
+                {
+                    s = JsonConvert.SerializeObject(new
+                    {
+                        API = $"http://localhost:{start.Program.api_port}",
+                        Accounts = $"http://localhost:{start.Program.api_port}",
+                        Auth = $"http://localhost:{start.Program.api_port}",
+                        CDN = $"http://localhost:20182",
+                        Chat = $"http://localhost:{start.Program.api_port}",
+                        Clubs = $"http://localhost:{start.Program.api_port}",
+                        Commerce = $"http://localhost:{start.Program.api_port}",
+                        DataCollection = $"http://localhost:{start.Program.api_port}",
+                        Images = "http://localhost:20182",
+                        Leaderboard = $"http://localhost:{start.Program.api_port}",
+                        Link = $"http://localhost:{start.Program.api_port}",
+                        Matchmaking = $"http://localhost:{start.Program.api_port}",
+                        Moderation = $"http://localhost:{start.Program.api_port}",
+                        Notifications = $"http://localhost:{start.Program.api_port}",
+                        PlatformNotifications = $"http://localhost:{start.Program.api_port}",
+                        RoomComments = $"http://localhost:{start.Program.api_port}",
+                        Rooms = $"http://localhost:{start.Program.api_port}",
+                        Storage = $"http://localhost:{start.Program.api_port}",
+                        WWW = $"http://localhost:{start.Program.api_port}",
+                    });
+                }
                 Console.WriteLine("API Response: " + s);
                 byte[] bytes = Encoding.UTF8.GetBytes(s);
                 response.ContentLength64 = (long)bytes.Length;
