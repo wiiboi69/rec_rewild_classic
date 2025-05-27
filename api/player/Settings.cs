@@ -157,6 +157,6 @@ namespace rec_rewild_classic.api
 		private static List<Setting> playerSettings;
 
 		
-		public static string SettingsPath = "/SaveData/settings.txt";
+		public static string SettingsPath = "/SaveData/Profile/settings.json";
 	}
 }

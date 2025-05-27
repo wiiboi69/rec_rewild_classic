@@ -6,7 +6,7 @@ namespace rec_rewild_classic.api
 {
     class Profiles
     {
-		public ulong Id { get; set; }
+		public int Id { get; set; }
 		public ulong XpRequiredToLevelUp { get; set; } = 0;
         public string Username { get; set; }
         public string Auth { get; set; } = string.Empty;

@@ -17,9 +17,9 @@ namespace rec_rewild_classic.api
             public Platform_Type Platform { get; set; }
             public string PlatformId { get; set; }
         }
-        public class GetCachedLogins
+        public class GetCachedLogin
         {
-            public ulong Id { get; set; }
+            public int Id { get; set; }
             public string Username { get; set; }
             public string DisplayName { get; set; }
             public string Bio { get; set; }
@@ -37,6 +37,59 @@ namespace rec_rewild_classic.api
             public PlayerReputation PlayerReputation { get; set; }
             public List<PlatformID> PlatformIds { get; set; }
         }
+        public class Login_Player_Account_dto
+        {
+            public string AppVersion { get; set; }
+            public Platform_Type Platform { get; set; }
+            public string PlatformId { get; set; }
+            public long ClientTimestamp { get; set; }
+            public long BuildTimestamp { get; set; }
+            public string DeviceId { get; set; }
+            public string LoginLockToken { get; set; }
+            public string AuthParams { get; set; }
+            public string Verify { get; set; }
+        }
+        public class Create_Player_Account_dto : Login_Player_Account_dto
+        {
+            public DateTime Birthday { get; set; }
+            public string Email { get; set; }
+        }
+        public class Player_Account_login_base
+        {
+            public string Error { get; set; }
+            public GetCachedLogin Player { get; set; }
+            public string Token { get; set; }
+            public bool FirstLoginOfTheDay { get; set; }
+            public long AnalyticsSessionId { get; set; }
+        }
+        public class Player_Account_Login : Player_Account_login_base
+        {
+            public bool CanUseScreenMode { get; set; }
+        }
+        public static Player_Account_Login Login_player_account(Login_Player_Account_dto data)
+        {
+            return new Player_Account_Login
+            {
+                Error = "",
+                Player = GetPlayerCachedLogins(data.Platform, data.PlatformId)[0],
+                Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTYxOTI4NzQ2MSwidmVycyI6IjIwMTcxMTE3X0VBIn0.-GqtcqPwAzr9ZJioTiz5v0Kl4HMMjH8hFMtVzQtRN5c",
+                FirstLoginOfTheDay = true,
+                AnalyticsSessionId = 392394L,
+                CanUseScreenMode = true
+            };
+        }
+        public static Player_Account_login_base Create_Player_Account_Login(Create_Player_Account_dto data)
+        {
+            return new Player_Account_login_base
+            {
+                Error = "",
+                Player = GetPlayerCachedLogins(data.Platform, data.PlatformId)[0],
+                Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTYxOTI4NzQ2MSwidmVycyI6IjIwMTcxMTE3X0VBIn0.-GqtcqPwAzr9ZJioTiz5v0Kl4HMMjH8hFMtVzQtRN5c",
+                FirstLoginOfTheDay = true,
+                AnalyticsSessionId = 392394L,
+            };
+        }
+
         public enum Platform_Type
         {
             STEAM,
@@ -51,16 +104,17 @@ namespace rec_rewild_classic.api
             PendingEmailVerification,
             Registered
         }
-        public static string GetPlayerCachedLogins(ulong userid, string platformid)
+        public static List<GetCachedLogin> GetPlayerCachedLogins(Platform_Type platform, string platformid)
         {
             int level = int.Parse(File.ReadAllText("SaveData/Profile/level.txt"));
             int xp = int.Parse(File.ReadAllText("SaveData/Profile/xp.txt"));
+            int userid = int.Parse(File.ReadAllText("SaveData/Profile/userid.txt"));
             string user_name = File.ReadAllText("SaveData/Profile/username.txt");
             string display_name = File.ReadAllText("SaveData/Profile/displayName.txt");
             string bio = File.ReadAllText("SaveData/Profile/bio.txt");
-            return JsonConvert.SerializeObject(new List<GetCachedLogins>
+            return new List<GetCachedLogin>
             {
-                new GetCachedLogins
+                new GetCachedLogin
                 {
                     Id = userid,
                     Username = user_name,
@@ -94,12 +148,12 @@ namespace rec_rewild_classic.api
                     {
                         new PlatformID
                         {
-                            Platform = 0,
+                            Platform = platform,
                             PlatformId = platformid
                         }
                     }
                 }
-            });
+            };
         }
     }
 }

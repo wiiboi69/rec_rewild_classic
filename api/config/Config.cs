@@ -18,12 +18,12 @@ namespace rec_rewild_classic.api.config
             public bool CrcCheckEnabled { get; set; }
             public bool EnableServerTracingAfterDisconnect { get; set; }
         }
-        internal class ConfigTableEntry
+        public class ConfigTableEntry
         {
             public string Key { get; set; }
             public string Value { get; set; }
         }
-        internal class MatchmakingConfigParams
+        public class MatchmakingConfigParams
         {
             public float PreferFullRoomsFrequency { get; set; }
             public float PreferEmptyRoomsFrequency { get; set; }
@@ -221,7 +221,7 @@ namespace rec_rewild_classic.api.config
                 }
             }
         };
-        internal class ConfigBase
+        public class ConfigBase
         {
             public string CdnBaseUri { get; set; } = "http://localhost:20182";
             public string ShareBaseUrl { get; set; } = "http://localhost:" + Program.api_port + "/web/img/view/{0}";
@@ -268,12 +268,12 @@ namespace rec_rewild_classic.api.config
                 EnableServerTracingAfterDisconnect = false
             };
         }
-        public static string GetDebugConfig()
+        public static ConfigBase GetDebugConfig()
         {
-            return JsonConvert.SerializeObject(new ConfigBase
+            return new ConfigBase
             {
                 DailyObjectives = dailyObjectives
-            });
+            };
         }
     }
 }

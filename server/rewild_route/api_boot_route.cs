@@ -6,6 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using static rec_rewild_classic.server.rewild_route_system;
 using rec_rewild_classic.api.config;
+using rec_rewild_classic.api;
+using Newtonsoft.Json;
+using static rec_rewild_classic.api.Login_System;
+using static rec_rewild_classic.api.config.Config;
 
 namespace rec_rewild_classic.server.rewild_route
 {
@@ -21,11 +25,10 @@ namespace rec_rewild_classic.server.rewild_route
             return "{\"ValidVersion\": true}";
         }
 
-
         [Route("/api/config/v2")]
-        public static string Api_config()
+        public static ConfigBase Api_config()
         {
-            return Config.GetDebugConfig();
+            return GetDebugConfig();
         }
 
         [Route("/api/gameconfigs/v1/all")]
@@ -45,19 +48,19 @@ namespace rec_rewild_classic.server.rewild_route
         {
             return "{\"AmplitudeKey\":\"NoKeyProvided\"}";
         }
+
         [Route("/api/platformlogin/v1/logincached")]
-        public static string Api_platformlogin_logincached(/*logincached_login login*/)
+        public static Player_Account_Login Api_platformlogin_logincached(Login_Player_Account_dto data)
         {
-            return APIServer_system.BracketResponse;//logincached.loginCache(login.PlayerId, ulong.Parse(login.PlatformId));
+            return Login_player_account(data);
         }
 
-
         [Route("/api/platformlogin/v1/getcachedlogins")]
-        public static string Api_platformlogin_getcachedlogins(int Platform, ulong PlatformId)
+        public static List<GetCachedLogin> Api_platformlogin_getcachedlogins(int Platform, string PlatformId)
         {
-            //Console.WriteLine($"APIServer2018: loading Platform " + Platform + " cachedlogin PlatformId: " + PlatformId + " with playerid: " + CachedPlayerID);
+            Console.WriteLine($"APIServer: loading Platform " + (Platform_Type)Platform + " cachedlogin PlatformId: " + PlatformId);
 
-            return APIServer_system.BracketResponse;//getcachedlogins.GetDebugLogin((ulong)CachedPlayerID, PlatformId);
+            return GetPlayerCachedLogins((Platform_Type)Platform, PlatformId);
         }
 
         [Route("/api/relationships/v2/get")]

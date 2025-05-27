@@ -228,9 +228,9 @@ namespace rec_rewild_classic
                     Console.WriteLine("Version Selected: September 27th, 2018.");
                     Console.WriteLine("you selected a Beta version of the new Server routing system for the api server");
                     new NameServer();
-                    //new ImageServer();
+                    new ImageServer();
                     APIServer_system.APIServer = new APIServer_system();
-                    //new WebSocketHTTP();
+                    new NotificationServer();
                     //new Late2018WebSock();
                 }
                 //else if (readline2 == "back")

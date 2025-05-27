@@ -8,6 +8,33 @@ namespace rec_rewild_classic.api.config.Objective
 {
     public class Objective
     {
+        public class Objective2018
+        {
+            public List<ObjectiveEntry> Objectives { get; set; }
+            public List<ObjectiveGroup> ObjectiveGroups { get; set; }
+
+            public Objective2018()
+            {
+                this.Objectives = new List<ObjectiveEntry>();
+                this.ObjectiveGroups = new List<ObjectiveGroup>();
+            }
+        }
+    
+        public class ObjectiveGroup
+        {
+            public int Group { get; set; }
+            public bool IsCompleted { get; set; }
+            public DateTime ClearedAt { get; set; }
+        }
+        public class ObjectiveEntry
+        {
+            public int Index { get; set; }
+            public int Group { get; set; }
+            public float Progress { get; set; }
+            public float VisualProgress { get; set; }
+            public bool IsCompleted { get; set; }
+            public bool IsRewarded { get; set; }
+        }
         public class Objective_item
         {
             public ObjectivesType type { get; set; }

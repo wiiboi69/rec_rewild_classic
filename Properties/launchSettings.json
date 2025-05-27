@@ -3,6 +3,10 @@
     "rec_rewild_clasic": {
       "commandName": "Project",
       "commandLineArgs": "--build beta"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
     }
   }
 }

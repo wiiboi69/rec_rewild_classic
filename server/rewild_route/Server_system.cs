@@ -209,13 +209,18 @@ namespace rec_rewild_classic.server.rewild_route
                                 response_data = null;
 
                         }
-                        else
+                        else if (method.ReturnType == typeof(string) || method.ReturnType == typeof(byte) || method.ReturnType == typeof(byte[]))
                         {
                             response_data = result;
                         }
+                        else
+                        {
+                            response_data = JsonConvert.SerializeObject(result);
+                        }
                     }
-                    catch
+                    catch (Exception e)
                     {
+                        Console.WriteLine($"APIServer_system: {e}");
                         response_data = null;
                     }
                     break;

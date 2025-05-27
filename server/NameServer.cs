@@ -40,7 +40,7 @@ namespace rec_rewild_classic.server
                 {
                     API = $"http://localhost:{Program.api_port}",
                     Cdn = "http://localhost:20182",
-                    Notifications = "http://localhost:20161",
+                    Notifications = "http://localhost:20183",
                     Images = "http://localhost:20182"
                 };
                 s = JsonConvert.SerializeObject(data);
