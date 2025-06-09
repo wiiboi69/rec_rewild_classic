@@ -12,13 +12,15 @@ namespace api
         public object InstagramImages { get; set; }
         public object Videos { get; set; }
 
-        public static string Community_Board(ulong id)
+        public static ulong CachedPlayerID = ulong.Parse(System.IO.File.ReadAllText("SaveData\\Profile\\userid.txt"));
+
+        public static string Community_Board()
         {
             var board = new CommunityBoard
             {
                 FeaturedPlayer = new FeaturedPlayer
                 {
-                    Id = id,
+                    Id = CachedPlayerID,
                     TitleOverride = "Featured Player",
                     UrlOverride = null
                 },
