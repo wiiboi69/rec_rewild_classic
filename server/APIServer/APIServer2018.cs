@@ -475,7 +475,11 @@ namespace server
 				{
 					s = new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/rec_rewild_classic/main/Update/rcslideshow.txt");
 				}
-				Console.WriteLine("API Response: " + s);
+                if (Url == "/api/communityboard/v1/current")
+                {
+                    s = CommunityBoard.Community_Board(CachedPlayerID);
+                }
+                Console.WriteLine("API Response: " + s);
 				bytes = Encoding.UTF8.GetBytes(s);
 				response.ContentLength64 = (long)bytes.Length;
 				Stream outputStream = response.OutputStream;
@@ -497,7 +501,7 @@ namespace server
 			}
 		}
 
-
+        public static ulong CachedPlayerID = ulong.Parse(File.ReadAllText("SaveData\\Profile\\userid.txt"));
         public static string BlankResponse = "";
         public static string BracketResponse = "[]";
 

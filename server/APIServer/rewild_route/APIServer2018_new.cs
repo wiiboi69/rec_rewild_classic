@@ -61,12 +61,11 @@ namespace rec_rewild_classic.server.APIServer.rewild_route
                 var routeAttribute = method.GetCustomAttribute<RouteAttribute>();
                 if (routeAttribute != null)
                 {
-                    // Convert route path to regex with named groups for parameters
                     
                     var pattern = "^" + Regex.Escape(routeAttribute.Path)
-                        .Replace("\\*", ".*")        // Match any string for wildcards
-                        .Replace("\\{", "(?<")       // Start named group
-                        .Replace("}", ">[^/]+)")   // End named group
+                        .Replace("\\*", ".*")       
+                        .Replace("\\{", "(?<")      
+                        .Replace("}", ">[^/]+)")   
                         + "$";
                     var regex = new Regex(pattern, RegexOptions.Compiled);
 
@@ -346,9 +345,11 @@ namespace rec_rewild_classic.server.APIServer.rewild_route
         {
             return logincached.loginCache(login.PlayerId, ulong.Parse(login.PlatformId));
         }
-        /*
-         /api/communityboard/v1/current
-         
-         */
+
+        [Route("/api/communityboard/v1/current")]
+        public static string Api_communityboard_v1_current()
+        {
+            return CommunityBoard.Community_Board(CachedPlayerID);
+        }
     }
 }
