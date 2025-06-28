@@ -290,11 +290,6 @@ namespace api
                         Value = 1.2f.ToString()
                     },
                     new ConfigTableEntry
-                    {
-                        Key = "Gift.Falloff",
-                        Value = 0xA.ToString()
-                    },
-                    new ConfigTableEntry
 					{
 						Key = "Gift.XP",
 						Value = 0.5f.ToString()
