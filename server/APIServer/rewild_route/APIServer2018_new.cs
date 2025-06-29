@@ -349,7 +349,7 @@ namespace rec_rewild_classic.server.APIServer.rewild_route
         [Route("/api/communityboard/v1/current")]
         public static string Api_communityboard_v1_current()
         {
-            return CommunityBoard.Community_Board(CachedPlayerID);
+            return CommunityBoard.Community_Board();
         }
     }
 }

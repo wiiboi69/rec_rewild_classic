@@ -477,7 +477,7 @@ namespace server
 				}
                 if (Url == "/api/communityboard/v1/current")
                 {
-                    s = CommunityBoard.Community_Board(CachedPlayerID);
+                    s = CommunityBoard.Community_Board();
                 }
                 Console.WriteLine("API Response: " + s);
 				bytes = Encoding.UTF8.GetBytes(s);

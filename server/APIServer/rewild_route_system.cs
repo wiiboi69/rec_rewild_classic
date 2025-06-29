@@ -14,13 +14,13 @@ namespace rec_rewild_classic.server.APIServer
     {
         public static object ParseJsonBody(string body, Type targetType)
         {
-            return JsonConvert.DeserializeObject(body, targetType); // Deserialize into the specified type
+            return JsonConvert.DeserializeObject(body, targetType); 
         }
 
         public static string ParseRequestBody(HttpListenerRequest request)
         {
             using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
-            return reader.ReadToEnd(); // Reads raw data from the body
+            return reader.ReadToEnd(); 
         }
 
         public static Dictionary<string, string> ParseFormData(string body)
